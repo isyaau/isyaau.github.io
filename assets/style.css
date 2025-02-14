@@ -1,28 +1,5 @@
-.gambar-wrapper {
-    display: inline-block;  /* Agar box hanya sebesar gambar */
-    padding: 10px;  /* Memberikan jarak antara gambar dan border */
-    background-color: rgb(102, 0, 0);  /* Memberikan warna latar belakang pada box */
-    border: 5px solid rgba(255, 255, 255, 0.9);  /* Border putih mengelilingi gambar */
-    border-radius: 50px;  /* Sudut melengkung pada box */
-    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.8);  /* Bayangan putih di sekitar box */
-}
-.gambar-title {
-    width: 100%;   /* Membuat gambar responsif, mengikuti lebar elemen kontainer */
-    height: auto;  /* Menjaga aspek rasio gambar */
-    max-width: 100%;  /* Membatasi gambar agar tidak lebih lebar dari lebar kontainer */
-}
-
-.card-login {
-    padding: 20px;  /* Memberikan jarak antara gambar dan border */
-    background-color: rgba(0, 0, 0, 0.24);  /* Memberikan warna latar belakang pada box */
-    border: 5px solid rgba(255, 255, 255, 0.9);  /* Border putih mengelilingi gambar */
-    border-radius: 50px;  /* Sudut melengkung pada box */
-    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.8);  /* Bayangan putih di sekitar box */
-}
-
-
-  /* Responsif untuk gambar */
-  .gambar-wrapper img {
+/* Responsif untuk gambar */
+.gambar-wrapper img {
     max-width: 100%;
     height: auto;
 }
@@ -30,16 +7,14 @@
 /* Menyesuaikan ukuran gambar title */
 .gambar-title {
     width: 100%;
-    max-width: 1000px;
-    /* Maksimal lebar gambar title */
+    max-width: 1000px; /* Maksimal lebar gambar title */
     height: auto;
 }
 
 /* Responsif untuk card */
 .card {
     width: 100%;
-    max-width: 18rem;
-    /* Ukuran maksimum card */
+    max-width: 18rem; /* Ukuran maksimum card */
 }
 
 /* Gambar card harus responsif */
@@ -50,37 +25,52 @@
 
 /* Responsif untuk tombol (volume dan logout) */
 .gambar-wrapper img {
-    width: 5vh;
-    /* Lebar gambar pada perangkat kecil */
+    width: 5vh; /* Lebar gambar pada perangkat kecil */
     height: auto;
 }
 
 /* Media query untuk perangkat kecil */
 @media (max-width: 768px) {
     .row .col-6 {
-        flex: 0 0 50%;
-        /* Membuat kolom card menjadi dua kolom dalam satu baris pada perangkat kecil */
+        flex: 0 0 50%; /* Membuat kolom card menjadi dua kolom dalam satu baris pada perangkat kecil */
         max-width: 50%;
     }
 
     .gambar-wrapper img {
-        width: 3vh;
-        /* Mengecilkan ukuran tombol pada perangkat kecil */
+        width: 4vh; /* Mengecilkan ukuran tombol pada perangkat kecil */
     }
 }
 
 /* Media query untuk perangkat sangat kecil */
 @media (max-width: 576px) {
     .gambar-wrapper img {
-        width: 3vh;
-        /* Mengecilkan lebih jauh pada perangkat lebih kecil */
+        width: 3vh; /* Mengecilkan lebih jauh pada perangkat lebih kecil */
     }
 }
 
 body {
-    background-image: url('assets/img/bg-login.jpg');
+    background-image: url('../assets/img/bg-login.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
+}
+
+/* Gambar wrapper dengan border dan bayangan */
+.gambar-wrapper {
+    display: inline-block; /* Agar box hanya sebesar gambar */
+    padding: 10px; /* Memberikan jarak antara gambar dan border */
+    background-color: rgb(102, 0, 0); /* Memberikan warna latar belakang pada box */
+    border: 5px solid rgba(255, 255, 255, 0.9); /* Border putih mengelilingi gambar */
+    border-radius: 50px; /* Sudut melengkung pada box */
+    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.8); /* Bayangan putih di sekitar box */
+}
+
+/* Card login styling */
+.card-login {
+    padding: 20px; /* Memberikan jarak antara gambar dan border */
+    background-color: rgba(0, 0, 0, 0.24); /* Memberikan warna latar belakang pada box */
+    border: 5px solid rgba(255, 255, 255, 0.9); /* Border putih mengelilingi gambar */
+    border-radius: 50px; /* Sudut melengkung pada box */
+    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.8); /* Bayangan putih di sekitar box */
 }
