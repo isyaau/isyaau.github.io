@@ -1,0 +1,21 @@
+.gambar-wrapper {
+    display: inline-block;  /* Agar box hanya sebesar gambar */
+    padding: 20px;  /* Memberikan jarak antara gambar dan border */
+    background-color: rgb(102, 0, 0);  /* Memberikan warna latar belakang pada box */
+    border: 5px solid rgba(255, 255, 255, 0.9);  /* Border putih mengelilingi gambar */
+    border-radius: 50px;  /* Sudut melengkung pada box */
+    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.8);  /* Bayangan putih di sekitar box */
+}
+.gambar-title {
+    width: 100%;   /* Membuat gambar responsif, mengikuti lebar elemen kontainer */
+    height: auto;  /* Menjaga aspek rasio gambar */
+    max-width: 100%;  /* Membatasi gambar agar tidak lebih lebar dari lebar kontainer */
+}
+
+.card-login {
+    padding: 20px;  /* Memberikan jarak antara gambar dan border */
+    background-color: rgba(0, 0, 0, 0.24);  /* Memberikan warna latar belakang pada box */
+    border: 5px solid rgba(255, 255, 255, 0.9);  /* Border putih mengelilingi gambar */
+    border-radius: 50px;  /* Sudut melengkung pada box */
+    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.8);  /* Bayangan putih di sekitar box */
+}
