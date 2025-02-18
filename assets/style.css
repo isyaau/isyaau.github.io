@@ -52,7 +52,7 @@ body {
     background-image: url('../assets/img/bg-login.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     height: 100vh;
 }
 
