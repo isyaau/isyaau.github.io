@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <script src="../assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Headers · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="row justify-content-center align-items-center mt-5">
+                <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
+                    <div class="gambar-wrapper" onclick="toggleMute()">
+                        <img src="assets/icon/high-volume.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
+                            id="volumeImage">
+                    </div>
+                    <!-- Background Music -->
+                    <audio id="audioPlayerbg" autoplay loop>
+                        <source src="assets/music/bg.wav" type="audio/mp3">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                    <h1 class="mx-auto">Materi</h1>
+                    <a href="/dashboard.html">
+                        <div class="gambar-wrapper">
+                            <img src="assets/icon/home.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
+                                id="volumeImage">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="text-center mb-5">
+                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Deskripsi Gambar" width="1000vh">
+                    <br>
+                    <h2>Selamat datang <span id="userName"></span> dari sekolah <span id="userSchool"></span>!</h2>
+                </div>
+            </div>
+
+            <!-- Cards Section -->
+            <div class="row d-flex justify-content-between align-items-center">
+                <!-- Card 1 (Prev Button) -->
+                <div class="col-2 col-md-2 col-lg-2 my-3 text-center">
+                    <img src="assets/icon/prev.png" alt="" onclick="changeImage(-1)" width="50vh">
+                </div>
+                <!-- Card 2 (Gambar yang berubah) -->
+                <div class="col-8 col-md-6 col-lg-6 my-3 text-center">
+                    <img id="currentImage" src="assets/huruf/1.png" style="max-width: 100%; height: auto;" alt="...">
+                </div>
+                <!-- Card 3 (Next Button) -->
+                <div class="col-2 col-md-2 col-lg-2 my-3 text-center">
+                    <img src="assets/icon/next.png" alt="" onclick="changeImage(1)" width="50vh">
+                </div>
+            </div>
+
+
+
+        </div>
+    </main>
+    <script src="assets/script.js"></script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Array berisi nama gambar yang akan ditampilkan
+        const images = [
+            'assets/huruf/1.png',
+            'assets/huruf/2.png',
+            'assets/huruf/3.png',
+            'assets/huruf/4.png',
+            'assets/huruf/5.png',
+            'assets/huruf/6.png',
+            'assets/huruf/7.png',
+            'assets/huruf/8.png',
+            'assets/huruf/9.png',
+            'assets/huruf/10.png',
+            'assets/huruf/11.png',
+            'assets/huruf/12.png',
+            'assets/huruf/13.png',
+            'assets/huruf/14.png',
+            'assets/huruf/15.png',
+            'assets/huruf/16.png',
+            'assets/huruf/17.png',
+            'assets/huruf/18.png',
+            'assets/huruf/19.png',
+            'assets/huruf/20.png',
+            'assets/huruf/21.png',
+            'assets/huruf/22.png',
+            'assets/huruf/23.png',
+            'assets/huruf/24.png',
+            'assets/huruf/25.png',
+            'assets/huruf/26.png',
+            'assets/huruf/27.png'
+        ];
+
+        let currentIndex = 0;  // Menyimpan indeks gambar yang ditampilkan
+
+        // Fungsi untuk mengganti gambar
+        function changeImage(direction) {
+            // Mengubah indeks gambar berdasarkan tombol yang diklik
+            currentIndex += direction;
+
+            // Pastikan indeks berada dalam rentang yang valid
+            if (currentIndex < 0) currentIndex = images.length - 1; // Loop ke gambar terakhir
+            if (currentIndex >= images.length) currentIndex = 0;  // Loop ke gambar pertama
+
+            // Update gambar yang ditampilkan
+            document.getElementById('currentImage').src = images[currentIndex];
+        }
+    </script>
+</body>
+
+</html>
