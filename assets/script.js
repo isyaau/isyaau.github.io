@@ -32,33 +32,33 @@ function toggleMute() {
     }
 }
     // Fungsi togglePlay yang menerima ID audio dan ID gambar
-    function togglePlay(audioId, imageId) {
-        var audio = document.getElementById(audioId);
-        var buttonImage = document.getElementById(imageId);
+    // function togglePlay(audioId, imageId) {
+    //     var audio = document.getElementById(audioId);
+    //     var buttonImage = document.getElementById(imageId);
 
-        if (audio.paused) {
-            audio.play();
-            buttonImage.src = "assets/icon/pause.png";  // Ganti gambar tombol menjadi pause
-        } else {
-            audio.pause();
-            buttonImage.src = "assets/icon/play.png";   // Ganti gambar tombol menjadi play
-        }
-    }
+    //     if (audio.paused) {
+    //         audio.play();
+    //         buttonImage.src = "assets/icon/pause.png";  // Ganti gambar tombol menjadi pause
+    //     } else {
+    //         audio.pause();
+    //         buttonImage.src = "assets/icon/play.png";   // Ganti gambar tombol menjadi play
+    //     }
+    // }
 
-    function toggleMute() {
-        var audio = document.getElementById('audioPlayerbg');
-        var image = document.getElementById('volumeImage');
+    // function toggleMute() {
+    //     var audio = document.getElementById('audioPlayerbg');
+    //     var image = document.getElementById('volumeImage');
     
-        // Jika audio sedang mute, unmute dan ubah gambar
-        if (audio.muted) {
-            audio.muted = false;
-            image.src = "assets/icon/high-volume.png";  // Ganti dengan gambar volume tinggi
-        } else {
-            // Jika audio sedang unmute, mute dan ubah gambar
-            audio.muted = true;
-            image.src = "assets/icon/silence.png";  // Ganti dengan gambar mute
-        }
-    }
+    //     // Jika audio sedang mute, unmute dan ubah gambar
+    //     if (audio.muted) {
+    //         audio.muted = false;
+    //         image.src = "assets/icon/high-volume.png";  // Ganti dengan gambar volume tinggi
+    //     } else {
+    //         // Jika audio sedang unmute, mute dan ubah gambar
+    //         audio.muted = true;
+    //         image.src = "assets/icon/silence.png";  // Ganti dengan gambar mute
+    //     }
+    // }
         // Fungsi togglePlay yang menerima ID audio dan ID gambar
         function togglePlay(audioId, imageId) {
             var audio = document.getElementById(audioId);

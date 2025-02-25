@@ -33,7 +33,7 @@
                         <source src="assets/music/bg.wav" type="audio/mp3">
                         Browser Anda tidak mendukung elemen audio.
                     </audio>
-                    <h1 class="mx-auto">HURUF</h1>
+                    <h1 class="mx-auto">MENGENAL HURUF</h1>
                     <a href="javascript:history.back()">
                         <div class="gambar-wrapper">
                             <img src="assets/icon/back.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
@@ -64,7 +64,7 @@
                 <!-- Card 2 (Gambar yang berubah) -->
                 <div class="col-8 col-md-6 col-lg-6 my-3 text-center">
                     <img id="currentImage" src="assets/huruf/1.png" style="max-width: 100%; height: auto;" alt="...">
-                    <audio id="audioPlayer">
+                    <audio id="audioPlayer" preload="auto">
                         <source src="assets/voice/huruf/1.mp3" type="audio/mp3">
                         Browser Anda tidak mendukung elemen audio.
                     </audio>
@@ -133,7 +133,9 @@
             const audioPlayer = document.getElementById('audioPlayer');
             audioPlayer.src = images[currentIndex].audio;
             audioPlayer.load();
-            // Gambar play kembali
+            audioPlayer.play();
+
+            // Mengubah gambar play/pause menjadi play
             document.getElementById('playPauseImage').src = "assets/icon/play.png";
         }
 
