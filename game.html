@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Susun Huruf</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .image-container {
+            margin-bottom: 20px;
+        }
+
+        #image {
+            width: 300px;
+            height: 300px;
+        }
+
+        .letter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .letter-box {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #f4f4f4;
+        }
+
+        .letter-box:hover {
+            background-color: #e0e0e0;
+        }
+
+        .letter-draggable {
+            cursor: move;
+        }
+
+        #checkButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #checkButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="image-container">
+        <img id="image" src="https://example.com/image.jpg" alt="Gambar Petunjuk">
+    </div>
+
+    <h2>Susun Huruf berdasarkan gambar di atas!</h2>
+
+    <div id="lettersContainer" class="letter-container">
+        <!-- Huruf-huruf akan muncul di sini -->
+    </div>
+
+    <div class="letter-container" id="answerContainer">
+        <!-- Tempat untuk susun huruf -->
+    </div>
+
+    <button id="checkButton" onclick="checkAnswer()">Periksa Jawaban</button>
+
+    <script>
+        // Daftar huruf yang sesuai dengan gambar
+        const correctAnswer = ['S', 'A', 'T', 'A', 'T', 'A'];
+        const shuffledAnswer = [...correctAnswer].sort(() => Math.random() - 0.5); // Mengacak huruf
+
+        // Fungsi untuk membuat huruf-huruf yang bisa disusun
+        function createLetterBoxes() {
+            const lettersContainer = document.getElementById('lettersContainer');
+            shuffledAnswer.forEach(letter => {
+                const letterBox = document.createElement('div');
+                letterBox.classList.add('letter-box', 'letter-draggable');
+                letterBox.textContent = letter;
+                letterBox.draggable = true;
+                letterBox.addEventListener('dragstart', dragStart);
+                lettersContainer.appendChild(letterBox);
+            });
+        }
+
+        // Menangani drag start untuk huruf
+        function dragStart(e) {
+            e.dataTransfer.setData('text', e.target.textContent);
+        }
+
+        // Membuat tempat untuk meletakkan huruf
+        function createAnswerBoxes() {
+            const answerContainer = document.getElementById('answerContainer');
+            for (let i = 0; i < correctAnswer.length; i++) {
+                const answerBox = document.createElement('div');
+                answerBox.classList.add('letter-box');
+                answerBox.setAttribute('ondrop', 'drop(event)');
+                answerBox.setAttribute('ondragover', 'allowDrop(event)');
+                answerContainer.appendChild(answerBox);
+            }
+        }
+
+        // Fungsi untuk mengizinkan huruf di-drop
+        function allowDrop(e) {
+            e.preventDefault();
+        }
+
+        // Fungsi untuk menangani drop huruf ke kotak
+        function drop(e) {
+            e.preventDefault();
+            const data = e.dataTransfer.getData('text');
+            const targetBox = e.target;
+
+            // Pastikan kotak tujuan kosong
+            if (!targetBox.textContent) {
+                targetBox.textContent = data;
+                // Menghapus huruf yang sudah dipilih dari area huruf
+                removeLetterFromContainer(data);
+            }
+        }
+
+        // Fungsi untuk menghapus huruf dari area huruf yang bisa dipilih
+        function removeLetterFromContainer(letter) {
+            const lettersContainer = document.getElementById('lettersContainer');
+            const letterBoxes = lettersContainer.getElementsByClassName('letter-box');
+            for (let i = 0; i < letterBoxes.length; i++) {
+                // Cek jika huruf yang sama ditemukan, sembunyikan huruf tersebut
+                if (letterBoxes[i].textContent === letter) {
+                    letterBoxes[i].style.display = 'none';  // Sembunyikan huruf yang sudah dipilih
+                    break; // Menghentikan loop setelah menghapus satu huruf yang cocok
+                }
+            }
+        }
+
+        // Memeriksa jawaban pemain
+        function checkAnswer() {
+            const answerBoxes = document.querySelectorAll('#answerContainer .letter-box');
+            let playerAnswer = [];
+            answerBoxes.forEach(box => {
+                playerAnswer.push(box.textContent);
+            });
+
+            if (JSON.stringify(playerAnswer) === JSON.stringify(correctAnswer)) {
+                alert('Selamat, jawaban Anda benar!');
+            } else {
+                alert('Jawaban Anda salah, coba lagi!');
+            }
+        }
+
+        // Memulai game
+        createLetterBoxes();
+        createAnswerBoxes();
+    </script>
+</body>
+
+</html>

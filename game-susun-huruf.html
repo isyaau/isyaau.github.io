@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <script src="../assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BELAJAR MEMBACA</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/style.css" rel="stylesheet">
+
+    <style>
+        .letter-box {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            background-color: #f0f0f0;
+            text-align: center;
+            font-size: 24px;
+            line-height: 50px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .letter-box.used {
+            background-color: #6c757d;
+            color: white;
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: scale(0.9);
+        }
+
+        .letter-box:hover:not(.used) {
+            background-color: #007bff;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .word-box {
+            margin-bottom: 20px;
+        }
+
+        .letter-drop-box {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            border: 2px dashed #aaa;
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+            font-size: 24px;
+            line-height: 50px;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .letter-drop-box:empty {
+            background-color: #e9ecef;
+        }
+
+        .letter-drop-box:not(:empty) {
+            border-style: solid;
+            border-color: #28a745;
+        }
+
+        #game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        #timer {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        #score {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .game-over {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8d7da;
+            border-radius: 10px;
+        }
+
+        #notification {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="row justify-content-center align-items-center mt-5">
+                <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
+                    <div class="gambar-wrapper" onclick="toggleMute()">
+                        <img src="assets/icon/high-volume.png" alt="Volume" width="50vh" class="gambar-shadow"
+                            id="volumeImage">
+                    </div>
+
+                    <!-- Background Music -->
+                    <audio id="audioPlayerbg" autoplay loop>
+                        <source src="assets/music/bg.wav" type="audio/wav">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+
+                    <h1 class="mx-auto">MENGENAL HURUF</h1>
+
+                    <a href="javascript:history.back()">
+                        <div class="gambar-wrapper">
+                            <img src="assets/icon/back.png" alt="Kembali" width="50vh" class="gambar-shadow"
+                                id="backImage">
+                        </div>
+                    </a>
+
+                    <a href="/dashboard.html">
+                        <div class="gambar-wrapper">
+                            <img src="assets/icon/home.png" alt="Beranda" width="50vh" class="gambar-shadow"
+                                id="homeImage">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="text-center mb-5">
+                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Judul Game" width="1000vh">
+                    <br>
+                    <h2>Selamat datang <span id="userName"></span> dari sekolah <span id="userSchool"></span>!</h2>
+                </div>
+
+                <div class="row text-center" id="gameContainer">
+                    <div class="col-12" id="game-stats">
+                        <div id="timer">Waktu: 60</div>
+                        <div id="score">Skor: 0</div>
+                    </div>
+
+                    <div class="col-12">
+                        <img id="gameImage" src="" alt="Gambar" class="mb-4"
+                            style="max-width: 300px; max-height: 300px;">
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div id="wordDropBoxes" class="word-box">
+                            <!-- Drop boxes for letters will be added dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div id="letterChoices" class="letter-choices">
+                            <!-- Letter choices will be added dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button id="checkButton" class="btn btn-primary btn-submit" onclick="checkAnswer()">Periksa
+                            Jawaban</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pop-up Notification -->
+    <div id="notification" class="alert" style="position: fixed; bottom: 10px; right: 10px; display: none;">
+        <strong id="notification-message"></strong>
+    </div>
+
+    <script>
+        // Daftar soal game susun huruf
+        const questions = [
+            {
+                image: 'assets/img/apel.png',
+                word: 'APEL',
+                hint: 'Nama buah berwarna merah'
+            },
+            {
+                image: 'assets/img/bola.png',
+                word: 'BOLA',
+                hint: 'Alat untuk bermain yang dapat dipantulkan'
+            },
+            {
+                image: 'assets/img/kupu.png',
+                word: 'KUPU',
+                hint: 'Serangga bersayap indah yang terbang di siang hari'
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let selectedLetters = [];
+        let timeLeft = 60;
+        let score = 0;
+        let timerInterval;
+
+        // Fungsi untuk mengacak huruf
+        function shuffleLetters(word) {
+            return word.split('').sort(() => Math.random() - 0.5);
+        }
+
+        // Fungsi untuk memulai timer
+        function startTimer() {
+            const timerElement = document.getElementById('timer');
+            clearInterval(timerInterval); // Pastikan tidak ada interval yang berjalan sebelumnya
+            timeLeft = 60;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = `Waktu: ${timeLeft}`;
+
+                if (timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        // Fungsi untuk mengakhiri permainan
+        function endGame() {
+            clearInterval(timerInterval);
+
+            // Sembunyikan elemen game
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.innerHTML = `
+                <div class="col-12 game-over">
+                    <h2>Game Over!</h2>
+                    <p>Skor Anda: ${score}</p>
+                    <button onclick="restartGame()" class="btn btn-primary">Mulai Ulang</button>
+                </div>
+            `;
+        }
+
+        // Fungsi untuk memulai ulang permainan
+        function restartGame() {
+            // Kembalikan elemen game ke kondisi awal
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.innerHTML = `
+                <div class="col-12" id="game-stats">
+                    <div id="timer">Waktu: 60</div>
+                    <div id="score">Skor: 0</div>
+                </div>
+
+                <div class="col-12">
+                    <img id="gameImage" src="" alt="Gambar" class="mb-4" style="max-width: 300px; max-height: 300px;">
+                </div>
+                
+                <div class="col-12 mb-3">
+                    <div id="wordDropBoxes" class="word-box">
+                        <!-- Drop boxes for letters will be added dynamically -->
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <div id="letterChoices" class="letter-choices">
+                        <!-- Letter choices will be added dynamically -->
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <button id="checkButton" class="btn btn-primary btn-submit" onclick="checkAnswer()">Periksa Jawaban</button>
+                </div>
+            `;
+
+            // Reset variabel
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedLetters = [];
+
+            // Mulai ulang game
+            startGame();
+            startTimer();
+        }
+
+        // Fungsi untuk memulai permainan
+        function startGame() {
+            const currentQuestion = questions[currentQuestionIndex];
+
+            // Set gambar
+            document.getElementById('gameImage').src = currentQuestion.image;
+
+            // Buat kotak untuk meletakkan huruf
+            const wordDropBoxes = document.getElementById('wordDropBoxes');
+            wordDropBoxes.innerHTML = '';
+            for (let i = 0; i < currentQuestion.word.length; i++) {
+                const dropBox = document.createElement('div');
+                dropBox.classList.add('letter-drop-box');
+                dropBox.dataset.index = i;
+                wordDropBoxes.appendChild(dropBox);
+            }
+
+            // Acak huruf untuk dipilih
+            const shuffledLetters = shuffleLetters(currentQuestion.word);
+
+            // Buat pilihan huruf
+            const letterChoices = document.getElementById('letterChoices');
+            letterChoices.innerHTML = '';
+            shuffledLetters.forEach(letter => {
+                const letterBox = document.createElement('div');
+                letterBox.classList.add('letter-box');
+                letterBox.textContent = letter;
+                letterBox.onclick = () => selectLetter(letterBox);
+                letterChoices.appendChild(letterBox);
+            });
+
+            // Reset pilihan huruf
+            selectedLetters = [];
+        }
+
+        // Fungsi untuk memilih huruf
+        function selectLetter(letterBox) {
+            // Cari kotak drop kosong pertama
+            const emptyDropBox = document.querySelector('.letter-drop-box:empty');
+
+            if (emptyDropBox && !letterBox.classList.contains('used')) {
+                emptyDropBox.textContent = letterBox.textContent;
+                letterBox.classList.add('used');
+                selectedLetters.push({
+                    letter: letterBox.textContent,
+                    element: letterBox
+                });
+
+                // Tambahkan opsi untuk mengembalikan huruf
+                emptyDropBox.onclick = () => unselectLetter(emptyDropBox);
+            }
+        }
+
+        // Fungsi untuk mengembalikan huruf
+        function unselectLetter(dropBox) {
+            const letter = dropBox.textContent;
+            dropBox.textContent = '';
+
+            // Cari dan kembalikan huruf ke kondisi semula
+            const usedLetterBox = Array.from(document.querySelectorAll('.letter-box.used'))
+                .find(box => box.textContent === letter);
+
+            if (usedLetterBox) {
+                usedLetterBox.classList.remove('used');
+                selectedLetters = selectedLetters.filter(item => item.letter !== letter);
+            }
+        }
+
+        // Fungsi untuk memeriksa jawaban
+        function checkAnswer() {
+            const currentQuestion = questions[currentQuestionIndex];
+            const dropBoxes = document.querySelectorAll('.letter-drop-box');
+
+            let isCorrect = true;
+            dropBoxes.forEach((box, index) => {
+                if (box.textContent !== currentQuestion.word[index]) {
+                    isCorrect = false;
+                    box.classList.add('incorrect-letter');
+                } else {
+                    box.classList.add('correct-letter');
+                }
+            });
+
+            // Tampilkan notifikasi
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+
+            if (isCorrect) {
+                // Tambah skor
+                score += 10;
+                document.getElementById('score').textContent = `Skor: ${score}`;
+
+                notificationMessage.textContent = 'Selamat! Jawaban Anda benar.';
+                notification.classList.remove('alert-danger');
+                notification.classList.add('alert-success');
+
+                // Lanjut ke soal berikutnya
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        startGame();
+                    } else {
+                        endGame();
+                    }
+                }, 2000);
+            } else {
+                notificationMessage.textContent = 'Maaf, jawaban Anda salah. Coba lagi!';
+                notification.classList.remove('alert-success');
+                notification.classList.add('alert-danger');
+            }
+
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+
+                // Reset warna dan huruf jika salah
+                if (!isCorrect) {
+                    dropBoxes.forEach(box => {
+                        box.textContent = '';
+                        box.classList.remove('incorrect-letter', 'correct-letter');
+                    });
+
+                    selectedLetters.forEach(item => {
+                        item.element.classList.remove('used');
+                    });
+
+                    selectedLetters = [];
+                }
+            }, 2000);
+        }
+
+        // Fungsi toggle mute
+        function toggleMute() {
+            const audio = document.getElementById('audioPlayerbg');
+            const volumeImage = document.getElementById('volumeImage');
+
+            if (audio.muted) {
+                audio.muted = false;
+                volumeImage.src = 'assets/icon/high-volume.png';
+            } else {
+                audio.muted = true;
+                volumeImage.src = 'assets/icon/mute.png';
+            }
+        }
+
+        // Inisialisasi game saat halaman dimuat
+        window.onload = () => {
+            startGame();
+            startTimer();
+        };
+    </script>
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -17,10 +17,6 @@
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/style.css" rel="stylesheet">
 
-    <style>
-
-    </style>
-
 </head>
 
 <body>
@@ -29,7 +25,7 @@
             <div class="row justify-content-center align-items-center mt-5">
                 <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
                     <div class="gambar-wrapper" onclick="toggleMute()">
-                        <img src="assets/icon/high-volume.png" alt="Deskripsi Gambar" class="gambar-shadow"
+                        <img src="assets/icon/high-volume.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
                             id="volumeImage">
                     </div>
                     <!-- Background Music -->
@@ -37,63 +33,47 @@
                         <source src="assets/music/bg.wav" type="audio/mp3">
                         Browser Anda tidak mendukung elemen audio.
                     </audio>
-                    <h1 class="mx-auto">Materi</h1>
-                    <div class="gambar-wrapper" onclick="logout()">
-                        <img src="assets/icon/logout.png" alt="Deskripsi Gambar" class="gambar-shadow" id="logoutImage">
-                    </div>
+                    <h1 class="mx-auto">MENGENAL HURUF</h1>
+                    <a href="/dashboard.html">
+                        <div class="gambar-wrapper">
+                            <img src="assets/icon/home.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
+                                id="volumeImage">
+                        </div>
+                    </a>
                 </div>
+
                 <div class="text-center mb-5">
-                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Deskripsi Gambar">
+                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Deskripsi Gambar" width="1000vh">
                     <br>
                     <h2>Selamat datang <span id="userName"></span> dari sekolah <span id="userSchool"></span>!</h2>
                 </div>
             </div>
+
+            <!-- Cards Section -->
             <div class="row justify-content-center">
                 <div class="col-6 col-md-3 mb-4">
-                    <a href="/mengenal-huruf.html">
-
-                        <img src="assets/menu/mengenal-huruf.png" class="card-img-top" alt="...">
-
-
+                    <a href="/huruf.html">
+                        <img src="assets/menu/huruf.png" class="card-img-top" alt="...">
                     </a>
                 </div>
                 <div class="col-6 col-md-3 mb-4">
-                    <a href="/materi.html">
-
-                        <img src="assets/menu/mengenal-kata.png" class="card-img-top" alt="...">
-
-
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3 mb-4">
-                    <a href="/mengenal-objek.html">
-
-                        <img src="assets/menu/mengenal-objek.png" class="card-img-top" alt="...">
-
+                    <a href="/huruf-konsonan.html">
+                        <img src="assets/menu/huruf-konsonan.png" class="card-img-top" alt="...">
                     </a>
                 </div>
                 <div class="col-6 col-md-3 mb-4">
-                    <a href="/game-susun-huruf.html">
-
-                        <img src="assets/menu/bermain.png" class="card-img-top" alt="...">
-
-
+                    <a href="/huruf-vocal.html">
+                        <img src="assets/menu/huruf-vocal.png" class="card-img-top" alt="...">
                     </a>
                 </div>
-                <div class="col-6 col-md-3 mb-4">
-                    <a href="/game-susun-huruf.html">
 
-                        <img src="assets/menu/latihan.png" class="card-img-top" alt="...">
-
-
-                    </a>
-                </div>
             </div>
+
         </div>
     </main>
     <script src="assets/script.js"></script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
