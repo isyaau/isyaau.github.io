@@ -121,6 +121,15 @@
         .lb tr:last-child td { border-bottom: none; }
         .lb .lb-rk { width: 36px; text-align: center; }
         .lb .lb-s { text-align: right; font-family: 'Fredoka'; font-weight: 600; }
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 14px 20px; border-bottom: 1px solid var(--card-border); scrollbar-width: thin; }
+        .tab-btn {
+            flex: 0 0 auto; font-family: 'Plus Jakarta Sans'; font-size: .85rem; font-weight: 600;
+            display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 12px;
+            border: 1px solid var(--card-border); background: var(--card); color: var(--muted); cursor: pointer; transition: .2s;
+        }
+        .tab-btn:hover { border-color: var(--violet); color: var(--txt); }
+        .tab-btn.on { border-color: var(--cyan); color: var(--txt); background: rgba(34, 211, 238, .12); }
+        .tab-btn .t-emoji { font-size: 1.15rem; }
         #gamePlay { padding: 22px 20px 28px; min-height: 320px; }
 
         .g-head { text-align: center; margin-bottom: 18px; }
@@ -271,9 +280,12 @@
             <h1>Main Seru, <span>Belajar Asik</span></h1>
             <p>Kumpulan game campuran <b>edukasi</b> & <b>hiburan</b> — dari tebak angka, aritmetika kilat, sampai ular lapar. Semua langsung dimainkan di browser, tanpa instalasi.</p>
             <div class="hero-meta">
-                <span>🏆 Skor terbaik tersimpan otomatis</span>
+                <span>🏆 Papan skor global 12 game</span>
                 <span>📱 Bisa dimainkan di HP & PC</span>
                 <span>🧠 Melatih logika & refleks</span>
+            </div>
+            <div class="btn-row">
+                <button class="gbtn" onclick="openBoard()">🏆 Buka Papan Skor</button>
             </div>
         </section>
 
@@ -287,11 +299,24 @@
                 <button class="mbtn" onclick="closeGame()">← Beranda</button>
                 <h2 id="gameTitle"></h2>
                 <div class="mgrp">
-                    <button class="mbtn" onclick="openBoard()">🏆 Papan Skor</button>
+                    <button class="mbtn" onclick="openBoard(cur)">🏆 Papan Skor</button>
                     <button class="mbtn" onclick="restartGame()">↻ Ulangi</button>
                 </div>
             </div>
             <div id="gamePlay"></div>
+        </div>
+    </div>
+
+    <!-- MODAL PAPAN SKOR -->
+    <div class="modal" id="boardModal" hidden>
+        <div class="modal-box">
+            <div class="modal-head">
+                <button class="mbtn" onclick="closeBoard()">← Beranda</button>
+                <h2>🏆 Papan Skor Global</h2>
+                <button class="mbtn" onclick="closeBoard()">✕</button>
+            </div>
+            <div class="tabs" id="boardTabs"></div>
+            <div id="boardPlay"></div>
         </div>
     </div>
 
@@ -369,58 +394,66 @@
         if (!res.ok) throw new Error('gagal kirim skor');
     }
 
-    function openBoard() {
-        if (!cur) return;
-        simpanNama().then(muatSkor);
+    const boardModal = $('boardModal');
+    let boardCur = null;
+
+    function openBoard(id) {
+        boardCur = id || (cur && GAMES.find(g => g.id === cur) ? cur : GAMES[0].id);
+        $('boardTabs').innerHTML = GAMES.map(g =>
+            `<button class="tab-btn ${g.id === boardCur ? 'on' : ''}" onclick="boardTab('${g.id}')"><span class="t-emoji">${g.emoji}</span>${g.name}</button>`).join('');
+        boardModal.hidden = false; document.body.classList.add('lock');
+        muatBoard();
+    }
+    function closeBoard() { boardModal.hidden = true; document.body.classList.remove('lock'); }
+    function boardTab(id) {
+        boardCur = id;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('on', b.onclick === `boardTab('${id}')`));
+        muatBoard();
     }
 
-    function simpanNama() {
+    async function muatBoard() {
+        const g = GAMES.find(x => x.id === boardCur);
         const nm = (localStorage.getItem('gk_nama') || '').trim();
-        return Promise.resolve(nm);
-    }
-
-    function muatSkor() {
-        const box = $('gamePlay');
-        const nm = (localStorage.getItem('gk_nama') || '').trim();
-        box.innerHTML = `
-            <div class="g-head">
-                <div class="big-emoji">🏆</div>
+        $('boardPlay').innerHTML = `
+            <div class="g-head" style="padding-top:6px">
+                <div class="big-emoji">${g.emoji}</div>
                 <div class="scoreline">
-                    <span class="chip">Papan Skor ${esc(GAMES.find(x => x.id === cur).name)}</span>
-                    <span class="chip">🌐 Top 10 se-Indonesia</span>
+                    <span class="chip">${esc(g.name)} · Top 10</span>
+                    <span class="chip">🌐 Global</span>
                 </div>
             </div>
             <div class="arena">
-                <p style="color:var(--muted);font-size:.9rem">Skor terbaikmu di game ini otomatis terkirim ke papan skor saat mendapat rekor baru.</p>
-                <div class="pill-selects" style="margin-top:12px;flex-direction:column">
-                    <div class="btn-row">
-                        <input class="plain" id="nmInp" value="${esc(nm)}" maxlength="20" placeholder="Nama kamu…" style="width:200px;font-size:1.1rem">
-                        <button class="gbtn" onclick="setNama()">Simpan nama</button>
-                    </div>
+                <div class="btn-row">
+                    <input class="plain" id="nmInp" value="${esc(nm)}" maxlength="20" placeholder="Nama kamu…" style="width:200px;font-size:1.05rem">
+                    <button class="gbtn" onclick="setNama()">Simpan nama</button>
                 </div>
-                <div id="lbList" class="scoreline" style="font-size:1rem;margin-top:18px">Memuat…</div>
+                <div id="lbList" class="scoreline" style="font-size:1rem;margin-top:16px">Memuat…</div>
             </div>
-            <div class="btn-row" style="margin-top:16px">
-                <button class="gbtn" onclick="startGame()">← Kembali main</button>
+            <div class="btn-row" style="margin-top:14px">
+                <button class="gbtn" onclick="openGame('${boardCur}')">▶ Main "${esc(g.name)}"</button>
             </div>`;
-        if (nm) su_get(cur).then(renderLb).catch(() => { $('lbList').innerHTML = '⚠️ Gagal memuat papan skor.'; });
-        else $('lbList').innerHTML = '💬 Tulis nama di atas untuk tampil di papan skor.';
+        const list = $('lbList');
+        list.innerHTML = 'Memuat…';
+        try {
+            const rows = await su_get(boardCur);
+            const sorted = (rows || []).slice().sort((a, b) => b.skor - a.skor);
+            list.innerHTML = renderLb(sorted, nm);
+        } catch (e) {
+            list.innerHTML = '⚠️ Gagal memuat papan skor.';
+        }
     }
 
     function setNama() {
         const v = ($('nmInp').value || '').trim();
         localStorage.setItem('gk_nama', v);
-        if (!v) { $('lbList').innerHTML = '💬 Tulis nama di atas untuk tampil di papan skor.'; return; }
-        $('lbList').innerHTML = 'Memuat…';
-        su_get(cur).then(renderLb).catch(() => { $('lbList').innerHTML = '⚠️ Gagal memuat papan skor.'; });
+        const lb = $('lbList');
+        lb.innerHTML = v ? `Nama tersimpan. Rekor baru otomatis terkirim. ✅` : '💬 Tulis nama untuk ikut papan skor.';
     }
 
-    function renderLb(rows) {
-        const sorted = (rows || []).slice().sort((a, b) => b.skor - a.skor);
-        const mine = (localStorage.getItem('gk_nama') || '').trim();
-        if (!sorted.length) { $('lbList').innerHTML = 'Belum ada skor. Jadilah yang pertama! 🎉'; return; }
-        $('lbList').innerHTML = `<table class="lb">
-            <tr style="color:var(--muted);font-size:.8rem">
+    function renderLb(sorted, mine) {
+        if (!sorted.length) return '<div style="padding:14px 0">Belum ada skor. Jadilah yang pertama! 🎉</div>';
+        return `<table class="lb">
+            <tr style="color:var(--muted);font-size:.78rem">
                 <td class="lb-rk">#</td><td>Pemain</td><td class="lb-s">Skor</td>
             </tr>
             ${sorted.map((r, i) => `
@@ -468,7 +501,9 @@
     function startGame() { clearAll(); FUNCS[cur](); }
     function restartGame() { startGame(); }
     function closeGame() { clearAll(); modal.hidden = true; document.body.classList.remove('lock'); cur = null; }
-    document.addEventListener('keydown', e => { if (!modal.hidden && e.key === 'Escape') closeGame(); });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') { if (!boardModal.hidden) closeBoard(); else if (!modal.hidden) closeGame(); }
+    });
 
     // ==================== 1. TEBAK ANGKA ====================
     const G = { target: 0, tries: 0 };
