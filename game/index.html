@@ -225,6 +225,12 @@
         /* emoji pictionary */
         .bigr { font-size: 3.2rem; letter-spacing: 8px; margin: 16px 0 4px; }
 
+        /* stroop + typing */
+        .stroop-word { font-family: 'Fredoka'; font-size: 2.8rem; font-weight: 700; letter-spacing: 3px; margin: 8px 0; }
+        .swatch { display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 8px; vertical-align: -2px; }
+        .typ-word { font-family: 'Fredoka'; font-size: 2.2rem; font-weight: 600; letter-spacing: 8px; margin: 8px 0; }
+        .typ-inp { text-transform: uppercase; }
+
         .result-box {
             text-align: center; padding: 28px 0 6px; font-family: 'Fredoka';
         }
@@ -327,6 +333,8 @@
         { id: 'simon',  emoji: '🔔', name: 'Simon Warna',       tag: 'MEMORI',        desc: 'Hafalkan dan ulangi urutan warna yang makin lama makin panjang.' },
         { id: 'snake',  emoji: '🐍', name: 'Ular Lapar',        tag: 'AKSI',          desc: 'Kendalikan ular makan buah, jangan menabrak tembok atau ekor sendiri.' },
         { id: 'emoji',  emoji: '🧩', name: 'Tebak Emoji',       tag: 'LOGIKA',        desc: 'Tebak kata atau istilah dari kombinasi emoji yang ditampilkan.' },
+        { id: 'stroop', emoji: '🎨', name: 'Tebak Warna',       tag: 'REFLEKS',       desc: 'Warna tulisan tidak selalu sama dengan katanya — klik warna TULISAN-nya. Seru & melatih fokus!' },
+        { id: 'typing', emoji: '⌨️', name: 'Ketik Kata Kilat',  tag: 'BAHASA',        desc: 'Ketik ulang kata yang tampil secepat mungkin dalam 30 detik.' },
     ];
     const GLOW = ['#22d3ee', '#a78bfa', '#fb7185', '#34d399', '#fbbf24', '#f472b6', '#60a5fa', '#2dd4bf', '#f97316', '#e5b8ff'];
 
@@ -830,6 +838,7 @@
             if (SIMON.idx >= SIMON.seq.length) {
                 setBest('simon', SIMON.level);
                 winSound();
+                SIMON.playing = false; SIMON.input = false; s_btn(false);
                 $('sMsg').className = 'status-msg good';
                 $('sMsg').textContent = `✅ Level ${SIMON.level} berhasil! Siap level berikut?`;
                 later(700, () => s_next());
@@ -838,7 +847,7 @@
             errSound();
             $('sMsg').className = 'status-msg bad';
             $('sMsg').textContent = `💥 Salah! Bertahan sampai level ${SIMON.level}.`;
-            SIMON.playing = true; s_btn(false);
+            SIMON.playing = false; SIMON.input = false; s_btn(false);
             later(1200, () => g_simon());
         }
     }
@@ -1019,8 +1028,148 @@
         } else { EM.idx++; em_render(); }
     }
 
+    // ==================== 11. TEBAK WARNA (STROOP) ====================
+    const STR_COLORS = [
+        { name: 'MERAH', hex: '#ef4444' },
+        { name: 'KUNING', hex: '#facc15' },
+        { name: 'HIJAU', hex: '#22c55e' },
+        { name: 'BIRU', hex: '#3b82f6' },
+    ];
+    const STR = { word: 0, paint: 0, score: 0, wrong: 0, time: 30, tick: null, over: false };
+    function g_stroop() {
+        STR.score = 0; STR.wrong = 0; STR.time = 30; STR.over = false;
+        playEl.innerHTML = `
+            <div class="g-head">
+                <div class="big-emoji">🎨</div>
+                <div class="scoreline">
+                    <span class="chip">🏆 ${best('stroop')}</span>
+                    <span class="chip">Skor: <b id="stScore">0</b></span>
+                    <span class="chip">Salah: <span id="stWrong">0</span></span>
+                    <span class="chip">⏱ <b id="stTime">30</b>s</span>
+                </div>
+            </div>
+            <div class="arena">
+                <p style="color:var(--muted);font-size:.9rem">Tantangan Stroop: klik warna yang sama dengan <b>warna tulisan</b>, bukan nama katanya!</p>
+                <div class="stroop-word" id="stWord">MERAH</div>
+                <div class="pill-selects" id="stOpts" style="margin-top:14px"></div>
+                <div class="status-msg" id="stMsg"></div>
+            </div>`;
+        st_new();
+        STR.tick = every(1000, () => {
+            STR.time--;
+            $('stTime').textContent = STR.time;
+            if (STR.time <= 0) { clearInterval(STR.tick); st_finish(); }
+        });
+    }
+    function st_new() {
+        STR.word = rnd(4);
+        do { STR.paint = rnd(4); } while (STR.paint === STR.word);
+        $('stWord').textContent = STR_COLORS[STR.word].name;
+        $('stWord').style.color = STR_COLORS[STR.paint].hex;
+        const order = shuffle([0, 1, 2, 3]);
+        $('stOpts').innerHTML = order.map(i =>
+            `<button class="opt-btn" onclick="st_pick(${i})"><span class="swatch" style="background:${STR_COLORS[i].hex}"></span>${STR_COLORS[i].name.toLowerCase()}</button>`).join('');
+        $('stMsg').textContent = '';
+    }
+    function st_pick(p) {
+        if (STR.over) return;
+        const btns = document.querySelectorAll('#stOpts .opt-btn');
+        if (p === STR.paint) {
+            STR.score++; beep(700, 60);
+            $('stScore').textContent = STR.score;
+            $('stMsg').className = 'status-msg good';
+            $('stMsg').textContent = '✅ Pintar!';
+            st_new();
+        } else {
+            STR.wrong++; errSound();
+            $('stWrong').textContent = STR.wrong;
+            btns.forEach(b => b.classList.remove('wrong'));
+            btns[p].classList.add('wrong');
+            $('stMsg').className = 'status-msg bad';
+            $('stMsg').textContent = `❌ Salah! Warna tulisan: ${STR_COLORS[STR.paint].name.toLowerCase()}`;
+            later(500, st_new);
+        }
+    }
+    function st_finish() {
+        STR.over = true;
+        const baru = setBest('stroop', STR.score);
+        playEl.innerHTML = `
+            <div class="result-box">
+                <div class="big">${STR.score >= 15 ? '🏆' : STR.score >= 8 ? '🎉' : '💪'}</div>
+                <h3>Waktu habis!</h3>
+                <p>Skor kamu: <b>${STR.score}</b> ⭐${baru ? ' · 🆕 Rekor baru!' : ' · Terbaik: ' + best('stroop')}</p>
+                <div class="btn-row"><button class="gbtn" onclick="restartGame()">Main lagi</button></div>
+            </div>`;
+    }
+
+    // ==================== 12. KETIK KATA KILAT ====================
+    const TYPE_WORDS = ['BUKU', 'GURU', 'MEJA', 'KURSI', 'PINTU', 'SINAR', 'TAMAN', 'SAINS', 'LANGIT', 'LAUTAN', 'GUNUNG', 'BURUNG', 'JENDELA', 'SEPEDA', 'SEKOLAH'];
+    const TYP = { score: 0, time: 30, over: false, tick: null };
+    function g_typing() {
+        TYP.score = 0; TYP.time = 30; TYP.over = false;
+        playEl.innerHTML = `
+            <div class="g-head">
+                <div class="big-emoji">⌨️</div>
+                <div class="scoreline">
+                    <span class="chip">🏆 ${best('typing')}</span>
+                    <span class="chip">Skor: <b id="typScore">0</b></span>
+                    <span class="chip">⏱ <b id="typTime">30</b>s</span>
+                </div>
+            </div>
+            <div class="arena">
+                <p style="color:var(--muted);font-size:.9rem">Ketik ulang kata di bawah secepat mungkin, lalu tekan <b>Enter</b>.</p>
+                <div class="typ-word" id="typWord">BUKU</div>
+                <div class="btn-row">
+                    <input class="plain typ-inp" id="typInp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ketik…">
+                </div>
+                <div class="status-msg" id="typMsg"></div>
+            </div>`;
+        typ_new();
+        TYP.tick = every(1000, () => {
+            TYP.time--;
+            $('typTime').textContent = TYP.time;
+            if (TYP.time <= 0) { clearInterval(TYP.tick); typ_finish(); }
+        });
+        $('typInp').addEventListener('keydown', e => { if (e.key === 'Enter') typ_check(); });
+        $('typInp').focus();
+    }
+    function typ_new() {
+        $('typWord').textContent = TYPE_WORDS[rnd(TYPE_WORDS.length)];
+        $('typMsg').textContent = '';
+        $('typInp').value = '';
+        $('typInp').focus();
+    }
+    function typ_check() {
+        if (TYP.over) return;
+        const v = ($('typInp').value || '').trim().toUpperCase();
+        if (!v) return;
+        if (v === $('typWord').textContent) {
+            TYP.score++; beep(700, 60);
+            $('typScore').textContent = TYP.score;
+            $('typMsg').className = 'status-msg good';
+            $('typMsg').textContent = '✅ Benar!';
+        } else {
+            errSound();
+            $('typMsg').className = 'status-msg bad';
+            $('typMsg').textContent = '❌ Belum tepat, coba lagi!';
+            $('typInp').value = '';
+        }
+        typ_new();
+    }
+    function typ_finish() {
+        TYP.over = true;
+        const baru = setBest('typing', TYP.score);
+        playEl.innerHTML = `
+            <div class="result-box">
+                <div class="big">${TYP.score >= 12 ? '⏩' : TYP.score >= 6 ? '⌨️' : '💪'}</div>
+                <h3>Waktu habis!</h3>
+                <p>Kata yang berhasil: <b>${TYP.score}</b>${baru ? ' · 🆕 Rekor baru!' : ' · Terbaik: ' + best('typing')}</p>
+                <div class="btn-row"><button class="gbtn" onclick="restartGame()">Main lagi</button></div>
+            </div>`;
+    }
+
     // ==================== REGISTRASI ====================
-    const FUNCS = { guess: g_guess, math: g_math, word: g_word, quiz: g_quiz, memory: g_memory, rps: g_rps, tictac: g_tictac, simon: g_simon, snake: g_snake, emoji: g_emoji };
+    const FUNCS = { guess: g_guess, math: g_math, word: g_word, quiz: g_quiz, memory: g_memory, rps: g_rps, tictac: g_tictac, simon: g_simon, snake: g_snake, emoji: g_emoji, stroop: g_stroop, typing: g_typing };
     buildHub();
     const keren = $('keren');
     setInterval(() => {
