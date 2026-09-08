@@ -2731,19 +2731,29 @@
                 body: new FormData(form),
                 headers: { 'Accept': 'application/json' }
             }).then(function(res) {
-                return res.json();
-            }).then(function(data) {
-                if (data.success === 'true' || data.success === true) {
+                return res.text().then(function(text) {
+                    let data = null;
+                    try { data = JSON.parse(text); } catch (err) {}
+                    return { res: res, text: text, data: data };
+                });
+            }).then(function(result) {
+                if (result.res.ok && result.data && (result.data.success === 'true' || result.data.success === true)) {
                     showToast('Pesan berhasil dikirim! Terima kasih');
                     form.reset();
+                    btn.disabled = false;
+                    btn.innerHTML = original;
                 } else {
-                    showToast('Gagal mengirim pesan, coba lagi.');
+                    btn.disabled = false;
+                    btn.innerHTML = original;
+                    const isActivation = /whoops|something went wrong/i.test(result.text);
+                    showToast(isActivation
+                        ? 'FormSubmit belum aktif. Klik kirim di formsubmit.co/email Anda untuk aktivasi.'
+                        : 'Gagal mengirim pesan, coba lagi.');
                 }
             }).catch(function() {
-                showToast('Gagal mengirim pesan, coba lagi.');
-            }).finally(function() {
                 btn.disabled = false;
                 btn.innerHTML = original;
+                showToast('Gagal mengirim pesan, coba lagi.');
             });
         });
 
