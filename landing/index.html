@@ -4,12 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Isyaau - Portofolio & Projek</title>
-    <meta name="description" content="Landing page Isyaau: portofolio dan projek-projek.">
+    <title>Isyaau Teknologi - Jasa Instalasi WiFi, CCTV &amp; Servis Komputer | Ngawi</title>
+    <meta name="description" content="Isyaau Teknologi menyediakan jasa instalasi WiFi/internet, pasang CCTV, servis komputer &amp; laptop, rakitan PC, dan manajemen jaringan kantor di Ngawi &amp; sekitarnya. Konsultasi gratis via WhatsApp.">
+    <meta name="keywords" content="instalasi wifi, pasang cctv, servis komputer, rakitan pc, jaringan kantor, ngawi, teknisi komputer">
+    <meta property="og:title" content="Isyaau Teknologi - Jasa IT &amp; Jaringan">
+    <meta property="og:description" content="Instalasi WiFi, pasang CCTV, servis komputer, dan manajemen jaringan. Pesan langsung via WhatsApp.">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -19,299 +21,1485 @@
         }
 
         :root {
-            --bg1: #0b1026;
-            --bg2: #111a3a;
-            --attr1: #163b78;
+            --bg0: #070d1d;
+            --bg1: #0b1428;
+            --bg2: #101e3d;
             --cyan: #22d3ee;
-            --blue: #6366f1;
-            --purple: #a855f7;
-            --pink: #f472b6;
+            --cyan-hi: #67e8f9;
+            --blue: #3b82f6;
+            --deep: #1d4ed8;
+            --text: #e8f2ff;
+            --muted: #9db4d9;
+            --green: #25d366;
+            --radius: 22px;
+            --shadow: 0 18px 50px rgba(2, 8, 26, 0.55);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            min-height: 100vh;
             font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
-            color: #fff;
+            color: var(--text);
             background:
-                radial-gradient(1100px 550px at 12% -10%, rgba(99, 102, 241, 0.4), transparent 60%),
-                radial-gradient(900px 500px at 108% 15%, rgba(168, 85, 247, 0.32), transparent 55%),
-                radial-gradient(800px 600px at 50% 115%, rgba(34, 211, 238, 0.28), transparent 60%),
-                linear-gradient(135deg, var(--bg1), var(--bg2));
+                radial-gradient(1200px 600px at 15% -10%, rgba(59, 130, 246, 0.35), transparent 60%),
+                radial-gradient(900px 500px at 110% 12%, rgba(34, 211, 238, 0.22), transparent 55%),
+                radial-gradient(1000px 700px at 50% 120%, rgba(29, 78, 216, 0.35), transparent 60%),
+                linear-gradient(160deg, var(--bg1), var(--bg0) 45%, var(--bg2));
             background-attachment: fixed;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        body::before,
-        body::after {
-            content: '';
+        .blobs {
             position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
+            inset: 0;
             z-index: 0;
             pointer-events: none;
+            overflow: hidden;
         }
 
-        body::before {
-            width: 420px;
-            height: 420px;
-            top: -140px;
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.5;
+        }
+
+        .blob.b1 {
+            width: 460px;
+            height: 460px;
+            top: -160px;
             left: -140px;
-            background: rgba(99, 102, 241, 0.35);
-            animation: drift 18s ease-in-out infinite;
+            background: rgba(59, 130, 246, 0.5);
+            animation: float1 20s ease-in-out infinite;
         }
 
-        body::after {
+        .blob.b2 {
+            width: 400px;
+            height: 400px;
+            top: 30%;
+            right: -180px;
+            background: rgba(34, 211, 238, 0.4);
+            animation: float2 24s ease-in-out infinite;
+        }
+
+        .blob.b3 {
             width: 380px;
             height: 380px;
-            bottom: -150px;
-            right: -150px;
-            background: rgba(34, 211, 238, 0.3);
-            animation: drift 22s ease-in-out infinite reverse;
+            bottom: -160px;
+            left: 20%;
+            background: rgba(29, 78, 216, 0.55);
+            animation: float1 28s ease-in-out infinite reverse;
         }
 
-        @keyframes drift {
+        @keyframes float1 {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(60px, 40px) scale(1.15); }
+            50% { transform: translate(60px, 50px) scale(1.12); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-70px, 40px) scale(1.1); }
         }
 
         .wrap {
             position: relative;
             z-index: 1;
-            max-width: 1040px;
+            max-width: 1120px;
             margin: 0 auto;
-            padding: 64px 24px;
+            padding: 0 22px;
         }
 
+        /* Navbar */
         nav {
+            position: sticky;
+            top: 14px;
+            z-index: 90;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 88px;
+            margin-top: 14px;
+            padding: 13px 20px;
+            border-radius: 20px;
+            background: rgba(10, 18, 38, 0.66);
+            border: 1px solid rgba(148, 198, 255, 0.14);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
         }
 
         .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
             font-weight: 800;
-            font-size: 1.15rem;
-            letter-spacing: 0.04em;
+            font-size: 1.08rem;
+            text-decoration: none;
+            color: var(--text);
         }
 
-        .brand span {
-            background: linear-gradient(120deg, var(--cyan), var(--pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            box-shadow: 0 6px 18px rgba(34, 211, 238, 0.4);
         }
 
-        .nav-link {
-            color: rgba(255, 255, 255, 0.75);
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.25s ease;
+            font-size: 0.93rem;
+            transition: color 0.2s;
         }
 
-        .nav-link:hover {
-            color: var(--cyan);
+        .nav-links a:hover {
+            color: var(--cyan-hi);
         }
 
+        .nav-cta {
+            padding: 10px 18px;
+            border-radius: 13px;
+            color: #071022 !important;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            font-weight: 800;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 0;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 860px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 66px;
+                right: 0;
+                left: 0;
+                flex-direction: column;
+                gap: 6px;
+                padding: 14px;
+                border-radius: 16px;
+                background: rgba(10, 18, 38, 0.96);
+                border: 1px solid rgba(148, 198, 255, 0.14);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+
+        /* Hero */
         .hero {
-            text-align: center;
-            margin-bottom: 96px;
-            animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(28px); }
-            to { opacity: 1; transform: translateY(0); }
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            align-items: center;
+            padding: 76px 0 66px;
         }
 
         .hero h1 {
-            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-size: clamp(2.1rem, 5vw, 3.5rem);
             font-weight: 800;
-            line-height: 1.15;
+            line-height: 1.12;
             margin-bottom: 18px;
         }
 
-        .hero h1 .grad {
-            background: linear-gradient(120deg, #c7d2fe, #fae8ff, #a5f3fc);
+        .grad {
+            background: linear-gradient(120deg, #9adcff, #22d3ee, #818cf8);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
-            color: rgba(255, 255, 255, 0.72);
-            font-size: 1.15rem;
-            max-width: 620px;
-            margin: 0 auto 34px;
+        .typing {
+            display: inline-flex;
+            gap: 2px;
+            border-right: 3px solid var(--cyan);
+            padding-right: 6px;
+            animation: blink 0.85s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .hero p.lead {
+            color: var(--muted);
+            font-size: 1.12rem;
+            max-width: 540px;
+            margin-bottom: 30px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 34px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 15px 30px;
-            border-radius: 16px;
-            font-weight: 700;
+            gap: 11px;
+            padding: 15px 26px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 0.98rem;
             text-decoration: none;
-            color: #fff;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--blue), var(--purple), var(--cyan));
-            box-shadow: 0 14px 34px rgba(99, 102, 241, 0.4);
+        .btn:hover {
+            transform: translateY(-3px);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 46px rgba(99, 102, 241, 0.55);
+        .btn-wa {
+            color: #04150b;
+            background: linear-gradient(135deg, var(--green), #2ee88c);
+            box-shadow: 0 14px 34px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-wa:hover {
+            box-shadow: 0 20px 46px rgba(37, 211, 102, 0.55);
         }
 
         .btn-ghost {
+            color: var(--text);
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(148, 198, 255, 0.25);
         }
 
         .btn-ghost:hover {
-            transform: translateY(-3px);
             border-color: var(--cyan);
-            box-shadow: 0 0 28px rgba(34, 211, 238, 0.2);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
         }
 
-        .section-title {
-            font-size: 1.4rem;
+        .btn-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.22);
+            color: #04150b;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 34px;
+            flex-wrap: wrap;
+        }
+
+        .stat h3 {
+            font-size: 1.65rem;
             font-weight: 800;
-            margin-bottom: 30px;
-            letter-spacing: 0.02em;
+            color: var(--cyan-hi);
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 22px;
-            margin-bottom: 80px;
+        .stat span {
+            color: var(--muted);
+            font-size: 0.85rem;
         }
 
-        .card-proj {
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            border-radius: 28px;
             padding: 26px;
-            border-radius: 24px;
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+            border: 1px solid rgba(148, 198, 255, 0.15);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: var(--shadow);
+            animation: heroFloat 5s ease-in-out infinite;
         }
 
-        .card-proj:nth-child(2) {
-            animation-delay: 0.15s;
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
         }
 
-        .card-proj:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .card-proj:hover {
-            transform: translateY(-8px);
-            border-color: var(--cyan);
-            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45), 0 0 30px rgba(34, 211, 238, 0.18);
-        }
-
-        .card-proj .icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 16px;
+        .hero-card-head {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
+            gap: 13px;
             margin-bottom: 18px;
-            background: linear-gradient(135deg, var(--blue), var(--purple));
         }
 
-        .card-proj h3 {
-            font-size: 1.15rem;
-            margin-bottom: 10px;
+        .hero-card-head img {
+            width: 52px;
+            height: 52px;
         }
 
-        .card-proj p {
-            color: rgba(255, 255, 255, 0.65);
-            font-size: 0.95rem;
-            line-height: 1.6;
+        .hero-card-head strong {
+            font-size: 1.05rem;
+        }
+
+        .hero-card-head span {
+            color: var(--muted);
+            font-size: 0.83rem;
+            display: block;
+        }
+
+        .hero-check {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 9px 0;
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .hero-check img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .mini-chip {
+            position: absolute;
+            top: -18px;
+            right: -12px;
+            padding: 9px 15px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: #04150b;
+            background: linear-gradient(135deg, var(--green), #2ee88c);
+            box-shadow: 0 10px 24px rgba(37, 211, 102, 0.45);
+            animation: ping 2.2s ease-in-out infinite;
+        }
+
+        @keyframes ping {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        /* Marquee */
+        .marquee {
+            overflow: hidden;
+            border-top: 1px solid rgba(148, 198, 255, 0.1);
+            border-bottom: 1px solid rgba(148, 198, 255, 0.1);
+            padding: 16px 0;
+            margin-bottom: 90px;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 48px;
+            width: max-content;
+            animation: scrollX 22s linear infinite;
+        }
+
+        .marquee-track span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--cyan-hi);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        .marquee-track span::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 12px var(--cyan);
+        }
+
+        @keyframes scrollX {
+            to { transform: translateX(-50%); }
+        }
+
+        /* Section */
+        .section {
+            padding: 20px 0 96px;
+        }
+
+        .sec-head {
+            text-align: center;
+            max-width: 660px;
+            margin: 0 auto 48px;
+        }
+
+        .sec-head .eyebrow {
+            display: inline-block;
+            padding: 7px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--cyan-hi);
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.3);
             margin-bottom: 16px;
         }
 
-        .card-proj a {
-            color: var(--cyan);
+        .sec-head h2 {
+            font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .sec-head p {
+            color: var(--muted);
+        }
+
+        /* Katalog */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 34px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 198, 255, 0.25);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
             font-weight: 700;
-            text-decoration: none;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .filter-btn.active {
+            color: #071022;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            border-color: transparent;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            border-radius: var(--radius);
+            padding: 26px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 198, 255, 0.13);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.28s ease, border-color 0.28s ease;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--cyan), transparent);
+            opacity: 0.7;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(34, 211, 238, 0.45);
+        }
+
+        .card .icon-tile {
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
+            background: linear-gradient(160deg, rgba(59, 130, 246, 0.28), rgba(34, 211, 238, 0.15));
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+        }
+
+        .card .icon-tile img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .card h3 {
+            font-size: 1.13rem;
+            margin-bottom: 9px;
+        }
+
+        .card p.desc {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 14px;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+
+        .card ul li {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--muted);
+            font-size: 0.88rem;
+            padding: 4px 0;
+        }
+
+        .card ul li img {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .card .price {
+            font-weight: 800;
+            font-size: 1.05rem;
+            color: var(--cyan-hi);
+            margin-bottom: 16px;
+        }
+
+        .card .price small {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.78rem;
+        }
+
+        .card .btn-wa {
+            width: 100%;
+            justify-content: center;
+            padding: 12px;
+            font-size: 0.93rem;
+        }
+
+        /* Carac pesan */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            counter-reset: step;
+        }
+
+        .step {
+            position: relative;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 198, 255, 0.13);
+        }
+
+        .step::after {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            top: 20px;
+            right: 22px;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: rgba(34, 211, 238, 0.18);
+        }
+
+        .step img {
+            width: 46px;
+            height: 46px;
+            margin-bottom: 16px;
+        }
+
+        .step h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: var(--muted);
             font-size: 0.9rem;
         }
 
-        .card-proj a:hover {
-            text-decoration: underline;
+        /* Galeri */
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .galeri-item {
+            position: relative;
+            height: 320px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .galeri-item:hover {
+            transform: translateY(-6px);
+        }
+
+        .galeri-item .ph {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            transition: transform 0.4s ease;
+        }
+
+        .galeri-item:hover .ph {
+            transform: scale(1.08);
+        }
+
+        .galeri-item .ph img {
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
+        }
+
+        .galeri-item .cap {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 34px 20px 18px;
+            background: linear-gradient(transparent, rgba(4, 9, 22, 0.92));
+            font-weight: 700;
+            font-size: 0.98rem;
+        }
+
+        .galeri-item .cap small {
+            display: block;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-top: 3px;
+        }
+
+        .ph-c1 { background: linear-gradient(135deg, #0c1d46, #1e4e9e, #22d3ee); }
+        .ph-c2 { background: linear-gradient(135deg, #0b1730, #123b6e, #3b82f6); }
+        .ph-c3 { background: linear-gradient(135deg, #0a1e2e, #155e75, #67e8f9); }
+        .ph-c4 { background: linear-gradient(135deg, #131c3f, #3730a3, #22d3ee); }
+        .ph-c5 { background: linear-gradient(135deg, #0d1d3a, #1d4ed8, #38bdf8); }
+        .ph-c6 { background: linear-gradient(135deg, #092034, #0e7490, #818cf8); }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            display: none;
+            place-items: center;
+            background: rgba(4, 8, 20, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .lightbox.open {
+            display: grid;
+        }
+
+        .lightbox .box {
+            text-align: center;
+            padding: 40px;
+            max-width: 90vw;
+        }
+
+        .lightbox .box img {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 14px 30px rgba(34, 211, 238, 0.4));
+        }
+
+        .lightbox .box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+
+        .lightbox .box p {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 22px;
+            right: 26px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        /* Keunggulan */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .why {
+            text-align: center;
+            border-radius: var(--radius);
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 198, 255, 0.13);
+        }
+
+        .why img {
+            width: 54px;
+            height: 54px;
+            margin-bottom: 15px;
+        }
+
+        .why h3 {
+            font-size: 1.02rem;
+            margin-bottom: 7px;
+        }
+
+        .why p {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        /* Visi Misi */
+        .vm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 26px;
+        }
+
+        .vm {
+            border-radius: 26px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 198, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vm h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+        }
+
+        .vm h3 img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .vm p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .vm ul {
+            margin: 12px 0 0 20px;
+            color: var(--muted);
+            font-size: 0.93rem;
+        }
+
+        .vm ul li {
+            margin-bottom: 7px;
+        }
+
+        .vm.visi {
+            background: linear-gradient(150deg, rgba(59, 130, 246, 0.16), rgba(34, 211, 238, 0.08));
+        }
+
+        .vm.misi {
+            background: linear-gradient(150deg, rgba(34, 211, 238, 0.12), rgba(59, 130, 246, 0.1));
+        }
+
+        /* 5W+1H */
+        .wh-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+
+        .wh {
+            border-radius: var(--radius);
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 198, 255, 0.13);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .wh:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34, 211, 238, 0.45);
+        }
+
+        .wh .tag {
+            display: inline-block;
+            padding: 5px 13px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: #071022;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            margin-bottom: 13px;
+        }
+
+        .wh h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .wh p {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        /* Kontak */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            border-radius: 28px;
+            padding: 48px;
+            background: linear-gradient(150deg, rgba(59, 130, 246, 0.18), rgba(34, 211, 238, 0.1));
+            border: 1px solid rgba(148, 198, 255, 0.2);
+        }
+
+        .contact h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 12px;
+        }
+
+        .contact p {
+            color: var(--muted);
+            margin-bottom: 26px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 9px 0;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.98rem;
+        }
+
+        .contact-row img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .contact-row span {
+            color: var(--muted);
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-actions .btn {
+            justify-content: center;
+        }
+
+        .hours {
+            border-radius: 16px;
+            padding: 18px;
+            background: rgba(4, 8, 20, 0.35);
+            border: 1px solid rgba(148, 198, 255, 0.15);
+            color: var(--muted);
+            font-size: 0.9rem;
         }
 
         footer {
+            border-top: 1px solid rgba(148, 198, 255, 0.1);
+            padding: 34px 0 80px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
+            color: var(--muted);
+            font-size: 0.88rem;
         }
 
         footer a {
-            color: var(--cyan);
+            color: var(--cyan-hi);
             text-decoration: none;
+        }
+
+        footer .brand-line {
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        /* Floating WA */
+        .wa-fab {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 100;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--green);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+            transition: transform 0.22s ease;
+        }
+
+        .wa-fab:hover {
+            transform: scale(1.1) rotate(6deg);
+        }
+
+        .wa-fab::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid var(--green);
+            animation: ring 2s ease-out infinite;
+        }
+
+        @keyframes ring {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.7); opacity: 0; }
+        }
+
+        .wa-fab svg {
+            width: 34px;
+            height: 34px;
+            fill: #fff;
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 860px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 48px 0;
+            }
+
+            .contact {
+                grid-template-columns: 1fr;
+                padding: 30px 24px;
+            }
+
+            footer {
+                padding-bottom: 110px;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="blobs">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+    </div>
+
     <div class="wrap">
-        <nav>
-            <div class="brand">isyaau<span>.dev</span></div>
-            <div class="d-flex align-items-center gap-4">
-                <a href="https://isyaau.github.io" class="nav-link">CV</a>
-                <a href="https://isyaau.github.io/belajar-membaca/" class="nav-link">Belajar Membaca</a>
-            </div>
+        <nav id="navbar">
+            <a href="#" class="brand">
+                <span class="brand-logo"><img src="img/rocket.png" alt="" style="width:26px;height:26px"></span>
+                Isyaau Teknologi
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#cara">Cara Pesan</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#kontak" class="nav-cta">Pesan Sekarang</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
         </nav>
 
         <header class="hero">
-            <h1>Kreatif, Teknis &amp;<br><span class="grad">Terus Berkembang.</span></h1>
-            <p>Selamat datang di proyek-proyek saya. Dari aplikasi belajar anak hingga portofolio interaktif — dibangun untuk memberi manfaat dan tampil modern.</p>
-            <a href="https://github.com/isyaau" class="btn btn-primary" target="_blank" rel="noopener">
-                <i class="bi bi-github"></i> Lihat GitHub
-            </a>
-            <a href="https://isyaau.github.io/belajar-membaca/" class="btn btn-ghost ms-2">
-                <i class="bi bi-joystick"></i> Mainkan Aplikasinya
-            </a>
+            <div>
+                <h1 class="reveal">Solusi IT &amp; Jaringan<br><span class="grad">Terpercaya</span> untuk Rumah &amp; Bisnis Anda</h1>
+                <p class="lead reveal">
+                    Jasa instalasi <strong class="typing" id="typing"></strong> di Ngawi &amp; sekitarnya — dikerjakan teknisi profesional, result rapi, dan bergaransi.
+                </p>
+                <div class="hero-actions reveal">
+                    <a class="btn btn-wa" href="https://wa.me/6285748637242?text=Halo%20Isyaau%20Teknologi%2C%20saya%20ingin%20konsultasi%20dan%20pesan%20jasa%20instalasi" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.02h-.01a8.98 8.98 0 0 1-4.58-1.25l-.33-.2-3.4.89.9-3.31-.21-.34a9 9 0 1 1 7.63 4.21zm8.38-17.4A9.96 9.96 0 0 0 2.1 18.05L0 24l6.05-1.58a9.96 9.96 0 1 0 14.37-17.8z"/></svg>
+                        Konsultasi Gratis via WhatsApp
+                    </a>
+                    <a class="btn btn-ghost" href="#layanan">Lihat Layanan</a>
+                </div>
+                <div class="hero-stats reveal">
+                    <div class="stat"><h3><span class="count" data-target="120">0</span>+</h3><span>Project Selesai</span></div>
+                    <div class="stat"><h3><span class="count" data-target="98">0</span>%</h3><span>Pelanggan Puas</span></div>
+                    <div class="stat"><h3><span class="count" data-target="7">0</span>+</h3><span>Tahun Pengalaman</span></div>
+                    <div class="stat"><h3><span class="count" data-target="9">0</span></h3><span>Kecamatan Terlayani</span></div>
+                </div>
+            </div>
+            <div class="hero-visual reveal">
+                <div class="hero-card">
+                    <div class="hero-card-head">
+                        <img src="img/wifi.png" alt="Instalasi WiFi">
+                        <div>
+                            <strong>Instalasi WiFi &amp; Internet</strong>
+                            <span>Rumah • Kantor • Warnet • Kafe</span>
+                        </div>
+                    </div>
+                    <div class="hero-check"><img src="img/ceklis.png" alt=""><span>Pemasangan router &amp; access point</span></div>
+                    <div class="hero-check"><img src="img/ceklis.png" alt=""><span>Konfigurasi hingga sinyal merata</span></div>
+                    <div class="hero-check"><img src="img/ceklis.png" alt=""><span>Garansi pekerjaan &amp; dukungan</span></div>
+                    <div class="mini-chip">Gratis Konsultasi</div>
+                </div>
+            </div>
         </header>
+    </div>
 
-        <h2 class="section-title">Projek Unggulan</h2>
-        <div class="grid">
-            <div class="card-proj">
-                <div class="icon"><i class="bi bi-mortarboard-fill"></i></div>
-                <h3>Aplikasi Belajar Membaca</h3>
-                <p>Aplikasi interaktif untuk anak belajar huruf, kata, dan membaca dengan dukungan suara, kuis, serta permainan menyusun huruf.</p>
-                <a href="https://isyaau.github.io/belajar-membaca/" target="_blank" rel="noopener">Buka Aplikasi <i class="bi bi-box-arrow-up-right ms-1"></i></a>
-            </div>
-            <div class="card-proj">
-                <div class="icon"><i class="bi bi-person-badge-fill"></i></div>
-                <h3>CV &amp; Portofolio Interaktif</h3>
-                <p>Portofolio satu halaman dengan mode gelap/terang, animasi modern, dan bagian data kontak bank yang mudah disalin.</p>
-                <a href="https://isyaau.github.io" target="_blank" rel="noopener">Lihat CV <i class="bi bi-box-arrow-up-right ms-1"></i></a>
-            </div>
-            <div class="card-proj">
-                <div class="icon"><i class="bi bi-ethernet"></i></div>
-                <h3>Instalasi &amp; Manajemen Jaringan</h3>
-                <p>Proyek layanan IT: instalasi jaringan, CCTV, dan manajemen perangkat untuk kebutuhan kantor dan komunitas.</p>
-            </div>
+    <div class="marquee">
+        <div class="marquee-track">
+            <span>RESPON CEPAT</span><span>HARGA TRANSPARAN</span><span>HASIL RAPI</span><span>BERGARANSI</span><span>TEKNISI PROFESIONAL</span><span>KONSULTASI GRATIS</span><span>AFTER-SALES TERJAGA</span>
+            <span>RESPON CEPAT</span><span>HARGA TRANSPARAN</span><span>HASIL RAPI</span><span>BERGARANSI</span><span>TEKNISI PROFESIONAL</span><span>KONSULTASI GRATIS</span><span>AFTER-SALES TERJAGA</span>
         </div>
+    </div>
+
+    <div class="wrap">
+        <section class="section" id="layanan">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Katalog Layanan</span>
+                <h2>Pilih Layanan yang Anda Butuhkan</h2>
+                <p>Semua layanan disertai survei lokasi, penawaran harga jelas, dan garansi. Klik tombol pesan untuk langsung chat WhatsApp.</p>
+            </div>
+
+            <div class="filter-bar reveal">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="jaringan">Jaringan &amp; WiFi</button>
+                <button class="filter-btn" data-filter="cctv">CCTV &amp; Keamanan</button>
+                <button class="filter-btn" data-filter="komputer">Komputer &amp; PC</button>
+            </div>
+
+            <div class="catalog-grid" id="catalogGrid">
+            </div>
+        </section>
+
+        <section class="section" id="cara">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Cara Pemesanan</span>
+                <h2>Mulai Pesan dalam 3 Langkah Mudah</h2>
+                <p>Tidak ribet. Semua proses komunikasi via WhatsApp agar jelas dan cepat.</p>
+            </div>
+            <div class="steps">
+                <div class="step reveal">
+                    <img src="img/telepon.png" alt="Konsultasi">
+                    <h3>Konsultasi &amp; Diskusi</h3>
+                    <p>Hubungi via WhatsApp, jelaskan kebutuhan Anda. Konsultasi 100% gratis tanpa biaya.</p>
+                </div>
+                <div class="step reveal">
+                    <img src="img/rumah.png" alt="Survei">
+                    <h3>Survei &amp; Penawaran</h3>
+                    <p>Teknisi datang survei lokasi, lalu disampaikan penawaran harga yang jelas &amp; transparan.</p>
+                </div>
+                <div class="step reveal">
+                    <img src="img/instalasi.png" alt="Eksekusi">
+                    <h3>Eksekusi &amp; Garansi</h3>
+                    <p>Pekerjaan dikerjakan rapi, diuji fungsinya, dan disertai garansi + dukungan after-sales.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="galeri">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Galeri Proyek</span>
+                <h2>Hasil Kerja Kami</h2>
+                <p>Beberapa proyek yang telah kami kerjakan untuk rumah, toko, kantor, dan sekolah di Ngawi.</p>
+            </div>
+            <div class="galeri-grid" id="galeriGrid">
+            </div>
+        </section>
+
+        <section class="section" id="keunggulan">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Kenapa Kami</span>
+                <h2>Kenapa Memilih Isyaau Teknologi</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why reveal">
+                    <img src="img/keamanan.png" alt="Terpercaya">
+                    <h3>Terpercaya &amp; Aman</h3>
+                    <p>Teknisi berpengalaman dengan standar kerja rapi dan profesional.</p>
+                </div>
+                <div class="why reveal">
+                    <img src="img/signal.png" alt="Cepat">
+                    <h3>Respon Cepat</h3>
+                    <p>Chat WhatsApp dibalas segera. Jadwal kerja sesuai kesepakatan.</p>
+                </div>
+                <div class="why reveal">
+                    <img src="img/bintang.png" alt="Berkualitas">
+                    <h3>Garansi Pekerjaan</h3>
+                    <p>Setiap instalasi disertai garansi dan dukungan setelah pemasangan.</p>
+                </div>
+                <div class="why reveal">
+                    <img src="img/memo.png" alt="Transparan">
+                    <h3>Harga Transparan</h3>
+                    <p>Penawaran tertulis sebelum pekerjaan dimulai, tanpa biaya tersembunyi.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="tentang">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Tentang Kami</span>
+                <h2>Visi, Misi &amp; Profil Perusahaan</h2>
+                <p>Mengenal Isyaau Teknologi lebih dekat — siapa kami, dari mana, dan bagaimana kami melayani.</p>
+            </div>
+
+            <div class="vm-grid">
+                <div class="vm visi reveal">
+                    <h3><img src="img/target.png" alt="Visi">Visi</h3>
+                    <p>Menjadi penyedia solusi teknologi informasi dan jaringan terdepan di wilayah Ngawi yang membantu setiap rumah, usaha kecil, dan lembaga terhubung, aman, dan produktif.</p>
+                </div>
+                <div class="vm misi reveal">
+                    <h3><img src="img/rocket.png" alt="Misi">Misi</h3>
+                    <ul>
+                        <li>Memberikan layanan instalasi &amp; perawatan jaringan yang cepat, rapi, dan bergaransi.</li>
+                        <li>Menawarkan solusi teknologi dengan harga jelas dan terjangkau bagi semua kalangan.</li>
+                        <li>Menjaga kepuasan pelanggan melalui dukungan dan edukasi penggunaan.</li>
+                        <li>Terus mengikuti perkembangan teknologi untuk kualitas layanan terbaik.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="profil">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Company Profile</span>
+                <h2>Profil Perusahaan: 5W + 1H</h2>
+                <p>Selengkapnya tentang Isyaau Teknologi — lengkap dari What, Who, When, Where, Why, hingga How.</p>
+            </div>
+            <div class="wh-grid" id="whGrid">
+            </div>
+        </section>
+
+        <section class="section" id="kontak">
+            <div class="contact reveal">
+                <div>
+                    <h2>Siap Mengerjakan?<br>Hubungi Kami Sekarang.</h2>
+                    <p>Konsultasi gratis, penawaran jelas, dan pekerjaan bergaransi. Balas cepat via WhatsApp.</p>
+                    <a class="contact-row" href="https://wa.me/6285748637242" target="_blank" rel="noopener">
+                        <img src="img/telepon.png" alt="WhatsApp">
+                        <div>0857-4863-7242<span>Pesan via WhatsApp</span></div>
+                    </a>
+                    <a class="contact-row" href="https://maps.google.com/?q=Ngawi,Jawa+Timur" target="_blank" rel="noopener">
+                        <img src="img/lokasi.png" alt="Lokasi">
+                        <div>Ngawi, Jawa Timur, Indonesia<span>Melayani Ngawi &amp; sekitarnya</span></div>
+                    </a>
+                    <div class="hours">
+                        Jam operasional: Senin – Sabtu, 08.00 – 21.00 WIB. Luar jam layanan, silakan tinggalkan pesan WhatsApp.
+                    </div>
+                </div>
+                <div class="contact-actions">
+                    <a class="btn btn-wa" href="https://wa.me/6285748637242?text=Halo%20Isyaau%20Teknologi%2C%20saya%20ingin%20pesan%20jasa%20instalasi" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.02h-.01a8.98 8.98 0 0 1-4.58-1.25l-.33-.2-3.4.89.9-3.31-.21-.34a9 9 0 1 1 7.63 4.21zm8.38-17.4A9.96 9.96 0 0 0 2.1 18.05L0 24l6.05-1.58a9.96 9.96 0 1 0 14.37-17.8z"/></svg>
+                        Order via WhatsApp
+                    </a>
+                    <a class="btn btn-ghost" href="https://isyaau.github.io" target="_blank" rel="noopener">Lihat CV Pengembang</a>
+                    <a class="btn btn-ghost" href="https://isyaau.github.io/belajar-membaca/" target="_blank" rel="noopener">Aplikasi Belajar Membaca</a>
+                </div>
+            </div>
+        </section>
 
         <footer>
-            Dibangun oleh <a href="https://isyaau.github.io">Isyaau Akhsanil Khakim</a> &middot; Hosting GitHub Pages
+            <div class="brand-line">Isyaau Teknologi</div>
+            Jasa Instalasi WiFi, CCTV, Servis Komputer &amp; Manajemen Jaringan — Ngawi, Jawa Timur.<br>
+            &copy; 2026 Isyaau Teknologi. Dibangun oleh <a href="https://isyaau.github.io">Isyaau Akhsanil Khakim</a>. Ikon oleh <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0).
         </footer>
     </div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="close" id="lbClose">&times;</button>
+        <div class="box">
+            <img id="lbImg" src="" alt="Preview proyek">
+            <h3 id="lbTitle"></h3>
+            <p id="lbDesc"></p>
+            <a class="btn btn-wa" id="lbWa" href="#" target="_blank" rel="noopener">Tanya tentang proyek ini</a>
+        </div>
+    </div>
+
+    <a class="wa-fab" href="https://wa.me/6285748637242?text=Halo%20Isyaau%20Teknologi%2C%20saya%20mau%20bertanya" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.02h-.01a8.98 8.98 0 0 1-4.58-1.25l-.33-.2-3.4.89.9-3.31-.21-.34a9 9 0 1 1 7.63 4.21zm8.38-17.4A9.96 9.96 0 0 0 2.1 18.05L0 24l6.05-1.58a9.96 9.96 0 1 0 14.37-17.8z"/></svg>
+    </a>
+
+    <script>
+        (function () {
+            var WA = 'https://wa.me/6285748637242?text=';
+
+            var services = [
+                {
+                    cat: 'jaringan',
+                    icon: 'img/wifi.png',
+                    name: 'Instalasi WiFi & Internet',
+                    desc: 'Pasang router, repeater, dan access point agar internet cepat dan merata di seluruh ruangan.',
+                    feat: ['Konfigurasi kecepatan optimal', 'Cakupan sinyal merata', 'Rapian kabel & penempatan aman'],
+                    price: 'Mulai Rp150rb',
+                    note: 'tergantung luas & perangkat'
+                },
+                {
+                    cat: 'cctv',
+                    icon: 'img/cctv.png',
+                    name: 'Pemasangan CCTV',
+                    desc: 'Instalasi kamera CCTV indoor/outdoor untuk rumah, toko, atau kantor, bisa dipantau dari HP.',
+                    feat: ['1 hingga 16 kamera', 'Akses live via HP', 'Rekaman & pemberitahuan gerakan'],
+                    price: 'Mulai Rp350rb',
+                    note: 'per titik + perangkat'
+                },
+                {
+                    cat: 'komputer',
+                    icon: 'img/servis.png',
+                    name: 'Servis Komputer & Laptop',
+                    desc: 'Perbaikan hardware & software, bersih-bersih, ganti part, hingga perbaikan kerusakan sistem.',
+                    feat: ['Diagnosa gratis', 'Penggantian part original', 'Pengerjaan cepat & rapi'],
+                    price: 'Mulai Rp75rb',
+                    note: 'per unit'
+                },
+                {
+                    cat: 'komputer',
+                    icon: 'img/pcd.png',
+                    name: 'Rakit PC & Upgrade',
+                    desc: 'Rakit PC baru atau upgrade sesuai kebutuhan: gaming, editing, hingga PC kantor dan server.',
+                    feat: ['Rekomendasi spesifikasi', 'Rakit dengan kabel rapi', 'Tes performa menyeluruh'],
+                    price: 'Mulai Rp1,5jt',
+                    note: 'konfigurasi sesuaikan budget'
+                },
+                {
+                    cat: 'jaringan',
+                    icon: 'img/signal.png',
+                    name: 'Jaringan Kantor & LAN',
+                    desc: 'Instalasi jaringan kabel/label, pengaturan server, printer sharing, dan manajemen perangkat kantor.',
+                    feat: ['Topologi jaringan rapi', 'Sharing printer & file', 'Manajemen akses perangkat'],
+                    price: 'Mulai Rp400rb',
+                    note: 'survei lokasi dulu'
+                },
+                {
+                    cat: 'jaringan',
+                    icon: 'img/instalasi.png',
+                    name: 'Maintenance Berkala',
+                    desc: 'Perawatan rutin jaringan, CCTV, dan perangkat agar tetap awet, stabil, dan aman digunakan.',
+                    feat: ['Cek rutin bulanan', 'Pembaruan & pembersihan', 'Laporan kondisi perangkat'],
+                    price: 'Paket mulai Rp150rb',
+                    note: 'per bulan'
+                },
+                {
+                    cat: 'cctv',
+                    icon: 'img/keamanan.png',
+                    name: 'Upgrade Keamanan Rumah',
+                    desc: 'Lengkapi sistem keamanan rumah dengan smart lock, sensor, dan monitoring terpadu.',
+                    feat: ['Smart lock & sensor pintu', 'Monitoring via HP', 'Pemasangan terpadu'],
+                    price: 'Mulai Rp500rb',
+                    note: 'sesuaikan kebutuhan'
+                },
+                {
+                    cat: 'komputer',
+                    icon: 'img/laptop.png',
+                    name: 'Install Ulang & Antivirus',
+                    desc: 'Install ulang sistem operasi, driver, dan perangkat lunak lengkap dengan proteksi antivirus.',
+                    feat: ['Sistem bersih & stabil', 'Backup data aman', 'Pasang antivirus & update'],
+                    price: 'Mulai Rp60rb',
+                    note: 'per unit'
+                },
+                {
+                    cat: 'cctv',
+                    icon: 'img/smartphone.png',
+                    name: 'Pasang CCTV via HP (WiFi Cam)',
+                    desc: 'Dapatkan pemantauan rumah jarak jauh dengan kamera WiFi yang mudah dipasang tanpa kabel rumit.',
+                    feat: ['Instalasi cepat', 'Live view kapan pun', 'Notifikasi gerakan'],
+                    price: 'Mulai Rp250rb',
+                    note: 'termasuk penyetelan'
+                }
+            ];
+
+            var galeri = [
+                { icon: 'img/wifi.png', title: 'Instalasi WiFi Rumah', sub: 'Sinyal merata 2 lantai', c: 'ph-c1' },
+                { icon: 'img/cctv.png', title: 'CCTV Toko 8 Kamera', sub: 'Pemantauan 24 jam via HP', c: 'ph-c2' },
+                { icon: 'img/pcd.png', title: 'Rakit PC Gaming', sub: 'Spesifikasi tinggi & kabel rapi', c: 'ph-c3' },
+                { icon: 'img/signal.png', title: 'Jaringan Kantor + Server', sub: 'LAN, printer sharing & NAS', c: 'ph-c4' },
+                { icon: 'img/laptop.png', title: 'Servis Laptop', sub: 'Ganti part & bersih total', c: 'ph-c5' },
+                { icon: 'img/keamanan.png', title: 'CCTV Rumah 4 Kamera', sub: 'Monitoring via aplikasi', c: 'ph-c6' }
+            ];
+
+            var wh = [
+                { tag: 'WHAT', title: 'Apa yang Kami Kerjakan?', desc: 'Perusahaan menyediakan layanan teknologi informasi meliputi instalasi WiFi & internet, pemasangan CCTV/monitoring, servis serta rakitan komputer, hingga manajemen jaringan kantor dan maintenance berkala.' },
+                { tag: 'WHO', title: 'Siapa di Balik Isyaau Teknologi?', desc: 'Didirikan dan dikelola oleh Isyaau Akhsanil Khakim, praktisi IT berpengalaman, dibantu jaringan teknisi lokal yang terpilih. Setiap pekerjaan dikerjakan langsung secara profesional dan bertanggung jawab.' },
+                { tag: 'WHEN', title: 'Kapan Kami Beroperasi?', desc: 'Layanan berjalan setiap hari, utama Senin hingga Sabtu pukul 08.00–21.00 WIB. Untuk keadaan mendesak, pelanggan dapat menghubungi kami kapan saja via WhatsApp.' },
+                { tag: 'WHERE', title: 'Di Mana Kami Melayani?', desc: 'Berbasis di Ngawi, Jawa Timur. Melayani pelanggan di seluruh Kabupaten Ngawi dan sekitarnya — termasuk Magetan, Madiun, dan Ponorogo untuk proyek skala tertentu.' },
+                { tag: 'WHY', title: 'Mengapa Memilih Kami?', desc: 'Karena kami mengutamakan kejujuran, kerapian, dan garansi. Harga disepakati di awal tanpa biaya tersembunyi, pekerjaan diuji sebelum diserahkan, dan dukungan setelah pemasangan tetap kami berikan.' },
+                { tag: 'HOW', title: 'Bagaimana Prosesnya?', desc: 'Mudah: hubungi kami via WhatsApp untuk konsultasi gratis, teknisi mendatangi lokasi untuk survei dan penawaran, kemudian pekerjaan dieksekusi, diuji, dan diserahkan lengkap dengan garansi.' }
+            ];
+
+            var waText = function (msg) {
+                return WA + encodeURIComponent(msg);
+            };
+
+            var grid = document.getElementById('catalogGrid');
+            var baseOrder = 'Halo Isyaau Teknologi, saya mau pesan ';
+            services.forEach(function (s) {
+                var card = document.createElement('div');
+                card.className = 'card reveal';
+                card.dataset.cat = s.cat;
+                card.innerHTML =
+                    '<div class="icon-tile"><img src="' + s.icon + '" alt="' + s.name + '"></div>' +
+                    '<h3>' + s.name + '</h3>' +
+                    '<p class="desc">' + s.desc + '</p>' +
+                    '<ul>' + s.feat.map(function (f) { return '<li><img src="img/ceklis.png" alt="">' + f + '</li>'; }).join('') + '</ul>' +
+                    '<div class="price">' + s.price + ' <small>' + s.note + '</small></div>' +
+                    '<a class="btn btn-wa" href="' + waText(baseOrder + s.name + '. Mohon info lebih lanjut.') + '" target="_blank" rel="noopener">Pesan Layanan</a>';
+                grid.appendChild(card);
+            });
+
+            var gGrid = document.getElementById('galeriGrid');
+            galeri.forEach(function (g) {
+                var item = document.createElement('div');
+                item.className = 'galeri-item reveal';
+                item.dataset.raw = JSON.stringify(g);
+                item.innerHTML =
+                    '<div class="ph ' + g.c + '"><img src="' + g.icon + '" alt=""></div>' +
+                    '<div class="cap">' + g.title + '<small>' + g.sub + '</small></div>';
+                gGrid.appendChild(item);
+            });
+
+            var whGrid = document.getElementById('whGrid');
+            wh.forEach(function (w) {
+                var box = document.createElement('div');
+                box.className = 'wh reveal';
+                box.innerHTML =
+                    '<span class="tag">' + w.tag + '</span>' +
+                    '<h3>' + w.title + '</h3>' +
+                    '<p>' + w.desc + '</p>';
+                whGrid.appendChild(box);
+            });
+
+            var typingEl = document.getElementById('typing');
+            var phrases = ['instalasi WiFi.', 'pasang CCTV.', 'rakit PC.', 'servis komputer.'];
+            var pi = 0, ci = 0, deleting = false;
+            function tick() {
+                var current = phrases[pi];
+                typingEl.textContent = current.slice(0, ci);
+                if (!deleting) {
+                    if (ci < current.length) { ci++; setTimeout(tick, 70); }
+                    else { deleting = true; setTimeout(tick, 1700); }
+                } else {
+                    if (ci > 0) { ci--; setTimeout(tick, 32); }
+                    else { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 350); }
+                }
+            }
+            tick();
+
+            var filterBtns = document.querySelectorAll('.filter-btn');
+            var cards = document.querySelectorAll('#catalogGrid .card');
+            filterBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(function (b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    var f = btn.dataset.filter;
+                    cards.forEach(function (c) {
+                        var show = (f === 'all') || c.dataset.cat === f;
+                        c.style.display = show ? '' : 'none';
+                    });
+                });
+            });
+
+            var lb = document.getElementById('lightbox');
+            var gItems = document.querySelectorAll('.galeri-item');
+            gItems.forEach(function (it) {
+                it.addEventListener('click', function () {
+                    var g = JSON.parse(it.dataset.raw);
+                    document.getElementById('lbImg').src = g.icon;
+                    document.getElementById('lbTitle').textContent = g.title;
+                    document.getElementById('lbDesc').textContent = g.sub + ' — hubungi kami untuk menanyakan proyek serupa.';
+                    document.getElementById('lbWa').href = waText('Halo Isyaau Teknologi, saya tertarik dengan proyek "' + g.title + '". Mohon informasinya.');
+                    lb.classList.add('open');
+                });
+            });
+            document.getElementById('lbClose').addEventListener('click', function () { lb.classList.remove('open'); });
+            lb.addEventListener('click', function (e) { if (e.target === lb) lb.classList.remove('open'); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+            var navT = document.getElementById('navToggle');
+            var navL = document.getElementById('navLinks');
+            navT.addEventListener('click', function () { navL.classList.toggle('open'); });
+            navL.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () { navL.classList.remove('open'); });
+            });
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (en.isIntersecting) {
+                        en.target.classList.add('show');
+                        io.unobserve(en.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+            var statIo = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (en.isIntersecting) {
+                        var el = en.target;
+                        var target = +el.dataset.target;
+                        var start = performance.now();
+                        function step(now) {
+                            var p = Math.min((now - start) / 1400, 1);
+                            el.textContent = Math.floor(p * target);
+                            if (p < 1) requestAnimationFrame(step);
+                        }
+                        requestAnimationFrame(step);
+                        statIo.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            document.querySelectorAll('.count').forEach(function (el) { statIo.observe(el); });
+        })();
+    </script>
 </body>
 
 </html>
