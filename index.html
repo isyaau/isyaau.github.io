@@ -23,6 +23,87 @@
             --text-faint: #93a9c9;
         }
 
+        body.light-mode {
+            --primary-color: #0d6efd;
+            --primary-light: #3d8bfd;
+            --accent-color: #0090b0;
+            --accent-light: #ffd76a;
+            --gold-color: #b8860b;
+            --dark-bg: #f4f7fb;
+            --card-bg: #ffffff;
+            --card-border: #cfe0f5;
+            --text-main: #0a2540;
+            --text-soft: #1a3a5c;
+            --text-muted: #55708f;
+            --text-faint: #6b85a6;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid var(--card-border);
+            background: var(--card-bg);
+            color: var(--primary-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-right: 12px;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg) scale(1.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+        }
+
+        body.light-mode .hero {
+            background: linear-gradient(135deg, #eaf3fe 0%, #d6e9ff 50%, #c2dcff 100%);
+        }
+
+        body.light-mode .navbar {
+            background: rgba(244, 247, 251, 0.95);
+            border-bottom: 1px solid #cfe0f5;
+        }
+
+        body.light-mode .hero-cursor {
+            box-shadow: 0 0 30px 10px rgba(13, 110, 253, 0.4);
+        }
+
+        body.light-mode .form-control {
+            background: #f4f7fb;
+            border-color: #cfe0f5;
+        }
+
+        body.light-mode .form-control:focus {
+            background: #ffffff;
+        }
+
+        body.light-mode .quiz-option {
+            background: #ffffff;
+        }
+
+        body.light-mode .quiz-option:hover {
+            background: #eaf3fe;
+        }
+
+        body.light-mode .snake-grid {
+            background: #0a1428;
+        }
+
+        body.light-mode .memory-card.flipped,
+        body.light-mode .memory-card.matched {
+            background: #eaf3fe;
+        }
+
+        body.light-mode .shiny-card::after {
+            background: linear-gradient(90deg, transparent, rgba(10, 20, 40, 0.06), transparent);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -1218,7 +1299,10 @@
             <a class="navbar-brand" href="#home">
                 <i class="fas fa-code me-2"></i>Isyaau Akhsanil Khakim
             </a>
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
+                <button class="theme-toggle" id="themeToggle" title="Ganti mode gelap/terang" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#about" class="nav-link">Tentang</a>
                 <a href="#skills" class="nav-link">Skills</a>
@@ -1245,11 +1329,12 @@
             </div>
             <p class="typed-text" id="typedText">|</p>
             <div class="social-links">
-                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/isyaau" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/isyaau-akhsanil-khakim" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/6285748637242" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/isyaau23" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=isyaau-akhsanil-khakim" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="mailto:isak.akhsanil@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
         <div class="scroll-down">
@@ -1277,11 +1362,11 @@
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label"><i class="fas fa-birthday-cake me-2"></i>Usia</span>
-                                    <span class="info-value">20 Tahun</span>
+                                    <span class="info-value">27 Tahun</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label"><i class="fas fa-location-dot me-2"></i>Lokasi</span>
-                                    <span class="info-value">Indonesia</span>
+                                    <span class="info-value">Ngawi, Jawa Timur, Indonesia</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -1494,26 +1579,36 @@
                         <div class="col-md-5">
                             <div class="contact-info">
                                 <div class="contact-item">
-                                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                                    <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
                                     <div>
-                                        <small>Telepon</small><br>
-                                        <a href="tel:+620000000000">+62 800-0000-0000</a>
+                                        <small>WhatsApp</small><br>
+                                        <a href="https://wa.me/6285748637242" target="_blank">0857-4863-7242</a>
                                     </div>
                                 </div>
                                 <div class="contact-item">
                                     <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                                     <div>
                                         <small>Email</small><br>
-                                        <a href="mailto:isyaau@email.com">isyaau@email.com</a>
+                                        <a href="mailto:isak.akhsanil@gmail.com">isak.akhsanil@gmail.com</a>
                                     </div>
                                 </div>
                                 <div class="contact-item">
                                     <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
                                     <div>
                                         <small>Lokasi</small><br>
-                                        <span style="color:var(--text-soft);">Indonesia</span>
+                                        <span style="color:var(--text-soft);">Ngawi, Jawa Timur, Indonesia</span>
                                     </div>
                                 </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+                                    <div>
+                                        <small>Instagram</small><br>
+                                        <a href="https://www.instagram.com/isyaau23" target="_blank">@isyaau23</a>
+                                    </div>
+                                </div>
+                                <a href="https://wa.me/6285748637242" target="_blank" class="btn btn-primary w-100 mt-3">
+                                    <i class="fab fa-whatsapp me-2"></i>Chat WhatsApp
+                                </a>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -1544,9 +1639,11 @@
         <div class="container">
             <p class="mb-3">&copy; 2026 Isyaau Akhsanil Khakim. Made with <i class="fas fa-heart" style="color:var(--accent-color);"></i> dan Bootstrap.</p>
             <div class="social-links justify-content-center" style="display:flex;">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/isyaau" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/isyaau-akhsanil-khakim" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/isyaau23" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=isyaau-akhsanil-khakim" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://wa.me/6285748637242" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
@@ -2323,7 +2420,30 @@
         window.addEventListener('load', function() {
             setTimeout(() => animateSkillBars(), 600);
             setTimeout(() => resizeVirgo(), 100);
+            applyTheme();
         });
+
+        // ===== Dark / Light Mode =====
+        function toggleTheme() {
+            const body = document.body;
+            const isLight = body.classList.toggle('light-mode');
+            const icon = document.querySelector('#themeToggle i');
+            icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('cv-theme', isLight ? 'light' : 'dark');
+            showToast(isLight ? 'Mode terang diaktifkan' : 'Mode gelap diaktifkan');
+        }
+
+        function applyTheme() {
+            const saved = localStorage.getItem('cv-theme');
+            const icon = document.querySelector('#themeToggle i');
+            if (saved === 'light') {
+                document.body.classList.add('light-mode');
+                icon.className = 'fas fa-sun';
+            } else {
+                document.body.classList.remove('light-mode');
+                icon.className = 'fas fa-moon';
+            }
+        }
     </script>
 </body>
 
