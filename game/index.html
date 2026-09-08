@@ -121,8 +121,10 @@
         .lb tr:last-child td { border-bottom: none; }
         .lb .lb-rk { width: 36px; text-align: center; }
         .lb .lb-s { text-align: right; font-family: 'Fredoka'; font-weight: 600; }
-        .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 14px 20px; border-bottom: 1px solid var(--card-border); scrollbar-width: none; -ms-overflow-style: none; }
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 14px 20px; border-bottom: 1px solid var(--card-border); scrollbar-width: none; -ms-overflow-style: none; cursor: grab; user-select: none; touch-action: pan-x; }
+        .tabs.dragging { cursor: grabbing; scroll-snap-type: none; }
         .tabs::-webkit-scrollbar { display: none; }
+        .tabs .tab-btn { scroll-snap-align: start; -webkit-user-select: none; user-select: none; }
         .tab-btn {
             flex: 0 0 auto; font-family: 'Plus Jakarta Sans'; font-size: .85rem; font-weight: 600;
             display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 12px;
@@ -132,6 +134,7 @@
         .tab-btn.on { border-color: var(--cyan); color: var(--txt); background: rgba(34, 211, 238, .12); }
         .tab-btn .t-emoji { font-size: 1.15rem; }
         #gamePlay { padding: 22px 20px 28px; min-height: 320px; }
+        #boardPlay { padding: 22px 20px 28px; min-height: 320px; }
 
         .g-head { text-align: center; margin-bottom: 18px; }
         .g-head .big-emoji { font-size: 3rem; }
@@ -430,6 +433,29 @@
         boardCur = id;
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('on', b.dataset.g === id));
         muatBoard();
+    }
+
+    function attachTabDrag(tabsEl) {
+        if (!tabsEl || tabsEl.dataset.drag) return;
+        tabsEl.dataset.drag = '1';
+        let isDown = false, startX = 0, scrollStart = 0, dragged = false;
+        tabsEl.addEventListener('mousedown', e => {
+            isDown = true; dragged = false;
+            startX = e.pageX; scrollStart = tabsEl.scrollLeft;
+            tabsEl.classList.add('dragging');
+        });
+        tabsEl.addEventListener('mousemove', e => {
+            if (!isDown) return;
+            const dx = e.pageX - startX;
+            if (Math.abs(dx) > 5) dragged = true;
+            tabsEl.scrollLeft = scrollStart - dx;
+        });
+        const up = () => { isDown = false; tabsEl.classList.remove('dragging'); };
+        tabsEl.addEventListener('mouseup', up);
+        tabsEl.addEventListener('mouseleave', up);
+        tabsEl.addEventListener('click', e => {
+            if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+        }, true);
     }
 
     async function muatBoard() {
@@ -1430,6 +1456,7 @@
     const FUNCS = { guess: g_guess, math: g_math, word: g_word, quiz: g_quiz, memory: g_memory, rps: g_rps, tictac: g_tictac, simon: g_simon, snake: g_snake, emoji: g_emoji, stroop: g_stroop, typing: g_typing };
     buildHub();
     portalPopup();
+    attachTabDrag($('boardTabs'));
     const keren = $('keren');
     setInterval(() => {
         keren.style.background = 'linear-gradient(90deg,' + ['#22d3ee', '#a78bfa', '#fb7185'][rnd(3)] + ',' + ['#a78bfa', '#fbbf24', '#22d3ee'][rnd(3)] + ')';
