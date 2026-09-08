@@ -840,45 +840,157 @@
             background: linear-gradient(150deg, rgba(34, 211, 238, 0.12), rgba(59, 130, 246, 0.1));
         }
 
-        /* 5W+1H */
-        .wh-grid {
+        /* Company Profile 5W+1H */
+        .profile-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 22px;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 44px;
+            align-items: center;
+            padding: 44px 0;
+            border-bottom: 1px solid rgba(148, 198, 255, 0.1);
         }
 
-        .wh {
-            border-radius: var(--radius);
-            padding: 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(148, 198, 255, 0.13);
-            transition: transform 0.25s ease, border-color 0.25s ease;
+        .profile-row:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .wh:hover {
-            transform: translateY(-4px);
-            border-color: rgba(34, 211, 238, 0.45);
+        .profile-row.flip .profile-media {
+            order: 2;
         }
 
-        .wh .tag {
+        .profile-media {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-media .disc {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(150deg, rgba(59, 130, 246, 0.3), rgba(34, 211, 238, 0.12));
+            border: 1px dashed rgba(34, 211, 238, 0.5);
+            position: relative;
+            animation: spinSlow 30s linear infinite;
+        }
+
+        .profile-media .disc::after {
+            content: '';
+            position: absolute;
+            inset: 18px;
+            border-radius: 50%;
+            background: rgba(4, 8, 20, 0.4);
+        }
+
+        .profile-media img {
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+            filter: drop-shadow(0 10px 26px rgba(34, 211, 238, 0.45));
+        }
+
+        @keyframes spinSlow {
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-media .numbadge {
+            position: absolute;
+            bottom: 6px;
+            right: calc(50% - 180px);
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #071022;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            box-shadow: 0 12px 30px rgba(34, 211, 238, 0.4);
+            z-index: 2;
+        }
+
+        .profile-info .tag {
             display: inline-block;
-            padding: 5px 13px;
+            padding: 6px 15px;
             border-radius: 999px;
             font-size: 0.78rem;
             font-weight: 800;
-            color: #071022;
-            background: linear-gradient(135deg, var(--cyan), var(--blue));
-            margin-bottom: 13px;
+            letter-spacing: 0.08em;
+            color: var(--cyan-hi);
+            background: rgba(34, 211, 238, 0.12);
+            border: 1px solid rgba(34, 211, 238, 0.35);
+            margin-bottom: 16px;
         }
 
-        .wh h3 {
-            font-size: 1.05rem;
-            margin-bottom: 8px;
+        .profile-info h3 {
+            font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+            font-weight: 800;
+            margin-bottom: 14px;
         }
 
-        .wh p {
+        .profile-info p.desc {
+            color: var(--muted);
+            font-size: 0.98rem;
+            margin-bottom: 18px;
+        }
+
+        .profile-info .pts {
+            list-style: none;
+            margin-bottom: 22px;
+        }
+
+        .profile-info .pts li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
             color: var(--muted);
             font-size: 0.92rem;
+            padding: 5px 0;
+        }
+
+        .profile-info .pts img {
+            width: 20px;
+            height: 20px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .profile-info .btn {
+            padding: 12px 22px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 860px) {
+            .profile-row,
+            .profile-row.flip {
+                grid-template-columns: 1fr;
+                gap: 26px;
+                padding: 36px 0;
+            }
+
+            .profile-row.flip .profile-media {
+                order: 0;
+            }
+
+            .profile-media .disc {
+                width: 190px;
+                height: 190px;
+            }
+
+            .profile-media img {
+                width: 96px;
+                height: 96px;
+            }
+
+            .profile-media .numbadge {
+                right: calc(50% - 145px);
+            }
         }
 
         /* Kontak */
@@ -1051,7 +1163,8 @@
                 <li><a href="#layanan">Layanan</a></li>
                 <li><a href="#cara">Cara Pesan</a></li>
                 <li><a href="#galeri">Galeri</a></li>
-                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#tentang">Visi &amp; Misi</a></li>
+                <li><a href="#profil">Profil 5W+1H</a></li>
                 <li><a href="#kontak" class="nav-cta">Pesan Sekarang</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
@@ -1212,10 +1325,10 @@
         <section class="section" id="profil">
             <div class="sec-head reveal">
                 <span class="eyebrow">Company Profile</span>
-                <h2>Profil Perusahaan: 5W + 1H</h2>
-                <p>Selengkapnya tentang Isyaau Teknologi — lengkap dari What, Who, When, Where, Why, hingga How.</p>
+                <h2>Profil Perusahaan yang Lengkap & Transparan</h2>
+                <p>Kenali Isyaau Teknologi dari 6 sudut — apa yang kami kerjakan, siapa di belakangnya, kapan, di mana, mengapa, dan bagaimana kami melayani Anda.</p>
             </div>
-            <div class="wh-grid" id="whGrid">
+            <div id="whRows">
             </div>
         </section>
 
@@ -1366,12 +1479,84 @@
             ];
 
             var wh = [
-                { tag: 'WHAT', title: 'Apa yang Kami Kerjakan?', desc: 'Perusahaan menyediakan layanan teknologi informasi meliputi instalasi WiFi & internet, pemasangan CCTV/monitoring, servis serta rakitan komputer, hingga manajemen jaringan kantor dan maintenance berkala.' },
-                { tag: 'WHO', title: 'Siapa di Balik Isyaau Teknologi?', desc: 'Didirikan dan dikelola oleh Isyaau Akhsanil Khakim, praktisi IT berpengalaman, dibantu jaringan teknisi lokal yang terpilih. Setiap pekerjaan dikerjakan langsung secara profesional dan bertanggung jawab.' },
-                { tag: 'WHEN', title: 'Kapan Kami Beroperasi?', desc: 'Layanan berjalan setiap hari, utama Senin hingga Sabtu pukul 08.00–21.00 WIB. Untuk keadaan mendesak, pelanggan dapat menghubungi kami kapan saja via WhatsApp.' },
-                { tag: 'WHERE', title: 'Di Mana Kami Melayani?', desc: 'Berbasis di Ngawi, Jawa Timur. Melayani pelanggan di seluruh Kabupaten Ngawi dan sekitarnya — termasuk Magetan, Madiun, dan Ponorogo untuk proyek skala tertentu.' },
-                { tag: 'WHY', title: 'Mengapa Memilih Kami?', desc: 'Karena kami mengutamakan kejujuran, kerapian, dan garansi. Harga disepakati di awal tanpa biaya tersembunyi, pekerjaan diuji sebelum diserahkan, dan dukungan setelah pemasangan tetap kami berikan.' },
-                { tag: 'HOW', title: 'Bagaimana Prosesnya?', desc: 'Mudah: hubungi kami via WhatsApp untuk konsultasi gratis, teknisi mendatangi lokasi untuk survei dan penawaran, kemudian pekerjaan dieksekusi, diuji, dan diserahkan lengkap dengan garansi.' }
+                {
+                    tag: '01 · WHAT',
+                    icon: 'img/instalasi.png',
+                    title: 'Solusi IT Lengkap dalam Satu Atap',
+                    desc: 'Kami menyediakan layanan teknologi informasi yang beragam — dari kebutuhan internet rumahan hingga keamanan dan infrastruktur bisnis. Semua dikerjakan dengan satu standar: rapi, cepat, dan bergaransi.',
+                    pts: [
+                        'Instalasi WiFi, repeater & access point untuk rumah, toko, dan kantor',
+                        'Pemasangan CCTV & sistem monitoring yang bisa dipantau dari HP',
+                        'Servis, rakitan, dan upgrade komputer / laptop sesuai kebutuhan',
+                        'Manajemen jaringan kantor, LAN, sharing printer, hingga maintenance berkala'
+                    ],
+                    cta: 'Konsultasikan Kebutuhan'
+                },
+                {
+                    tag: '02 · WHO',
+                    icon: 'img/pcd.png',
+                    title: 'Teknisi Berpengalaman, Bukan Sekadar Jasa',
+                    desc: 'Di belakang Isyaau Teknologi ada praktisi IT berpengalaman — Isyaau Akhsanil Khakim — yang menangani langsung setiap pekerjaan, didukung jaringan teknisi lokal terpilih agar kualitas terjaga di setiap titik.',
+                    pts: [
+                        'Penanganan langsung oleh praktisi IT berpengalaman',
+                        'Standar kerja rapi, jujur, dan bertanggung jawab',
+                        'Komunikasi jelas dari awal hingga serah terima',
+                        'Selalu mengikuti perkembangan teknologi terbaru'
+                    ],
+                    cta: 'Kenali Lebih Dekat'
+                },
+                {
+                    tag: '03 · WHEN',
+                    icon: 'img/telepon.png',
+                    title: 'Siap Melayani Setiap Hari Kerja',
+                    desc: 'Waktu Anda berharga. Karena itu kami menawarkan jadwal layanan yang fleksibel, termasuk respons cepat untuk kebutuhan yang sifatnya mendesak.',
+                    pts: [
+                        'Senin – Sabtu, 08.00 – 21.00 WIB',
+                        'Konsultasi via WhatsApp di luar jam untuk keadaan mendesak',
+                        'Penjadwalan survei sesuai waktu luang Anda',
+                        'Estimasi pengerjaan jelas sebelum dimulai'
+                    ],
+                    cta: 'Chat untuk Janji Waktu'
+                },
+                {
+                    tag: '04 · WHERE',
+                    icon: 'img/lokasi.png',
+                    title: 'Berbasis di Ngawi, Menjangkau Sekitar',
+                    desc: 'Berpusat di Ngawi, Jawa Timur — kami nyaman melayani dari rumah, toko, sekolah, hingga kantor di seluruh Kabupaten Ngawi dan kawasan sekitarnya.',
+                    pts: [
+                        'Titik layanan utama: seluruh Kabupaten Ngawi',
+                        'Menjangkau Magetan, Madiun, dan Ponorogo untuk proyek skala tertentu',
+                        'Teknisi mendatangi lokasi Anda — tanpa Anda repot',
+                        'Konsultasi awal dapat dilakukan dari mana saja via WhatsApp'
+                    ],
+                    cta: 'Cek Jangkauan Layanan'
+                },
+                {
+                    tag: '05 · WHY',
+                    icon: 'img/bintang.png',
+                    title: 'Mengapa Banyak yang Memilih Kami',
+                    desc: 'Bukan hanya memasang dan pulang. Kami membangun solusi yang tahan lama, dengan harga jujur dan tanggung jawab yang tetap berjalan setelah pekerjaan selesai.',
+                    pts: [
+                        'Harga transparan — disepakati tertulis sebelum bekerja',
+                        'Garansi pekerjaan & dukungan after-sales',
+                        'Hasil instalasi rapi, diuji, dan diserahkan lengkap',
+                        'Nilai tambah: saran & edukasi penggunaan teknologi'
+                    ],
+                    cta: 'Rasakan Bedanya'
+                },
+                {
+                    tag: '06 · HOW',
+                    icon: 'img/rumah.png',
+                    title: 'Proses Mudah, Hasil Maksimal',
+                    desc: 'Alur kami sederhana dan bisa diikuti langkah demi langkah. Anda cukup memulai dengan satu pesan WhatsApp.',
+                    pts: [
+                        'Langkah 1: Konsultasi gratis via WhatsApp — sampaikan kebutuhan',
+                        'Langkah 2: Survei lokasi & penawaran harga yang jelas',
+                        'Langkah 3: Eksekusi, uji fungsi, serah terima',
+                        'Langkah 4: Garansi & dukungan setelah pemasangan'
+                    ],
+                    cta: 'Mulai Langkah Pertama'
+                }
             ];
 
             var waText = function (msg) {
@@ -1405,15 +1590,24 @@
                 gGrid.appendChild(item);
             });
 
-            var whGrid = document.getElementById('whGrid');
-            wh.forEach(function (w) {
-                var box = document.createElement('div');
-                box.className = 'wh reveal';
-                box.innerHTML =
-                    '<span class="tag">' + w.tag + '</span>' +
-                    '<h3>' + w.title + '</h3>' +
-                    '<p>' + w.desc + '</p>';
-                whGrid.appendChild(box);
+            var whRows = document.getElementById('whRows');
+            wh.forEach(function (w, i) {
+                var row = document.createElement('div');
+                row.className = 'profile-row reveal'
+                    + ((i % 2 === 1) ? ' flip' : '');
+                row.innerHTML =
+                    '<div class="profile-media">' +
+                    '    <div class="disc"><img src="' + w.icon + '" alt=""></div>' +
+                    '    <div class="numbadge">0' + (i + 1) + '</div>' +
+                    '</div>' +
+                    '<div class="profile-info">' +
+                    '    <span class="tag">' + w.tag + '</span>' +
+                    '    <h3>' + w.title + '</h3>' +
+                    '    <p class="desc">' + w.desc + '</p>' +
+                    '    <ul class="pts">' + w.pts.map(function (p) { return '<li><img src="img/ceklis.png" alt="">' + p + '</li>'; }).join('') + '</ul>' +
+                    '    <a class="btn btn-wa" href="' + waText('Halo Isyaau Teknologi, saya ingin ' + w.cta.toLowerCase() + '. Mohon informasinya.') + '" target="_blank" rel="noopener">' + w.cta + '</a>' +
+                    '</div>';
+                whRows.appendChild(row);
             });
 
             var typingEl = document.getElementById('typing');
