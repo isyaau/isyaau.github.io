@@ -294,3 +294,84 @@ h2 {
         max-width: 28px;
     }
 }
+
+/* =========================================================
+   Animasi interaktif tambahan
+   ========================================================= */
+
+/* Kartu menu dan card miring mengikuti kursor (3D tilt) */
+.menu-card:hover,
+.card:hover {
+    transform: translateY(-10px) scale(1.02) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+
+.menu-card,
+.card {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.25s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* Confetti (dipakai latihan & game) */
+.confetti {
+    position: fixed;
+    top: -16px;
+    width: 12px;
+    height: 12px;
+    z-index: 2000;
+    pointer-events: none;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0.7;
+    }
+}
+
+/* Deskripsi teks kecil yang melayang saat hover kartu */
+.card-body {
+    position: relative;
+}
+
+/* Suara gelombang saat tombol suara ditekan */
+@keyframes soundWave {
+    0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.5); }
+    100% { box-shadow: 0 0 0 22px rgba(34, 211, 238, 0); }
+}
+
+.gambar-wrapper.wave {
+    animation: soundWave 0.8s ease-out;
+}
+
+/* Gambar berdenyut halus (untuk menu & kartu) */
+@keyframes gentlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Tombol dengan shimmer (global) */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+    animation: btnShimmer 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes btnShimmer {
+    0% { left: -150%; }
+    60%, 100% { left: 150%; }
+}

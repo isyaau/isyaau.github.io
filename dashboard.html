@@ -118,7 +118,7 @@
                     </a>
                 </div>
                 <div class="col-6 col-md-3 mb-4">
-                    <a href="/game-susun-huruf.html" class="menu-card">
+                    <a href="/latihan.html" class="menu-card">
                         <img src="assets/menu/latihan.png" alt="Latihan">
                         <div class="menu-label">LATIHAN</div>
                     </a>
@@ -134,6 +134,21 @@
 
     <script src="assets/script.js"></script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.menu-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width - 0.5;
+                const py = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.setProperty('--ry', `${px * 14}deg`);
+                card.style.setProperty('--rx', `${-py * 14}deg`);
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--rx', '0deg');
+                card.style.setProperty('--ry', '0deg');
+            });
+        });
+    </script>
 </body>
 
 </html>

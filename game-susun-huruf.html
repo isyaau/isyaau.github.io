@@ -1,14 +1,12 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="id">
 
 <head>
-    <script src="../assets/js/color-modes.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BELAJAR MEMBACA</title>
-
+    <title>BELAJAR MEMBACA - Bermain</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/style.css" rel="stylesheet">
 
@@ -121,6 +119,24 @@
             display: none;
             z-index: 1000;
         }
+
+        .confetti {
+            position: fixed;
+            top: -16px;
+            width: 12px;
+            height: 12px;
+            z-index: 2000;
+            pointer-events: none;
+            border-radius: 2px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0.7;
+            }
+        }
     </style>
 </head>
 
@@ -140,7 +156,7 @@
                         Browser Anda tidak mendukung elemen audio.
                     </audio>
 
-                    <h1 class="mx-auto">MENGENAL HURUF</h1>
+                    <h1 class="mx-auto">BERMAIN</h1>
 
                     <a href="javascript:history.back()">
                         <div class="gambar-wrapper">
@@ -200,6 +216,22 @@
         <strong id="notification-message"></strong>
     </div>
 
+    <script src="../assets/tts.js"></script>
+    <script>
+        function burstConfetti() {
+            const colors = ['#6366f1', '#22d3ee', '#fbbf24', '#f472b6', '#34d399', '#a78bfa'];
+            for (let i = 0; i < 40; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+                piece.style.animationDelay = (Math.random() * 0.6) + 's';
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 4500);
+            }
+        }
+    </script>
     <script>
         // Daftar soal game susun huruf
         const questions = [
@@ -397,6 +429,8 @@
                 notificationMessage.textContent = 'Selamat! Jawaban Anda benar.';
                 notification.classList.remove('alert-danger');
                 notification.classList.add('alert-success');
+                speak('Benar! ' + currentQuestion.word);
+                burstConfetti();
 
                 // Lanjut ke soal berikutnya
                 setTimeout(() => {
@@ -433,24 +467,13 @@
             }, 2000);
         }
 
-        // Fungsi toggle mute
-        function toggleMute() {
-            const audio = document.getElementById('audioPlayerbg');
-            const volumeImage = document.getElementById('volumeImage');
-
-            if (audio.muted) {
-                audio.muted = false;
-                volumeImage.src = 'assets/icon/high-volume.png';
-            } else {
-                audio.muted = true;
-                volumeImage.src = 'assets/icon/mute.png';
-            }
-        }
+        // Fungsi toggle mute (global di script.js juga tersedia)
 
         // Inisialisasi game saat halaman dimuat
         window.onload = () => {
             startGame();
             startTimer();
+            speak('Ayo bermain! Susun huruf sesuai gambar.');
         };
     </script>
 
