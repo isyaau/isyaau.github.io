@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Modern - Isyaau</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #fd79a8;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            padding-top: 60px;
+        }
+
+        /* Confetti canvas */
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .profile-img {
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(108, 92, 231, 0.5);
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .typed-text {
+            color: var(--primary-color);
+            font-weight: 600;
+            min-height: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-light);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-6px) rotate(360deg);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.4);
+            color: var(--primary-color);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollBounce 2s ease infinite;
+            color: var(--text-muted);
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, 10px);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            margin: 0 12px;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: var(--text-light);
+        }
+
+        /* Skills Card */
+        .skill-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.8rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            margin: 10px 0 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+
+        /* Game Section */
+        .game-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(108, 92, 231, 0.1), transparent, rgba(253, 121, 168, 0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+
+        .game-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .word-display {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 1.8rem 0;
+            flex-wrap: wrap;
+        }
+
+        .letter-box {
+            width: 48px;
+            height: 60px;
+            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: rgba(108, 92, 231, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .letter-box.revealed {
+            background: var(--primary-color);
+            color: white;
+            animation: pop 0.4s ease;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hint-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .hint-btn {
+            padding: 10px 24px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .hint-btn:hover:not(:disabled) {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hint-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .score-display {
+            font-size: 1.4rem;
+            margin: 1rem 0;
+        }
+
+        #guessInput {
+            max-width: 320px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 3px solid var(--dark-bg);
+        }
+
+        .timeline-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact */
+        .contact-info a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            padding: 2.5rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Toast */
+        .toast-notif {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: var(--text-light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateX(120%);
+            transition: transform 0.4s ease;
+            z-index: 2000;
+        }
+
+        .toast-notif.show {
+            transform: translateX(0);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+            color: var(--text-light);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .letter-box {
+                width: 40px;
+                height: 52px;
+                font-size: 1.5rem;
+            }
+
+            .navbar .d-flex {
+                gap: 0 !important;
+            }
+
+            .nav-link {
+                margin: 0 8px;
+                font-size: 0.85rem;
+            }
+
+            body {
+                padding-top: 56px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="confettiCanvas"></canvas>
+    <div class="toast-notif" id="toast"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-code me-2"></i>Isyaau
+            </a>
+            <div class="d-flex">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">Tentang</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#game" class="nav-link">Game</a>
+                <a href="#experience" class="nav-link">Pengalaman</a>
+                <a href="#contact" class="nav-link">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particle-bg" id="particleBg"></div>
+        <div class="hero-content">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=developer" alt="Profile Photo" class="profile-img">
+            <h1>Isyaau</h1>
+            <p class="tagline">Full Stack Developer</p>
+            <p class="typed-text" id="typedText"></p>
+            <div class="social-links">
+                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="about-card">
+                        <p class="lead" style="color: var(--text-muted);">
+                            Saya adalah seorang developer yang bersemangat dalam menciptakan solusi digital yang inovatif.
+                            Dengan pengalaman di bidang web development dan design, saya selalu berusaha memberikan
+                            yang terbaik dalam setiap proyek yang saya kerjakan.
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-user me-2"></i>Nama</span>
+                                    <span class="info-value">Isyaau</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-birthday-cake me-2"></i>Usia</span>
+                                    <span class="info-value">20 Tahun</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-location-dot me-2"></i>Lokasi</span>
+                                    <span class="info-value">Indonesia</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-briefcase me-2"></i>Status</span>
+                                    <span class="info-value">Freelance</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-graduation-cap me-2"></i>Pendidikan</span>
+                                    <span class="info-value">Teknik Informatika</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-heart me-2"></i>Hobi</span>
+                                    <span class="info-value">Coding, Gaming</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="row g-4">
+                <div class="col-md-4 col-sm-6">
+                    <div class="skill-card">
+                        <i class="fab fa-html5 skill-icon"></i>
+                        <h5>HTML5</h5>
+                        <div class="progress-bar"><div class="progress-fill" data-width="90"></div></div>
+                        <small style="color: var(--text-muted);">90%</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="skill-card">
+                        <i class="fab fa-css3-alt skill-icon"></i>
+                        <h5>CSS3</h5>
+                        <div class="progress-bar"><div class="progress-fill" data-width="85"></div></div>
+                        <small style="color: var(--text-muted);">85%</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="skill-card">
+                        <i class="fab fa-js skill-icon"></i>
+                        <h5>JavaScript</h5>
+                        <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+                        <small style="color: var(--text-muted);">80%</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="skill-card">
+                        <i class="fab fa-react skill-icon"></i>
+                        <h5>React</h5>
+                        <div class="progress-bar"><div class="progress-fill" data-width="75"></div></div>
+                        <small style="color: var(--text-muted);">75%</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="skill-card">
+                        <i class="fab fa-node-js skill-icon"></i>
+                        <h5>Node.js</h5>
+                        <div class="progress-bar"><div class="progress-fill" data-width="70"></div></div>
+                        <small style="color: var(--text-muted);">70%</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="skill-card">
+                        <i class="fab fa-python skill-icon"></i>
+                        <h5>Python</h5>
+                        <div class="progress-bar"><div class="progress-fill" data-width="65"></div></div>
+                        <small style="color: var(--text-muted);">65%</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="game" class="section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-gamepad me-2" style="color: var(--primary-color);"></i>Mini Game</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <div class="game-container">
+                        <div class="game-inner">
+                            <h3 class="game-title"><i class="fas fa-brain me-2"></i>Word Challenge</h3>
+                            <p class="text-muted mb-4">Tebak kata berdasarkan petunjuk dan menangkan skor tertinggi!</p>
+
+                            <div class="score-display">
+                                <span class="me-4"><i class="fas fa-star me-2" style="color: #fdcb6e;"></i>Score: <span id="score" style="color: #fdcb6e; font-weight: bold;">0</span></span>
+                                <span><i class="fas fa-trophy me-2" style="color: var(--accent-color);"></i>Level: <span id="level" style="color: var(--accent-color); font-weight: bold;">1</span></span>
+                            </div>
+
+                            <div class="word-display" id="wordDisplay"></div>
+
+                            <p style="margin: 1.2rem 0; font-size: 1.1rem;">
+                                <i class="fas fa-lightbulb me-2" style="color: #fdcb6e;"></i>
+                                <span id="currentHint"></span>
+                            </p>
+
+                            <div class="hint-buttons">
+                                <button class="hint-btn" onclick="getHint()" id="hintBtn">
+                                    <i class="fas fa-lightbulb"></i> Petunjuk Huruf
+                                </button>
+                                <button class="hint-btn" onclick="skipWord()">
+                                    <i class="fas fa-forward"></i> Skip Kata
+                                </button>
+                                <button class="hint-btn" onclick="resetGame()">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+
+                            <div class="mt-4 d-flex justify-content-center flex-wrap gap-2">
+                                <input type="text" id="guessInput" class="form-control d-inline-block p-2"
+                                       placeholder="Masukkan jawaban...">
+                                <button class="btn btn-primary px-4" onclick="checkAnswer()">
+                                    <i class="fas fa-check"></i> Cek Jawaban
+                                </button>
+                            </div>
+
+                            <div id="message" class="mt-4" style="font-size: 1.3rem; min-height: 30px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Pengalaman Kerja</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2024 - Sekarang</div>
+                        <h5>Full Stack Developer</h5>
+                        <p style="color: var(--text-muted);">PT. Teknologi Maju</p>
+                        <p style="color: var(--text-muted);">Mengembangkan aplikasi web menggunakan React dan Node.js,
+                            memimpin tim development kecil, dan mengoptimalkan performa aplikasi.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2023 - 2024</div>
+                        <h5>Frontend Developer</h5>
+                        <p style="color: var(--text-muted);">PT. Digital Kreatif</p>
+                        <p style="color: var(--text-muted);">Membangun UI/UX untuk berbagai proyek client dengan fokus
+                            pada responsivitas dan pengalaman pengguna.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2022 - 2023</div>
+                        <h5>Web Developer Intern</h5>
+                        <p style="color: var(--text-muted);">Startup XYZ</p>
+                        <p style="color: var(--text-muted);">Magang intensif dalam pengembangan web, belajar praktik
+                            terbaik dan bekerja dalam tim agile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Hubungi Saya</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <div class="row g-4">
+                        <div class="col-md-5">
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                                    <div>
+                                        <small class="text-muted">Telepon</small><br>
+                                        <a href="tel:+620000000000">+62 800-0000-0000</a>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                                    <div>
+                                        <small class="text-muted">Email</small><br>
+                                        <a href="mailto:isyaau@email.com">isyaau@email.com</a>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+                                    <div>
+                                        <small class="text-muted">Lokasi</small><br>
+                                        <span>Indonesia</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="about-card">
+                                <form id="contactForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <input type="text" class="form-control" placeholder="Nama" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <input type="email" class="form-control" placeholder="Email" required>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control mb-3" placeholder="Subjek" required>
+                                    <textarea class="form-control mb-3" rows="4" placeholder="Pesan Anda..." required></textarea>
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="mb-3">&copy; 2026 Isyaau. Made with <i class="fas fa-heart" style="color: var(--accent-color);"></i> dan Bootstrap.</p>
+            <div class="social-links justify-content-center" style="display: flex;">
+                <a href="#" class="me-2"><i class="fab fa-github"></i></a>
+                <a href="#" class="me-2"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ===== Word Game Logic =====
+        const words = [
+            { word: "DEVELOPER", hint: "Seseorang yang membuat program/aplikasi" },
+            { word: "JAVASCRIPT", hint: "Bahasa pemrograman utama untuk web" },
+            { word: "CREATIVITY", hint: "Kemampuan untuk menciptakan sesuatu" },
+            { word: "PORTFOLIO", hint: "Kumpulan karya terbaik seseorang" },
+            { word: "INNOVATION", hint: "Pembaruan atau penemuan baru" },
+            { word: "ALGORITHM", hint: "Langkah-langkah penyelesaian masalah" },
+            { word: "DATABASE", hint: "Tempat penyimpanan data terstruktur" },
+            { word: "FRONTEND", hint: "Bagian website yang dilihat user" },
+            { word: "BACKEND", hint: "Bagian server yang mengelola data" },
+            { word: "TECHNOLOGY", hint: "Ilmu yang diterapkan untuk membuat alat" },
+            { word: "DESIGNER", hint: "Seseorang yang merancang tampilan" },
+            { word: "PROGRAMMER", hint: "Profesi yang menulis kode program" }
+        ];
+
+        let currentWordIndex = 0;
+        let score = 0;
+        let level = 1;
+        let hintsUsed = 0;
+        let revealedLetters = [];
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function initGame() {
+            currentWordIndex = Math.floor(Math.random() * words.length);
+            renderWord();
+            updateHint();
+        }
+
+        function renderWord() {
+            const word = words[currentWordIndex].word;
+            const display = document.getElementById('wordDisplay');
+            display.innerHTML = '';
+
+            for (let i = 0; i < word.length; i++) {
+                const box = document.createElement('div');
+                box.className = 'letter-box';
+                box.id = `letter-${i}`;
+
+                if (revealedLetters.includes(i)) {
+                    box.textContent = word[i];
+                    box.classList.add('revealed');
+                }
+
+                display.appendChild(box);
+            }
+        }
+
+        function updateHint() {
+            document.getElementById('currentHint').textContent = words[currentWordIndex].hint;
+        }
+
+        function getHint() {
+            const word = words[currentWordIndex].word;
+            const unrevealedLetters = [];
+
+            for (let i = 0; i < word.length; i++) {
+                if (!revealedLetters.includes(i)) {
+                    unrevealedLetters.push(i);
+                }
+            }
+
+            if (unrevealedLetters.length > 0) {
+                const randomIndex = unrevealedLetters[Math.floor(Math.random() * unrevealedLetters.length)];
+                revealedLetters.push(randomIndex);
+                hintsUsed++;
+
+                document.getElementById(`letter-${randomIndex}`).textContent = word[randomIndex];
+                document.getElementById(`letter-${randomIndex}`).classList.add('revealed');
+
+                score = Math.max(0, score - 5);
+                document.getElementById('score').textContent = score;
+
+                if (hintsUsed >= 3) {
+                    document.getElementById('hintBtn').disabled = true;
+                }
+            }
+        }
+
+        function skipWord() {
+            currentWordIndex = (currentWordIndex + 1) % words.length;
+            revealedLetters = [];
+            hintsUsed = 0;
+            document.getElementById('hintBtn').disabled = false;
+            document.getElementById('message').innerHTML = '';
+            document.getElementById('guessInput').value = '';
+            renderWord();
+            updateHint();
+        }
+
+        function resetGame() {
+            score = 0;
+            level = 1;
+            hintsUsed = 0;
+            revealedLetters = [];
+            document.getElementById('score').textContent = '0';
+            document.getElementById('level').textContent = '1';
+            document.getElementById('hintBtn').disabled = false;
+            document.getElementById('message').innerHTML = '';
+            document.getElementById('guessInput').value = '';
+            skipWord();
+            showToast('Game telah direset!');
+        }
+
+        function checkAnswer() {
+            const input = document.getElementById('guessInput').value.toUpperCase().trim();
+            const word = words[currentWordIndex].word;
+            const message = document.getElementById('message');
+
+            if (!input) {
+                message.innerHTML = '<span style="color: #fdcb6e;">Masukkan jawaban terlebih dahulu!</span>';
+                return;
+            }
+
+            if (input === word) {
+                let earned = 10 - (hintsUsed * 5);
+                if (earned < 5) earned = 5;
+                score += earned;
+                level++;
+
+                message.innerHTML = `<span style="color: #00b894;"><i class="fas fa-trophy me-2"></i>Benar! +${earned} poin</span>`;
+                launchConfetti();
+                showToast(`Jawaban benar! +${earned} poin! `);
+
+                setTimeout(() => {
+                    currentWordIndex = (currentWordIndex + 1) % words.length;
+                    revealedLetters = [];
+                    hintsUsed = 0;
+                    document.getElementById('hintBtn').disabled = false;
+                    document.getElementById('score').textContent = score;
+                    document.getElementById('level').textContent = level;
+                    document.getElementById('guessInput').value = '';
+                    message.innerHTML = '';
+                    renderWord();
+                    updateHint();
+                }, 2000);
+            } else {
+                message.innerHTML = '<span style="color: var(--accent-color);"><i class="fas fa-times me-2"></i>Jawaban salah, coba lagi!</span>';
+                score = Math.max(0, score - 2);
+                document.getElementById('score').textContent = score;
+            }
+        }
+
+        // Enter key support
+        document.getElementById('guessInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // ===== Confetti Effect =====
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        const ctx = confettiCanvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function launchConfetti() {
+            const colors = ['#6c5ce7', '#fd79a8', '#00b894', '#fdcb6e', '#a29bfe'];
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: -20 - Math.random() * confettiCanvas.height * 0.3,
+                    size: Math.random() * 8 + 4,
+                    speedY: Math.random() * 3 + 2,
+                    speedX: (Math.random() - 0.5) * 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            let active = false;
+
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX + Math.sin(p.y * 0.02) * 0.5;
+                p.rotation += p.rotationSpeed;
+
+                if (p.y < confettiCanvas.height + 20) {
+                    active = true;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+                }
+            });
+
+            if (active) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            }
+        }
+
+        // ===== Particle Background =====
+        function createParticles() {
+            const container = document.getElementById('particleBg');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = `rgba(${Math.random() > 0.5 ? '108, 92, 231' : '253, 121, 168'}, 0.4)`;
+                particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+                particle.style.animationDelay = '-' + Math.random() * 20 + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ===== Typing Effect =====
+        const phrases = [
+            'Website Developer',
+            'UI/UX Enthusiast',
+            'Creative Problem Solver',
+            'Tech Explorer'
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            const typedText = document.getElementById('typedText');
+
+            if (!deleting && charIndex <= currentPhrase.length) {
+                typedText.textContent = currentPhrase.substring(0, charIndex);
+                charIndex++;
+            } else if (deleting && charIndex > 0) {
+                typedText.textContent = currentPhrase.substring(0, charIndex);
+                charIndex--;
+            }
+
+            let delay = deleting ? 50 : 100;
+            if (charIndex === currentPhrase.length) {
+                delay = 2000;
+                deleting = true;
+            } else if (charIndex === 0 && deleting) {
+                deleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                delay = 500;
+            }
+
+            setTimeout(typeEffect, delay);
+        }
+        typeEffect();
+
+        // ===== Skill Bars Animation =====
+        function animateSkillBars() {
+            const bars = document.querySelectorAll('.progress-fill');
+            bars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+        }
+
+        // ===== Smooth Scroll & Active Nav =====
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            updateActiveNav();
+
+            const skillsSection = document.getElementById('skills');
+            if (window.scrollY > skillsSection.offsetTop - 300) {
+                animateSkillBars();
+            }
+        });
+
+        // ===== Contact Form =====
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Pesan berhasil dikirim! Terima kasih');
+            this.reset();
+        });
+
+        // ===== Initialize =====
+        initGame();
+        window.addEventListener('load', function() {
+            setTimeout(() => animateSkillBars(), 500);
+        });
+    </script>
+</body>
+
+</html>
