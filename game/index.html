@@ -320,6 +320,17 @@
         </div>
     </div>
 
+    <!-- MODAL POPUP NAMA -->
+    <div class="modal" id="namaModal" hidden>
+        <div class="modal-box" style="max-width:420px">
+            <div class="modal-head">
+                <h2 id="nmTitle">📝 Simpan Nama</h2>
+                <button class="mbtn" onclick="tutupNama(false)">✕</button>
+            </div>
+            <div id="nmBody" style="padding:20px 22px 24px"></div>
+        </div>
+    </div>
+
     <footer class="site">
         <p><a href="https://isyaau.github.io">GameKu Interaktif</a> — dibuat dengan <span id="keren">HTML, CSS & JavaScript</span></p>
         <p class="attr">Ikon oleh <a href="https://openmoji.org" target="_blank">OpenMoji</a> (CC BY-SA 4.0) & Emoji © Unicode</p>
@@ -343,7 +354,13 @@
         if (v > best(id)) {
             localStorage.setItem('gk_' + id, v);
             const nm = (localStorage.getItem('gk_nama') || '').trim();
-            if (nm) su_post(id, nm, v).catch(() => {});
+            const sudahSkip = localStorage.getItem('gk_discard_' + id) === '1';
+            if (nm) {
+                su_post(id, nm, v).catch(() => {});
+            } else if (!sudahSkip) {
+                localStorage.setItem('gk_pending', JSON.stringify({ game: id, skor: v }));
+                if (!namaAsked) { namaAsked = true; popupNama('skor'); }
+            }
             return true;
         }
         return false;
@@ -399,15 +416,18 @@
 
     function openBoard(id) {
         boardCur = id || (cur && GAMES.find(g => g.id === cur) ? cur : GAMES[0].id);
-        $('boardTabs').innerHTML = GAMES.map(g =>
-            `<button class="tab-btn ${g.id === boardCur ? 'on' : ''}" onclick="boardTab('${g.id}')"><span class="t-emoji">${g.emoji}</span>${g.name}</button>`).join('');
+        renderTabs();
         boardModal.hidden = false; document.body.classList.add('lock');
         muatBoard();
+    }
+    function renderTabs() {
+        $('boardTabs').innerHTML = GAMES.map(g =>
+            `<button class="tab-btn ${g.id === boardCur ? 'on' : ''}" data-g="${g.id}" onclick="boardTab('${g.id}')"><span class="t-emoji">${g.emoji}</span>${g.name}</button>`).join('');
     }
     function closeBoard() { boardModal.hidden = true; document.body.classList.remove('lock'); }
     function boardTab(id) {
         boardCur = id;
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('on', b.onclick === `boardTab('${id}')`));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('on', b.dataset.g === id));
         muatBoard();
     }
 
@@ -446,8 +466,9 @@
     function setNama() {
         const v = ($('nmInp').value || '').trim();
         localStorage.setItem('gk_nama', v);
+        flushPending();
         const lb = $('lbList');
-        lb.innerHTML = v ? `Nama tersimpan. Rekor baru otomatis terkirim. ✅` : '💬 Tulis nama untuk ikut papan skor.';
+        lb.innerHTML = v ? `Nama "${esc(v)}" tersimpan. Rekor baru otomatis terkirim. ✅` : '💬 Tulis nama untuk ikut papan skor.';
     }
 
     function renderLb(sorted, mine) {
@@ -462,6 +483,69 @@
                 <td>${esc(r.nama)}</td><td class="lb-s">${r.skor}</td>
             </tr>`).join('')}
         </table>`;
+    }
+
+    // ==================== POPUP NAMA ====================
+    const namaModal = $('namaModal');
+    let namaAsked = false;
+
+    function popupNama(mode) {
+        const nm = (localStorage.getItem('gk_nama') || '').trim();
+        const pend = JSON.parse(localStorage.getItem('gk_pending') || 'null');
+        $('nmTitle').textContent = mode === 'portal' ? '👋 Selamat datang!' : '🏆 Rekor baru!';
+        $('nmBody').innerHTML = mode === 'portal' ? `
+            <p style="color:var(--muted);font-size:.92rem;line-height:1.6">Boleh kenalan dulu? Beri nama singkat agar skor terbaikmu bisa disimpan di <b>papan skor global</b>.</p>
+            <div class="btn-row" style="margin-top:14px">
+                <input class="plain" id="ppName" maxlength="20" placeholder="Nama kamu…" style="width:200px;font-size:1.05rem" value="${esc(nm)}">
+                <button class="gbtn" onclick="simpanNamaPortal()">Simpan</button>
+            </div>
+            <div class="btn-row" style="margin-top:10px">
+                <button class="mbtn" onclick="tutupNama()">Lewati</button>
+            </div>` : `
+            <p style="color:var(--muted);font-size:.92rem;line-height:1.6">Kamu dapat rekor <b>${pend ? pend.skor : ''}</b> poin! Isi nama agar skormu masuk papan skor global — atau pilih <b>tidak perlu simpan</b>.</p>
+            <div class="btn-row" style="margin-top:14px">
+                <input class="plain" id="ppName" maxlength="20" placeholder="Nama kamu…" style="width:200px;font-size:1.05rem" value="${esc(nm)}">
+                <button class="gbtn" onclick="simpanNamaSkor()">Simpan skor</button>
+            </div>
+            <div class="btn-row" style="margin-top:10px">
+                <button class="mbtn" onclick="tidakPerluSimpan()">Tidak perlu simpan</button>
+            </div>`;
+        namaModal.hidden = false;
+        document.body.classList.add('lock');
+        const inp = $('ppName'); if (inp) { inp.focus(); inp.select(); }
+    }
+    function tutupNama() { namaModal.hidden = true; document.body.classList.remove('lock'); }
+    function simpanNamaPortal() {
+        const v = ($('ppName').value || '').trim();
+        if (!v) return;
+        localStorage.setItem('gk_nama', v);
+        flushPending();
+        tutupNama();
+    }
+    function simpanNamaSkor() {
+        const v = ($('ppName').value || '').trim();
+        if (!v) return;
+        localStorage.setItem('gk_nama', v);
+        flushPending();
+        tutupNama();
+    }
+    function tidakPerluSimpan() {
+        const pend = JSON.parse(localStorage.getItem('gk_pending') || 'null');
+        if (pend) { localStorage.setItem('gk_discard_' + pend.game, '1'); }
+        localStorage.removeItem('gk_pending');
+        tutupNama();
+    }
+    function flushPending() {
+        const nm = (localStorage.getItem('gk_nama') || '').trim();
+        const pend = JSON.parse(localStorage.getItem('gk_pending') || 'null');
+        if (nm && pend) {
+            su_post(pend.game, nm, pend.skor).catch(() => {});
+            localStorage.removeItem('gk_pending');
+        }
+    }
+    function portalPopup() {
+        const nm = (localStorage.getItem('gk_nama') || '').trim();
+        if (!nm) later(500, () => popupNama('portal'));
     }
 
     // ==================== DAFTAR GAME ====================
@@ -1316,6 +1400,7 @@
     // ==================== REGISTRASI ====================
     const FUNCS = { guess: g_guess, math: g_math, word: g_word, quiz: g_quiz, memory: g_memory, rps: g_rps, tictac: g_tictac, simon: g_simon, snake: g_snake, emoji: g_emoji, stroop: g_stroop, typing: g_typing };
     buildHub();
+    portalPopup();
     const keren = $('keren');
     setInterval(() => {
         keren.style.background = 'linear-gradient(90deg,' + ['#22d3ee', '#a78bfa', '#fb7185'][rnd(3)] + ',' + ['#a78bfa', '#fbbf24', '#22d3ee'][rnd(3)] + ')';
