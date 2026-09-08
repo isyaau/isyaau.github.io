@@ -528,6 +528,28 @@
             margin-bottom: 2rem;
         }
 
+        .hero-contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-soft);
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+
+        .hero-contact i {
+            color: var(--primary-light);
+            margin-right: 5px;
+        }
+
+        .hero-contact .dot {
+            color: var(--primary-light);
+            font-size: 0.6rem;
+        }
+
         .social-links a {
             display: inline-flex;
             align-items: center;
@@ -700,6 +722,43 @@
         .skill-card small {
             color: var(--text-muted) !important;
             font-weight: 600;
+        }
+
+        .cert-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--card-border);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            height: 100%;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(30, 144, 255, 0.25);
+            border-color: var(--primary-color);
+        }
+
+        .cert-card .cert-icon {
+            font-size: 2rem;
+            color: var(--gold-color);
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .cert-card h5 {
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .cert-card p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
         }
 
         .progress-track {
@@ -1390,6 +1449,7 @@
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#game" class="nav-link">Games</a>
                 <a href="#experience" class="nav-link">Pengalaman</a>
+                <a href="#certificates" class="nav-link">Sertifikat</a>
                 <a href="#contact" class="nav-link">Kontak</a>
             </div>
         </div>
@@ -1405,6 +1465,13 @@
             </div>
             <h1>Isyaau Akhsanil Khakim</h1>
             <p class="tagline">Full Stack Developer</p>
+            <p class="hero-contact">
+                <span><i class="fas fa-location-dot"></i> Ngawi, Jawa Timur</span>
+                <span class="dot">&#9679;</span>
+                <span><i class="fas fa-envelope"></i> isak.akhsanil@gmail.com</span>
+                <span class="dot">&#9679;</span>
+                <span><i class="fab fa-whatsapp"></i> (+62) 857-4863-7242</span>
+            </p>
             <div class="zodiac-badge mb-3 mt-2">
                 <span class="badge-symbol">&#9805;</span>
                 <span>Zodiak Virgo &#183; Kreatif &amp; Teliti</span>
@@ -1427,14 +1494,17 @@
     <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title reveal">Tentang Saya</h2>
+            <h2 class="section-title reveal">Profile Summary</h2>
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="about-card shiny-card reveal reveal-delay-1">
                         <p class="lead">
-                            Saya adalah seorang developer yang bersemangat dalam menciptakan solusi digital yang inovatif.
-                            Dengan pengalaman di bidang web development dan design, saya selalu berusaha memberikan
-                            yang terbaik dalam setiap proyek yang saya kerjakan.
+                            Saya, <strong style="color:var(--text-main);">Isyaau Akhsanil Khakim</strong>, lulusan SMK
+                            PGRI Wonoasri jurusan Teknik Komputer dan Jaringan serta S1 Teknik Informatika Universitas
+                            PGRI Madiun, memiliki ketertarikan besar di dunia teknologi, khususnya di bidang jaringan
+                            komputer dan web programming. Berpengalaman dalam konfigurasi jaringan menggunakan Mikrotik,
+                            serta pengembangan aplikasi web menggunakan Laravel dan CodeIgniter, saya siap berkontribusi
+                            dalam membangun solusi IT yang efisien dan inovatif.
                         </p>
                         <div class="row mt-4">
                             <div class="col-md-6">
@@ -1448,22 +1518,56 @@
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label"><i class="fas fa-location-dot me-2"></i>Lokasi</span>
-                                    <span class="info-value">Ngawi, Jawa Timur, Indonesia</span>
+                                    <span class="info-value">Ngawi, Jawa Timur</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="info-item">
                                     <span class="info-label"><i class="fas fa-briefcase me-2"></i>Status</span>
-                                    <span class="info-value">Freelance</span>
+                                    <span class="info-value">IT & Web Developer</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label"><i class="fas fa-graduation-cap me-2"></i>Pendidikan</span>
-                                    <span class="info-value">Teknik Informatika</span>
+                                    <span class="info-value">S1 Teknik Informatika</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label"><i class="fas fa-heart me-2"></i>Hobi</span>
-                                    <span class="info-value">Coding, Gaming</span>
+                                    <span class="info-label"><i class="fas fa-envelope me-2"></i>Email</span>
+                                    <span class="info-value">isak.akhsanil@gmail.com</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Riwayat Pendidikan</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="timeline reveal reveal-delay-1">
+                        <div class="timeline-item">
+                            <div class="timeline-card shiny-card">
+                                <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2018 - 2022</div>
+                                <h5>TEKNIK INFORMATIKA</h5>
+                                <p style="color:var(--text-soft); font-weight:600;">Universitas PGRI Madiun</p>
+                                <p>IPK 3.84/4.00</p>
+                                <p>
+                                    <small>Mata Kuliah Terkait:</small> Algoritma Pemrograman, Pemrograman Berbasis
+                                    Objek, Struktur Data, Struktur Komputer, Pemrograman Web, E-Commerce, Jaringan
+                                    Komputer.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-card shiny-card">
+                                <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2016 - 2018</div>
+                                <h5>TEKNIK KOMPUTER DAN JARINGAN</h5>
+                                <p style="color:var(--text-soft); font-weight:600;">SMK PGRI Wonoasri</p>
+                                <p>Mendalami dasar-dasar jaringan komputer, perakitan dan perawatan komputer.</p>
                             </div>
                         </div>
                     </div>
@@ -1475,55 +1579,71 @@
     <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title reveal">Skills & Expertise</h2>
+            <h2 class="section-title reveal">Skills &amp; Expertise</h2>
             <p class="section-sub reveal reveal-delay-1">Kemampuan teknis yang saya kuasai</p>
             <div class="row g-4">
                 <div class="col-md-4 col-sm-6 reveal reveal-delay-1">
                     <div class="skill-card shiny-card">
-                        <i class="fab fa-html5 skill-icon"></i>
-                        <h5>HTML5</h5>
-                        <div class="progress-track"><div class="progress-fill" data-width="90"></div></div>
-                        <small>90% - Mahir</small>
+                        <i class="fab fa-laravel skill-icon"></i>
+                        <h5>Laravel &amp; CodeIgniter</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="85"></div></div>
+                        <small>85% - Mahir</small>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 reveal reveal-delay-2">
                     <div class="skill-card shiny-card">
-                        <i class="fab fa-css3-alt skill-icon"></i>
-                        <h5>CSS3</h5>
+                        <i class="fab fa-php skill-icon"></i>
+                        <h5>PHP, HTML, CSS, JavaScript</h5>
                         <div class="progress-track"><div class="progress-fill" data-width="85"></div></div>
                         <small>85% - Mahir</small>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 reveal reveal-delay-3">
                     <div class="skill-card shiny-card">
-                        <i class="fab fa-js skill-icon"></i>
-                        <h5>JavaScript</h5>
+                        <i class="fas fa-network-wired skill-icon"></i>
+                        <h5>Mikrotik &amp; Jaringan Komputer</h5>
                         <div class="progress-track"><div class="progress-fill" data-width="80"></div></div>
                         <small>80% - Mahir</small>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 reveal reveal-delay-1">
                     <div class="skill-card shiny-card">
-                        <i class="fab fa-react skill-icon"></i>
-                        <h5>React</h5>
+                        <i class="fas fa-tools skill-icon"></i>
+                        <h5>Website Maintenance &amp; Optimization</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="80"></div></div>
+                        <small>80% - Mahir</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-2">
+                    <div class="skill-card shiny-card">
+                        <i class="fas fa-database skill-icon"></i>
+                        <h5>Database (MySQL / MariaDB)</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="80"></div></div>
+                        <small>80% - Mahir</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-3">
+                    <div class="skill-card shiny-card">
+                        <i class="fas fa-hashtag skill-icon"></i>
+                        <h5>Social Media &amp; Content Plan</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="75"></div></div>
+                        <small>75% - Menengah</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-1">
+                    <div class="skill-card shiny-card">
+                        <i class="fas fa-palette skill-icon"></i>
+                        <h5>Design (Photoshop, Canva, Video)</h5>
                         <div class="progress-track"><div class="progress-fill" data-width="75"></div></div>
                         <small>75% - Menengah</small>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 reveal reveal-delay-2">
                     <div class="skill-card shiny-card">
-                        <i class="fab fa-node-js skill-icon"></i>
-                        <h5>Node.js</h5>
-                        <div class="progress-track"><div class="progress-fill" data-width="70"></div></div>
-                        <small>70% - Menengah</small>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 reveal reveal-delay-3">
-                    <div class="skill-card shiny-card">
-                        <i class="fab fa-python skill-icon"></i>
-                        <h5>Python</h5>
-                        <div class="progress-track"><div class="progress-fill" data-width="65"></div></div>
-                        <small>65% - Menengah</small>
+                        <i class="fas fa-file-excel skill-icon"></i>
+                        <h5>Microsoft Office (Excel, Word, PPT)</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="85"></div></div>
+                        <small>85% - Mahir</small>
                     </div>
                 </div>
             </div>
@@ -1638,24 +1758,29 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-card shiny-card">
-                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2022 - 2024</div>
-                        <h5>IT Staff, Video Editor & Social Media Specialist</h5>
+                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>Jan 2023 - Des 2024</div>
+                        <h5>IT Staff & Social Media Specialist</h5>
                         <p>PT. Adi Sanjaya Sejahtera</p>
                         <p>
-                            Bertanggung jawab atas dukungan IT dan perawatan perangkat kantor. Selain itu menangani
-                            pengeditan video, pembuatan desain grafis, serta pengelolaan konten media sosial perusahaan
-                            untuk meningkatkan branding dan engagement.
+                            Mengelola dan melakukan pemeliharaan rutin pada website perusahaan untuk memastikan performa
+                            dan keamanan optimal. Bertanggung jawab atas pengelolaan akun Instagram dan YouTube
+                            perusahaan, termasuk perencanaan dan penjadwalan konten. Menyusun content plan bulanan untuk
+                            meningkatkan engagement dan visibilitas brand, serta bekerja sama dengan tim pemasaran untuk
+                            menghasilkan konten visual dan video yang sesuai target audiens.
                         </p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-card shiny-card">
-                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2019 - 2022</div>
-                        <h5>Teknisi CCTV & IT</h5>
+                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>Jan 2019 - Jan 2022</div>
+                        <h5>Network Engineer</h5>
                         <p>PT. Palapa Media Indonesia, Madiun</p>
                         <p>
-                            Melaksanakan pemasangan dan perawatan CCTV, service komputer, serta instalasi jaringan
-                            internet untuk kebutuhan klien, memastikan sistem berjalan stabil dan aman.
+                            Melakukan instalasi, konfigurasi, dan pemeliharaan perangkat jaringan termasuk router dan
+                            switch berbasis Mikrotik. Memantau performa jaringan dan melakukan troubleshooting untuk
+                            memastikan konektivitas stabil dan minim downtime. Menyusun dokumentasi teknis jaringan dan
+                            memberikan dukungan teknis untuk tim internal serta pelanggan. Bekerja dalam tim untuk
+                            merancang dan mengimplementasikan solusi jaringan bagi klien korporat.
                         </p>
                     </div>
                 </div>
@@ -1668,6 +1793,75 @@
                             Memberikan layanan pemasangan CCTV, service komputer/laptop, dan instalasi jaringan internet
                             kepada perorangan maupun usaha kecil sebagai teknisi mandiri.
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section">
+        <div class="container">
+            <h2 class="section-title reveal"><i class="fas fa-award me-2" style="color: var(--primary-light);"></i>Sertifikat</h2>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-6 reveal reveal-delay-1">
+                    <div class="cert-card shiny-card">
+                        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                        <div>
+                            <h5>BNSP - LAN Network Engineer</h5>
+                            <p>Sertifikasi kompetensi bidang jaringan LAN dari Badan Nasional Sertifikasi Profesi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal reveal-delay-2">
+                    <div class="cert-card shiny-card">
+                        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                        <div>
+                            <h5>BNSP - Content Media Planner</h5>
+                            <p>Sertifikasi kompetensi perencanaan konten media dari Badan Nasional Sertifikasi Profesi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal reveal-delay-1">
+                    <div class="cert-card shiny-card">
+                        <div class="cert-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div>
+                            <h5>Program Kreativitas Mahasiswa Indonesia 2021</h5>
+                            <p>Digital Entrepreneur Course &mdash; Kementerian / program mahasiswa Indonesia.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal reveal-delay-2">
+                    <div class="cert-card shiny-card">
+                        <div class="cert-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div>
+                            <h5>Kampus Mengajar Angkatan 1</h5>
+                            <p>Peserta program Kampus Mengajar dari Kementerian Pendidikan dan Kebudayaan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organization Section -->
+    <section id="organization" class="section">
+        <div class="container">
+            <h2 class="section-title reveal"><i class="fas fa-users me-2" style="color: var(--primary-light);"></i>Pengalaman Organisasi</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="timeline reveal reveal-delay-1">
+                        <div class="timeline-item">
+                            <div class="timeline-card shiny-card">
+                                <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2019 - 2021</div>
+                                <h5>HMPS-DEPTICS</h5>
+                                <p style="color:var(--text-soft); font-weight:600;">Universitas PGRI Madiun</p>
+                                <p>
+                                    Menjadi anggota Divisi Web selama 1 periode dan menjadi kepala divisi Web selama
+                                    1 periode. Aktif mengelola dan mengembangkan website serta kegiatan organisasi.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
