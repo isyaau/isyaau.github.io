@@ -187,6 +187,23 @@
             color: var(--text-main);
         }
 
+        body.light-mode .aurora::before,
+        body.light-mode .aurora::after {
+            opacity: 0.16;
+        }
+
+        body.light-mode .stat-number {
+            color: var(--primary-color);
+        }
+
+        body.light-mode .marquee-item {
+            background: #fff;
+        }
+
+        body.light-mode .project-tag {
+            background: rgba(13, 110, 253, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -1383,6 +1400,298 @@
             transform: translateY(-5px);
         }
 
+        /* ===== Number Ticker / Stats ===== */
+        .stats-band {
+            padding: 0 0 40px;
+        }
+
+        .stats-wrapper {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .stat-cell {
+            padding: 2rem 1.2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-cell:not(:last-child) {
+            border-right: 1px solid var(--card-border);
+        }
+
+        .stat-icon {
+            font-size: 1.8rem;
+            color: var(--primary-light);
+            margin-bottom: 0.6rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            line-height: 1.1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-suffix {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 0.4rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-cell:nth-child(2) {
+                border-right: none;
+            }
+
+            .stat-cell:nth-child(n + 3) {
+                border-top: 1px solid var(--card-border);
+            }
+        }
+
+        /* ===== Marquee Skill Strip ===== */
+        .marquee-section {
+            padding: 0 0 30px;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 26s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 40px;
+            padding: 0.7rem 1.5rem;
+            margin-right: 1rem;
+            white-space: nowrap;
+            color: var(--text-soft);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .marquee-item i {
+            color: var(--primary-light);
+        }
+
+        .marquee-group {
+            display: flex;
+            padding-right: 1rem;
+        }
+
+        /* ===== Shimmer Button ===== */
+        .btn-shimmer {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .btn-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 2.8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .btn-shimmer i,
+        .btn-shimmer span {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes shimmer {
+            0% { left: -150%; }
+            60%, 100% { left: 150%; }
+        }
+
+        /* ===== Aurora Background ===== */
+        .aurora {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aurora::before,
+        .aurora::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.28;
+            pointer-events: none;
+            animation: auroraFloat 14s ease-in-out infinite;
+        }
+
+        .aurora::before {
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            top: -250px;
+            left: -150px;
+        }
+
+        .aurora::after {
+            background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+            bottom: -260px;
+            right: -150px;
+            animation-delay: -7s;
+        }
+
+        @keyframes auroraFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, 40px) scale(1.15); }
+            66% { transform: translate(-40px, -30px) scale(0.95); }
+        }
+
+        /* ===== Spotlight Follow Cursor ===== */
+        .spotlight {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            background: radial-gradient(600px circle at var(--sx, 50%) var(--sy, 50%), rgba(30, 144, 255, 0.14), transparent 45%);
+        }
+
+        .hero:hover .spotlight {
+            opacity: 1;
+        }
+
+        /* ===== Project Cards ===== */
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 1.8rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 45px rgba(30, 144, 255, 0.25);
+            border-color: var(--primary-color);
+        }
+
+        .project-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-bottom: 1.2rem;
+            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.3);
+        }
+
+        .project-card h4 {
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0.8rem 0 1rem;
+        }
+
+        .project-tag {
+            background: rgba(30, 144, 255, 0.12);
+            color: var(--primary-light);
+            border: 1px solid rgba(30, 144, 255, 0.25);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--text-soft);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .project-links a {
+            color: var(--primary-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-right: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .project-links a:hover {
+            color: var(--accent-color);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -1449,6 +1758,7 @@
                 <a href="#about" class="nav-link">Tentang</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#game" class="nav-link">Games</a>
+                <a href="#projects" class="nav-link">Project</a>
                 <a href="#experience" class="nav-link">Pengalaman</a>
                 <a href="#certificates" class="nav-link">Sertifikat</a>
                 <a href="#contact" class="nav-link">Kontak</a>
@@ -1487,13 +1797,49 @@
                 <a href="mailto:isak.akhsanil@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
+        <div class="spotlight" id="spotlight"></div>
         <div class="scroll-down">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
+    <!-- Stats / Number Ticker -->
+    <section class="stats-band">
+        <div class="container">
+            <div class="stats-wrapper reveal reveal-delay-1">
+                <div class="stats-grid">
+                    <div class="stat-cell">
+                        <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="stat-number"><span class="ticker" data-target="3.84" data-decimal="2" data-prefix="">0.00</span></div>
+                        <div class="stat-label">IPK S1 Teknik Informatika</div>
+                    </div>
+                    <div class="stat-cell">
+                        <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="stat-number"><span class="ticker" data-target="7" data-decimal="0" data-suffix="+">0</span></div>
+                        <div class="stat-label">Tahun Pengalaman</div>
+                    </div>
+                    <div class="stat-cell">
+                        <div class="stat-icon"><i class="fas fa-award"></i></div>
+                        <div class="stat-number"><span class="ticker" data-target="4" data-decimal="0">0</span></div>
+                        <div class="stat-label">Sertifikat Kompetensi</div>
+                    </div>
+                    <div class="stat-cell">
+                        <div class="stat-icon"><i class="fas fa-code"></i></div>
+                        <div class="stat-number"><span class="ticker" data-target="3" data-decimal="0" data-suffix="+">0</span></div>
+                        <div class="stat-label">Project Dikerjakan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Skill Strip -->
+    <section class="marquee-section" aria-hidden="true">
+        <div class="marquee-track" id="marqueeTrack"></div>
+    </section>
+
     <!-- About Section -->
-    <section id="about" class="section">
+    <section id="about" class="section aurora">
         <div class="container">
             <h2 class="section-title reveal">Profile Summary</h2>
             <div class="row justify-content-center">
@@ -1578,7 +1924,7 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
+    <section id="skills" class="section aurora">
         <div class="container">
             <h2 class="section-title reveal">Skills &amp; Expertise</h2>
             <p class="section-sub reveal reveal-delay-1">Kemampuan teknis yang saya kuasai</p>
@@ -1733,6 +2079,63 @@
                         <button class="btn-game primary" onclick="initTtt()"><i class="fas fa-redo"></i> Mulai Ulang</button>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Section -->
+    <section id="projects" class="section aurora">
+        <div class="container">
+            <h2 class="section-title reveal"><i class="fas fa-folder-open me-2" style="color: var(--primary-light);"></i>Project</h2>
+            <p class="section-sub reveal reveal-delay-1">Kumpulan project yang pernah saya kembangkan</p>
+            <div class="row g-4">
+                <div class="col-md-4 reveal reveal-delay-1">
+                    <div class="project-card shiny-card">
+                        <div class="project-icon"><i class="fas fa-code"></i></div>
+                        <h4>CV & Portfolio Interaktif</h4>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Bootstrap</span>
+                        </div>
+                        <p>Website portfolio personal ini dengan 5 game interaktif, animasi zodiak, dark/light mode, dan form kontak ke email. Dibangun murni frontend tanpa framework.</p>
+                        <div class="project-links">
+                            <a href="https://isyaau.github.io" target="_blank"><i class="fas fa-external-link-alt me-1"></i>Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal reveal-delay-2">
+                    <div class="project-card shiny-card">
+                        <div class="project-icon"><i class="fas fa-book-open"></i></div>
+                        <h4>Aplikasi Belajar Membaca</h4>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">Bootstrap</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <p>Situs edukasi interaktif untuk anak-anak belajar membaca: mengenal huruf vokal & konsonan, suku kata, membaca autoplay, dan game menyusun huruf.</p>
+                        <div class="project-links">
+                            <a href="https://isyaau.github.io/index-belajar.html" target="_blank"><i class="fas fa-external-link-alt me-1"></i>Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal reveal-delay-3">
+                    <div class="project-card shiny-card">
+                        <div class="project-icon"><i class="fas fa-wifi"></i></div>
+                        <h4>Instalasi & Manajemen Jaringan</h4>
+                        <div class="project-tags">
+                            <span class="project-tag">Mikrotik</span>
+                            <span class="project-tag">Networking</span>
+                            <span class="project-tag">CCTV</span>
+                        </div>
+                        <p>Proyek instalasi jaringan, konfigurasi Mikrotik, pemasangan CCTV, dan service komputer untuk klien korporat maupun perorangan.</p>
+                        <div class="project-links">
+                            <span style="color:var(--text-faint); font-size:0.9rem;">Proyek Layanan IT</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1926,8 +2329,8 @@
                                         <i class="fas fa-copy"></i> Salin Rekening
                                     </button>
                                 </div>
-                                <a href="https://wa.me/6285748637242" target="_blank" class="btn btn-primary w-100 mt-3">
-                                    <i class="fab fa-whatsapp me-2"></i>Chat WhatsApp
+                                <a href="https://wa.me/6285748637242" target="_blank" class="btn btn-primary w-100 mt-3 btn-shimmer">
+                                    <i class="fab fa-whatsapp me-2"></i><span>Chat WhatsApp</span>
                                 </a>
                             </div>
                         </div>
@@ -2765,6 +3168,74 @@
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
+
+        // ===== Spotlight Follow Cursor (Hero) =====
+        const spotlight = document.getElementById('spotlight');
+        const heroSection = document.getElementById('home');
+        if (spotlight && heroSection) {
+            heroSection.addEventListener('mousemove', function(e) {
+                const rect = heroSection.getBoundingClientRect();
+                spotlight.style.setProperty('--sx', (e.clientX - rect.left) + 'px');
+                spotlight.style.setProperty('--sy', (e.clientY - rect.top) + 'px');
+            });
+        }
+
+        // ===== Marquee Skill Strip =====
+        const marqueeItems = [
+            { icon: 'fab fa-laravel', label: 'Laravel' },
+            { icon: 'fab fa-php', label: 'PHP' },
+            { icon: 'fab fa-html5', label: 'HTML5' },
+            { icon: 'fab fa-css3-alt', label: 'CSS3' },
+            { icon: 'fab fa-js', label: 'JavaScript' },
+            { icon: 'fas fa-database', label: 'MySQL / MariaDB' },
+            { icon: 'fas fa-network-wired', label: 'Mikrotik' },
+            { icon: 'fas fa-tools', label: 'Website Maintenance' },
+            { icon: 'fab fa-instagram', label: 'Social Media' },
+            { icon: 'fas fa-video', label: 'Video Editing' },
+            { icon: 'fas fa-palette', label: 'Desain Grafis' },
+            { icon: 'fas fa-file-excel', label: 'Microsoft Office' }
+        ];
+        const marqueeTrack = document.getElementById('marqueeTrack');
+        if (marqueeTrack) {
+            let inner = '';
+            for (let i = 0; i < 2; i++) {
+                inner += '<div class="marquee-group">';
+                marqueeItems.forEach(function(item) {
+                    inner += '<span class="marquee-item"><i class="' + item.icon + '"></i>' + item.label + '</span>';
+                });
+                inner += '</div>';
+            }
+            marqueeTrack.innerHTML = inner;
+        }
+
+        // ===== Number Ticker =====
+        function animateTicker(el) {
+            const target = parseFloat(el.dataset.target);
+            const decimal = parseInt(el.dataset.decimal || '0', 10);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const duration = 1600;
+            const start = performance.now();
+            function frame(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const value = target * eased;
+                el.textContent = prefix + value.toFixed(decimal) + suffix;
+                if (progress < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        }
+        const tickerObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    animateTicker(entry.target);
+                    tickerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('.ticker').forEach(function(el) {
+            tickerObserver.observe(el);
+        });
 
         initGame();
         initMemory();
