@@ -121,7 +121,8 @@
         .lb tr:last-child td { border-bottom: none; }
         .lb .lb-rk { width: 36px; text-align: center; }
         .lb .lb-s { text-align: right; font-family: 'Fredoka'; font-weight: 600; }
-        .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 14px 20px; border-bottom: 1px solid var(--card-border); scrollbar-width: thin; }
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 14px 20px; border-bottom: 1px solid var(--card-border); scrollbar-width: none; -ms-overflow-style: none; }
+        .tabs::-webkit-scrollbar { display: none; }
         .tab-btn {
             flex: 0 0 auto; font-family: 'Plus Jakarta Sans'; font-size: .85rem; font-weight: 600;
             display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 12px;
@@ -492,8 +493,17 @@
     function popupNama(mode) {
         const nm = (localStorage.getItem('gk_nama') || '').trim();
         const pend = JSON.parse(localStorage.getItem('gk_pending') || 'null');
-        $('nmTitle').textContent = mode === 'portal' ? '👋 Selamat datang!' : '🏆 Rekor baru!';
-        $('nmBody').innerHTML = mode === 'portal' ? `
+        if (mode === 'portal' && nm) {
+            $('nmTitle').textContent = '👋 Selamat datang kembali!';
+            $('nmBody').innerHTML = `
+            <p style="color:var(--muted);font-size:.92rem;line-height:1.6">Nama kamu tersimpan sebagai <b>${esc(nm)}</b>. Rekor terbaik akan otomatis masuk <b>papan skor global</b>.</p>
+            <div class="btn-row" style="margin-top:14px">
+                <button class="gbtn" onclick="tutupNama()">Lanjut main 🎮</button>
+                <button class="mbtn" onclick="editNamaPopup()">Ganti nama</button>
+            </div>`;
+        } else if (mode === 'portal') {
+            $('nmTitle').textContent = '👋 Selamat datang!';
+            $('nmBody').innerHTML = `
             <p style="color:var(--muted);font-size:.92rem;line-height:1.6">Boleh kenalan dulu? Beri nama singkat agar skor terbaikmu bisa disimpan di <b>papan skor global</b>.</p>
             <div class="btn-row" style="margin-top:14px">
                 <input class="plain" id="ppName" maxlength="20" placeholder="Nama kamu…" style="width:200px;font-size:1.05rem" value="${esc(nm)}">
@@ -501,7 +511,11 @@
             </div>
             <div class="btn-row" style="margin-top:10px">
                 <button class="mbtn" onclick="tutupNama()">Lewati</button>
-            </div>` : `
+            </div>`;
+            later(150, () => { const inpp = $('ppName'); if (inpp) { inpp.focus(); inpp.select(); } });
+        } else {
+            $('nmTitle').textContent = '🏆 Rekor baru!';
+            $('nmBody').innerHTML = `
             <p style="color:var(--muted);font-size:.92rem;line-height:1.6">Kamu dapat rekor <b>${pend ? pend.skor : ''}</b> poin! Isi nama agar skormu masuk papan skor global — atau pilih <b>tidak perlu simpan</b>.</p>
             <div class="btn-row" style="margin-top:14px">
                 <input class="plain" id="ppName" maxlength="20" placeholder="Nama kamu…" style="width:200px;font-size:1.05rem" value="${esc(nm)}">
@@ -510,11 +524,26 @@
             <div class="btn-row" style="margin-top:10px">
                 <button class="mbtn" onclick="tidakPerluSimpan()">Tidak perlu simpan</button>
             </div>`;
+            later(150, () => { const inpp = $('ppName'); if (inpp) { inpp.focus(); inpp.select(); } });
+        }
         namaModal.hidden = false;
         document.body.classList.add('lock');
-        const inp = $('ppName'); if (inp) { inp.focus(); inp.select(); }
     }
     function tutupNama() { namaModal.hidden = true; document.body.classList.remove('lock'); }
+    function editNamaPopup() {
+        const nm = (localStorage.getItem('gk_nama') || '').trim();
+        $('nmTitle').textContent = '✏️ Ganti nama';
+        $('nmBody').innerHTML = `
+            <p style="color:var(--muted);font-size:.92rem;line-height:1.6">Nama baru akan dipakai untuk skor selanjutnya di <b>papan skor global</b>.</p>
+            <div class="btn-row" style="margin-top:14px">
+                <input class="plain" id="ppName" maxlength="20" placeholder="Nama kamu…" style="width:200px;font-size:1.05rem" value="${esc(nm)}">
+                <button class="gbtn" onclick="simpanNamaPortal()">Simpan</button>
+            </div>
+            <div class="btn-row" style="margin-top:10px">
+                <button class="mbtn" onclick="tutupNama()">Batal</button>
+            </div>`;
+        later(150, () => { const inp = $('ppName'); if (inp) { inp.focus(); inp.select(); } });
+    }
     function simpanNamaPortal() {
         const v = ($('ppName').value || '').trim();
         if (!v) return;
@@ -545,7 +574,7 @@
     }
     function portalPopup() {
         const nm = (localStorage.getItem('gk_nama') || '').trim();
-        if (!nm) later(500, () => popupNama('portal'));
+        setTimeout(() => popupNama('portal'), 350);
     }
 
     // ==================== DAFTAR GAME ====================
