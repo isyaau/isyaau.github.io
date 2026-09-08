@@ -1,4 +1,4 @@
-// Memuat data dari localStorage
+﻿// Memuat data dari localStorage
 const userName = localStorage.getItem('name');
 const userSchool = localStorage.getItem('school');
 
@@ -7,14 +7,14 @@ if (userName && userSchool && document.getElementById('userName')) {
     document.getElementById('userSchool').textContent = userSchool;
 } else if (!userName || !userSchool) {
     // Jika data tidak ditemukan, arahkan kembali ke halaman login
-    window.location.href = 'index-belajar.html';
+    window.location.href = 'index.html';
 }
 
 // Fungsi untuk logout dan menghapus data dari localStorage
 function logout() {
     localStorage.removeItem('name');
     localStorage.removeItem('school');
-    window.location.href = 'index-belajar.html';
+    window.location.href = 'index.html';
 }
 
 function toggleMute() {

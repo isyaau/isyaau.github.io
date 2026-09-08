@@ -1,4 +1,4 @@
-// Fungsi untuk memuat data dari localStorage jika ada
+﻿// Fungsi untuk memuat data dari localStorage jika ada
 window.onload = function() {
     const storedName = localStorage.getItem('name');
     const storedSchool = localStorage.getItem('school');

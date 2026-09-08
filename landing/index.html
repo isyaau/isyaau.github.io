@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Isyaau - Portofolio & Projek</title>
+    <meta name="description" content="Landing page Isyaau: portofolio dan projek-projek.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg1: #0b1026;
+            --bg2: #111a3a;
+            --attr1: #163b78;
+            --cyan: #22d3ee;
+            --blue: #6366f1;
+            --purple: #a855f7;
+            --pink: #f472b6;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+            color: #fff;
+            background:
+                radial-gradient(1100px 550px at 12% -10%, rgba(99, 102, 241, 0.4), transparent 60%),
+                radial-gradient(900px 500px at 108% 15%, rgba(168, 85, 247, 0.32), transparent 55%),
+                radial-gradient(800px 600px at 50% 115%, rgba(34, 211, 238, 0.28), transparent 60%),
+                linear-gradient(135deg, var(--bg1), var(--bg2));
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::before {
+            width: 420px;
+            height: 420px;
+            top: -140px;
+            left: -140px;
+            background: rgba(99, 102, 241, 0.35);
+            animation: drift 18s ease-in-out infinite;
+        }
+
+        body::after {
+            width: 380px;
+            height: 380px;
+            bottom: -150px;
+            right: -150px;
+            background: rgba(34, 211, 238, 0.3);
+            animation: drift 22s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.15); }
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 64px 24px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 88px;
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: 0.04em;
+        }
+
+        .brand span {
+            background: linear-gradient(120deg, var(--cyan), var(--pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.25s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--cyan);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 96px;
+            animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 .grad {
+            background: linear-gradient(120deg, #c7d2fe, #fae8ff, #a5f3fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 1.15rem;
+            max-width: 620px;
+            margin: 0 auto 34px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--purple), var(--cyan));
+            box-shadow: 0 14px 34px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 46px rgba(99, 102, 241, 0.55);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .btn-ghost:hover {
+            transform: translateY(-3px);
+            border-color: var(--cyan);
+            box-shadow: 0 0 28px rgba(34, 211, 238, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            letter-spacing: 0.02em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+            margin-bottom: 80px;
+        }
+
+        .card-proj {
+            padding: 26px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .card-proj:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .card-proj:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .card-proj:hover {
+            transform: translateY(-8px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45), 0 0 30px rgba(34, 211, 238, 0.18);
+        }
+
+        .card-proj .icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+        }
+
+        .card-proj h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+
+        .card-proj p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .card-proj a {
+            color: var(--cyan);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .card-proj a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <nav>
+            <div class="brand">isyaau<span>.dev</span></div>
+            <div class="d-flex align-items-center gap-4">
+                <a href="https://isyaau.github.io" class="nav-link">CV</a>
+                <a href="https://isyaau.github.io/belajar-membaca/" class="nav-link">Belajar Membaca</a>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <h1>Kreatif, Teknis &amp;<br><span class="grad">Terus Berkembang.</span></h1>
+            <p>Selamat datang di proyek-proyek saya. Dari aplikasi belajar anak hingga portofolio interaktif — dibangun untuk memberi manfaat dan tampil modern.</p>
+            <a href="https://github.com/isyaau" class="btn btn-primary" target="_blank" rel="noopener">
+                <i class="bi bi-github"></i> Lihat GitHub
+            </a>
+            <a href="https://isyaau.github.io/belajar-membaca/" class="btn btn-ghost ms-2">
+                <i class="bi bi-joystick"></i> Mainkan Aplikasinya
+            </a>
+        </header>
+
+        <h2 class="section-title">Projek Unggulan</h2>
+        <div class="grid">
+            <div class="card-proj">
+                <div class="icon"><i class="bi bi-mortarboard-fill"></i></div>
+                <h3>Aplikasi Belajar Membaca</h3>
+                <p>Aplikasi interaktif untuk anak belajar huruf, kata, dan membaca dengan dukungan suara, kuis, serta permainan menyusun huruf.</p>
+                <a href="https://isyaau.github.io/belajar-membaca/" target="_blank" rel="noopener">Buka Aplikasi <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+            <div class="card-proj">
+                <div class="icon"><i class="bi bi-person-badge-fill"></i></div>
+                <h3>CV &amp; Portofolio Interaktif</h3>
+                <p>Portofolio satu halaman dengan mode gelap/terang, animasi modern, dan bagian data kontak bank yang mudah disalin.</p>
+                <a href="https://isyaau.github.io" target="_blank" rel="noopener">Lihat CV <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+            <div class="card-proj">
+                <div class="icon"><i class="bi bi-ethernet"></i></div>
+                <h3>Instalasi &amp; Manajemen Jaringan</h3>
+                <p>Proyek layanan IT: instalasi jaringan, CCTV, dan manajemen perangkat untuk kebutuhan kantor dan komunitas.</p>
+            </div>
+        </div>
+
+        <footer>
+            Dibangun oleh <a href="https://isyaau.github.io">Isyaau Akhsanil Khakim</a> &middot; Hosting GitHub Pages
+        </footer>
+    </div>
+</body>
+
+</html>
