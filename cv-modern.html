@@ -1933,17 +1933,20 @@
                         </div>
                         <div class="col-md-7">
                             <div class="about-card">
-                                <form id="contactForm">
+                                <form id="contactForm" action="https://formsubmit.co/ajax/isak.akhsanil@gmail.com" method="POST">
+                                    <input type="hidden" name="_subject" value="Pesan baru dari CV Isyaau">
+                                    <input type="hidden" name="_template" value="table">
+                                    <input type="text" name="_honey" style="display:none;">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" placeholder="Nama" required>
+                                            <input type="text" class="form-control" name="nama" placeholder="Nama" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <input type="email" class="form-control" placeholder="Email" required>
+                                            <input type="email" class="form-control" name="email" placeholder="Email" required>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control mb-3" placeholder="Subjek" required>
-                                    <textarea class="form-control mb-3" rows="4" placeholder="Pesan Anda..." required></textarea>
+                                    <input type="text" class="form-control mb-3" name="subjek" placeholder="Subjek" required>
+                                    <textarea class="form-control mb-3" name="pesan" rows="4" placeholder="Pesan Anda..." required></textarea>
                                     <button type="submit" class="btn btn-primary w-100"><i class="fas fa-paper-plane me-2"></i>Kirim Pesan</button>
                                 </form>
                             </div>
@@ -2718,8 +2721,30 @@
         // ===== Contact Form =====
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            showToast('Pesan berhasil dikirim! Terima kasih');
-            this.reset();
+            const form = this;
+            const btn = this.querySelector('button[type="submit"]');
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Mengirim...';
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).then(function(res) {
+                return res.json();
+            }).then(function(data) {
+                if (data.success === 'true' || data.success === true) {
+                    showToast('Pesan berhasil dikirim! Terima kasih');
+                    form.reset();
+                } else {
+                    showToast('Gagal mengirim pesan, coba lagi.');
+                }
+            }).catch(function() {
+                showToast('Gagal mengirim pesan, coba lagi.');
+            }).finally(function() {
+                btn.disabled = false;
+                btn.innerHTML = original;
+            });
         });
 
         // ===== Initialize Canvas & Games =====
