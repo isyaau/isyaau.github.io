@@ -1,141 +1,14 @@
 ﻿<!doctype html>
 <html lang="id">
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.122.0">
-    
+    <title>BELAJAR MEMBACA - Materi</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <title>BELAJAR MEMBACA</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/style.css" rel="stylesheet">
-
+    <meta http-equiv="refresh" content="0; url=./materi.html">
+    <script>window.location.href = './materi.html';</script>
 </head>
-
-<body>
-    <main>
-        <div class="container">
-            <div class="row justify-content-center align-items-center mt-5">
-                <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                    <!-- Tombol Mute/Unmute -->
-                    <div class="gambar-wrapper" onclick="toggleMute()">
-                        <img src="assets/icon/high-volume.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
-                            id="volumeImage">
-                    </div>
-
-                    <!-- Background Music -->
-                    <audio id="audioPlayerbg" autoplay loop>
-                        <source src="assets/music/bg.wav" type="audio/mp3">
-                        Browser Anda tidak mendukung elemen audio.
-                    </audio>
-
-                    <!-- Judul Materi -->
-                    <h1 class="mx-auto">Materi 1</h1>
-
-                    <a href="javascript:history.back()">
-                        <div class="gambar-wrapper">
-                            <img src="assets/icon/back.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
-                                id="backImage">
-                        </div>
-                    </a>
-                    <!-- Tombol Home -->
-                    <a href="/dashboard.html">
-                        <div class="gambar-wrapper">
-                            <img src="assets/icon/home.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
-                                id="volumeImage">
-                        </div>
-                    </a>
-                </div>
-
-                <div class="text-center mb-5">
-                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Deskripsi Gambar" width="1000vh">
-                    <br>
-                    <h2>Selamat datang <span id="userName"></span> dari sekolah <span id="userSchool"></span>!</h2>
-                </div>
-            </div>
-
-            <!-- Cards Section -->
-            <div class="row">
-                <!-- Card 1 -->
-                <div class="col-6 col-md-3 col-lg-3 my-3">
-                    <div class="card" style="width: 100%; height: 100%;">
-                        <img src="assets/img/img-materi.jpg" class="card-img-top" alt="..."
-                            style="object-fit: cover; height: 150px; width: 100%;">
-                        <div class="card-body text-center">
-                            <p class="card-text">A</p>
-                            <audio id="audioPlayera">
-                                <source src="assets/voice/a.mp3" type="audio/wav">
-                                Browser Anda tidak mendukung elemen audio.
-                            </audio>
-                            <!-- Gambar play/pause yang bisa diklik -->
-                            <img src="assets/icon/play.png" id="playPauseImagea"
-                                onclick="togglePlay('audioPlayera', 'playPauseImagea')" width="50px">
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="col-6 col-md-3 col-lg-3 my-3">
-                    <div class="card" style="width: 100%; height: 100%;">
-                        <img src="assets/img/img-materi.jpg" class="card-img-top" alt="..."
-                            style="object-fit: cover; height: 150px; width: 100%;">
-                        <div class="card-body text-center">
-                            <p class="card-text">B</p>
-                            <audio id="audioPlayerb">
-                                <source src="assets/voice/a.mp3" type="audio/wav">
-                                Browser Anda tidak mendukung elemen audio.
-                            </audio>
-                            <!-- Gambar play/pause yang bisa diklik -->
-                            <img src="assets/icon/play.png" id="playPauseImageb"
-                                onclick="togglePlay('audioPlayerb', 'playPauseImageb')" width="50px">
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="col-6 col-md-3 col-lg-3 my-3">
-                    <div class="card" style="width: 100%; height: 100%;">
-                        <img src="assets/img/img-materi.jpg" class="card-img-top" alt="..."
-                            style="object-fit: cover; height: 150px; width: 100%;">
-                        <div class="card-body text-center">
-                            <p class="card-text">C</p>
-                            <audio id="audioPlayerc">
-                                <source src="assets/voice/a.mp3" type="audio/wav">
-                                Browser Anda tidak mendukung elemen audio.
-                            </audio>
-                            <!-- Gambar play/pause yang bisa diklik -->
-                            <img src="assets/icon/play.png" id="playPauseImagec"
-                                onclick="togglePlay('audioPlayerc', 'playPauseImagec')" width="50px">
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="col-6 col-md-3 col-lg-3 my-3">
-                    <div class="card" style="width: 100%; height: 100%;" onclick="logout()">
-                        <img src="assets/img/img-materi.jpg" class="card-img-top" alt="..."
-                            style="object-fit: cover; height: 150px; width: 100%;">
-                        <div class="card-body text-center">
-                            <p class="card-text">D</p>
-                            <audio id="audioPlayerd">
-                                <source src="assets/voice/a.mp3" type="audio/wav">
-                                Browser Anda tidak mendukung elemen audio.
-                            </audio>
-                            <!-- Gambar play/pause yang bisa diklik -->
-                            <img src="assets/icon/play.png" id="playPauseImaged"
-                                onclick="togglePlay('audioPlayerd', 'playPauseImaged')" width="50px">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-    <script src="assets/script.js"></script>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
+<body style="margin:0;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0b1026;color:#fff;">
+    <p>Mengalihkan ke halaman Mengenal Kata...</p>
 </body>
-
 </html>
