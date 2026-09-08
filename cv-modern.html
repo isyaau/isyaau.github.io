@@ -645,6 +645,65 @@
             text-shadow: 0 0 15px rgba(30, 144, 255, 0.6);
         }
 
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 0;
+            color: var(--text-soft);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 6px 10px;
+            line-height: 1;
+        }
+
+        .nav-toggle:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 992px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 2px;
+                padding: 10px 20px 14px;
+                background: rgba(13, 13, 26, 0.97);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--card-border);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links .nav-link {
+                margin: 0;
+                padding: 12px 6px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            }
+
+            body.light-mode .nav-links {
+                background: rgba(244, 247, 251, 0.97);
+            }
+
+            body.light-mode .nav-links .nav-link {
+                border-bottom-color: #cfe0f5;
+            }
+        }
+
         /* Section Styles */
         .section {
             padding: 80px 0;
@@ -1802,14 +1861,19 @@
                 <button class="theme-toggle" id="themeToggle" title="Ganti mode gelap/terang" onclick="toggleTheme()">
                     <i class="fas fa-moon"></i>
                 </button>
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">Tentang</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#game" class="nav-link">Games</a>
-                <a href="#projects" class="nav-link">Project</a>
-                <a href="#experience" class="nav-link">Pengalaman</a>
-                <a href="#certificates" class="nav-link">Sertifikat</a>
-                <a href="#contact" class="nav-link">Kontak</a>
+                <button class="nav-toggle" id="navToggle" title="Menu" onclick="toggleNav()" aria-label="Buka menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">Tentang</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#game" class="nav-link">Games</a>
+                    <a href="#projects" class="nav-link">Project</a>
+                    <a href="#experience" class="nav-link">Pengalaman</a>
+                    <a href="#certificates" class="nav-link">Sertifikat</a>
+                    <a href="#contact" class="nav-link">Kontak</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -3352,6 +3416,29 @@
             localStorage.setItem('cv-theme', isLight ? 'light' : 'dark');
             showToast(isLight ? 'Mode terang diaktifkan' : 'Mode gelap diaktifkan');
         }
+
+        // ===== Mobile Navigation =====
+        function toggleNav() {
+            const links = document.getElementById('navLinks');
+            const open = links.classList.toggle('open');
+            document.querySelector('#navToggle i').className = open ? 'fas fa-xmark' : 'fas fa-bars';
+        }
+        document.addEventListener('click', function(e) {
+            const links = document.getElementById('navLinks');
+            const toggle = document.getElementById('navToggle');
+            if (!links || !toggle) return;
+            if (!links.contains(e.target) && !toggle.contains(e.target) && links.classList.contains('open')) {
+                links.classList.remove('open');
+                document.querySelector('#navToggle i').className = 'fas fa-bars';
+            }
+        });
+        document.querySelectorAll('.nav-links .nav-link').forEach(function(l) {
+            l.addEventListener('click', function() {
+                const links = document.getElementById('navLinks');
+                links.classList.remove('open');
+                document.querySelector('#navToggle i').className = 'fas fa-bars';
+            });
+        });
 
         function applyTheme() {
             const saved = localStorage.getItem('cv-theme');
