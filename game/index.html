@@ -115,6 +115,12 @@
         }
         .mbtn:hover { color: var(--txt); border-color: var(--cyan); }
         .mbtn.primary { color: #082f49; background: var(--cyan); border-color: transparent; font-weight: 700; }
+        .mgrp { display: flex; gap: 8px; }
+        .lb { width: 100%; border-collapse: collapse; margin: 10px auto 0; max-width: 460px; }
+        .lb td { padding: 10px 12px; border-bottom: 1px solid var(--card-border); text-align: left; font-size: .92rem; }
+        .lb tr:last-child td { border-bottom: none; }
+        .lb .lb-rk { width: 36px; text-align: center; }
+        .lb .lb-s { text-align: right; font-family: 'Fredoka'; font-weight: 600; }
         #gamePlay { padding: 22px 20px 28px; min-height: 320px; }
 
         .g-head { text-align: center; margin-bottom: 18px; }
@@ -280,7 +286,10 @@
             <div class="modal-head">
                 <button class="mbtn" onclick="closeGame()">← Beranda</button>
                 <h2 id="gameTitle"></h2>
-                <button class="mbtn" onclick="restartGame()">↻ Ulangi</button>
+                <div class="mgrp">
+                    <button class="mbtn" onclick="openBoard()">🏆 Papan Skor</button>
+                    <button class="mbtn" onclick="restartGame()">↻ Ulangi</button>
+                </div>
             </div>
             <div id="gamePlay"></div>
         </div>
@@ -305,7 +314,15 @@
     function rnd(n) { return Math.floor(Math.random() * n); }
     function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; }
     function best(id) { return +localStorage.getItem('gk_' + id) || 0; }
-    function setBest(id, v) { if (v > best(id)) { localStorage.setItem('gk_' + id, v); return true; } return false; }
+    function setBest(id, v) {
+        if (v > best(id)) {
+            localStorage.setItem('gk_' + id, v);
+            const nm = (localStorage.getItem('gk_nama') || '').trim();
+            if (nm) su_post(id, nm, v).catch(() => {});
+            return true;
+        }
+        return false;
+    }
 
     let AC = null;
     function beep(f = 600, d = 80, type = 'square', vol = .12) {
@@ -320,6 +337,99 @@
     }
     function winSound() { beep(660, 110); later(120, () => beep(880, 180)); }
     function errSound() { beep(220, 160, 'sawtooth'); }
+
+    // ==================== SUPABASE (papan skor online) ====================
+    const SU_URL = 'https://kdnsgzfzyemcghafpzlq.supabase.co';
+    const SU_KEY = 'sb_publishable_uVphrhqkcPihrXx3zXtjcA_bEonnqUP';
+
+    function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+    async function su_get(game) {
+        const res = await fetch(`${SU_URL}/rest/v1/skor?game=eq.${game}&order=skor.desc&limit=10`, {
+            headers: {
+                'apikey': SU_KEY,
+                'Authorization': 'Bearer ' + SU_KEY,
+                'Accept': 'application/json'
+            }
+        });
+        if (!res.ok) throw new Error('gagal ambil skor');
+        return res.json();
+    }
+    async function su_post(game, nama, skor) {
+        const res = await fetch(`${SU_URL}/rest/v1/skor`, {
+            method: 'POST',
+            headers: {
+                'apikey': SU_KEY,
+                'Authorization': 'Bearer ' + SU_KEY,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ game, nama, skor })
+        });
+        if (!res.ok) throw new Error('gagal kirim skor');
+    }
+
+    function openBoard() {
+        if (!cur) return;
+        simpanNama().then(muatSkor);
+    }
+
+    function simpanNama() {
+        const nm = (localStorage.getItem('gk_nama') || '').trim();
+        return Promise.resolve(nm);
+    }
+
+    function muatSkor() {
+        const box = $('gamePlay');
+        const nm = (localStorage.getItem('gk_nama') || '').trim();
+        box.innerHTML = `
+            <div class="g-head">
+                <div class="big-emoji">🏆</div>
+                <div class="scoreline">
+                    <span class="chip">Papan Skor ${esc(GAMES.find(x => x.id === cur).name)}</span>
+                    <span class="chip">🌐 Top 10 se-Indonesia</span>
+                </div>
+            </div>
+            <div class="arena">
+                <p style="color:var(--muted);font-size:.9rem">Skor terbaikmu di game ini otomatis terkirim ke papan skor saat mendapat rekor baru.</p>
+                <div class="pill-selects" style="margin-top:12px;flex-direction:column">
+                    <div class="btn-row">
+                        <input class="plain" id="nmInp" value="${esc(nm)}" maxlength="20" placeholder="Nama kamu…" style="width:200px;font-size:1.1rem">
+                        <button class="gbtn" onclick="setNama()">Simpan nama</button>
+                    </div>
+                </div>
+                <div id="lbList" class="scoreline" style="font-size:1rem;margin-top:18px">Memuat…</div>
+            </div>
+            <div class="btn-row" style="margin-top:16px">
+                <button class="gbtn" onclick="startGame()">← Kembali main</button>
+            </div>`;
+        if (nm) su_get(cur).then(renderLb).catch(() => { $('lbList').innerHTML = '⚠️ Gagal memuat papan skor.'; });
+        else $('lbList').innerHTML = '💬 Tulis nama di atas untuk tampil di papan skor.';
+    }
+
+    function setNama() {
+        const v = ($('nmInp').value || '').trim();
+        localStorage.setItem('gk_nama', v);
+        if (!v) { $('lbList').innerHTML = '💬 Tulis nama di atas untuk tampil di papan skor.'; return; }
+        $('lbList').innerHTML = 'Memuat…';
+        su_get(cur).then(renderLb).catch(() => { $('lbList').innerHTML = '⚠️ Gagal memuat papan skor.'; });
+    }
+
+    function renderLb(rows) {
+        const sorted = (rows || []).slice().sort((a, b) => b.skor - a.skor);
+        const mine = (localStorage.getItem('gk_nama') || '').trim();
+        if (!sorted.length) { $('lbList').innerHTML = 'Belum ada skor. Jadilah yang pertama! 🎉'; return; }
+        $('lbList').innerHTML = `<table class="lb">
+            <tr style="color:var(--muted);font-size:.8rem">
+                <td class="lb-rk">#</td><td>Pemain</td><td class="lb-s">Skor</td>
+            </tr>
+            ${sorted.map((r, i) => `
+            <tr ${r.nama === mine ? 'style="color:var(--cyan);font-weight:700"' : ''}>
+                <td class="lb-rk">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
+                <td>${esc(r.nama)}</td><td class="lb-s">${r.skor}</td>
+            </tr>`).join('')}
+        </table>`;
+    }
 
     // ==================== DAFTAR GAME ====================
     const GAMES = [
