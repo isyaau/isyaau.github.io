@@ -1,270 +1,2086 @@
-<!doctype html>
-<html lang="en" data-bs-theme="auto">
+<!DOCTYPE html>
+<html lang="id">
 
 <head>
-  <script src="../assets/js/color-modes.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Modern - Isyaau</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --primary-light: #a29bfe;
+            --accent-color: #fd79a8;
+            --accent-light: #ffeaa7;
+            --dark-bg: #0d0d1a;
+            --card-bg: #16162b;
+            --card-border: #2a2a4a;
+            --text-main: #ffffff;
+            --text-soft: #e6e6ff;
+            --text-muted: #b8b8d8;
+            --text-faint: #9a9ab8;
+        }
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Hugo 0.122.0">
-  <title>BELAJAR MEMBACA</title>
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            padding-top: 60px;
+        }
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+        /* Confetti canvas */
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
 
-  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/style.css" rel="stylesheet">
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
 
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
+        .reveal-delay-1 {
+            transition-delay: 0.15s;
+        }
 
-    .b-example-divider {
-      width: 100%;
-      height: 3rem;
-      background-color: rgba(0, 0, 0, .1);
-      border: solid rgba(0, 0, 0, .15);
-      border-width: 1px 0;
-      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
+        .reveal-delay-2 {
+            transition-delay: 0.3s;
+        }
 
-    .b-example-vr {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 100vh;
-    }
+        .reveal-delay-3 {
+            transition-delay: 0.45s;
+        }
 
-    .bi {
-      vertical-align: -.125em;
-      fill: currentColor;
-    }
+        /* Shine sweep effect on cards */
+        .shiny-card {
+            position: relative;
+            overflow: hidden;
+        }
 
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
+        .shiny-card::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -50%;
+            width: 50%;
+            height: 300%;
+            transform: rotate(25deg);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            transition: left 0.8s ease;
+        }
 
-    .nav-scroller .nav {
-      display: flex;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
+        .shiny-card:hover::after {
+            left: 150%;
+        }
 
-    .btn-bd-primary {
-      --bd-violet-bg: #712cf9;
-      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+        /* Hero Section */
+        .hero {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0d0d1a 0%, #1a1a3e 50%, #2d1b4e 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
-      --bs-btn-font-weight: 600;
-      --bs-btn-color: var(--bs-white);
-      --bs-btn-bg: var(--bd-violet-bg);
-      --bs-btn-border-color: var(--bd-violet-bg);
-      --bs-btn-hover-color: var(--bs-white);
-      --bs-btn-hover-bg: #6528e0;
-      --bs-btn-hover-border-color: #6528e0;
-      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-      --bs-btn-active-color: var(--bs-btn-hover-color);
-      --bs-btn-active-bg: #5a23c8;
-      --bs-btn-active-border-color: #5a23c8;
-    }
+        .hero-cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-light), var(--accent-color));
+            pointer-events: none;
+            z-index: 5;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 30px 10px rgba(108, 92, 231, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-    .bd-mode-toggle {
-      z-index: 1500;
-    }
+        .hero-cursor.active {
+            opacity: 0.8;
+        }
 
-    .bd-mode-toggle .dropdown-menu .active .bi {
-      display: block !important;
-    }
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
 
-    body {
-      background-image: url('assets/img/bg-login.png');
-      background-size: cover;
-      /* Agar gambar menutupi seluruh layar */
-      background-position: center;
-      /* Posisi gambar di tengah layar */
-      background-repeat: no-repeat;
-      /* Mencegah gambar diulang */
-      height: 100vh;
-      /* Menjadikan tinggi layar 100% */
-    }
-  </style>
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
 
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
 
-  <!-- Custom styles for this template -->
-  <link href="headers.css" rel="stylesheet">
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .profile-img-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-img-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary-color), var(--accent-color), var(--primary-light), var(--accent-color), var(--primary-color));
+            animation: spin 6s linear infinite;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid var(--dark-bg);
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            animation: float 3s ease-in-out infinite;
+            object-fit: cover;
+            background: var(--card-bg);
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary-light), var(--accent-color), var(--primary-light));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            text-shadow: 0 0 40px rgba(108, 92, 231, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero .tagline {
+            font-size: 1.4rem;
+            color: var(--text-soft);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .typed-text {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+            min-height: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-soft);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--card-border);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-6px) scale(1.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.4);
+            color: var(--primary-light);
+            background: var(--dark-bg);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollBounce 2s ease infinite;
+            color: var(--text-soft);
+            font-size: 1.3rem;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, 10px);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(13, 13, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--primary-light) !important;
+        }
+
+        .nav-link {
+            color: var(--text-soft) !important;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-light) !important;
+            text-shadow: 0 0 15px rgba(108, 92, 231, 0.6);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--text-main);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: -1.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-card .lead {
+            color: var(--text-soft) !important;
+            line-height: 1.8;
+        }
+
+        .info-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .info-value {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Skills Card */
+        .skill-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.8rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--card-border);
+            height: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.25);
+            border-color: var(--primary-color);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h5 {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .skill-card small {
+            color: var(--text-muted) !important;
+            font-weight: 600;
+        }
+
+        .progress-track {
+            height: 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            margin: 10px 0 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease;
+            box-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+        }
+
+        /* Game Hub */
+        .game-hub {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .game-tab {
+            padding: 14px 25px;
+            border-radius: 30px;
+            border: 2px solid var(--card-border);
+            background: var(--card-bg);
+            color: var(--text-soft);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .game-tab:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            color: var(--primary-light);
+        }
+
+        .game-tab.active {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+        }
+
+        .game-panel {
+            display: none;
+        }
+
+        .game-panel.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .game-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .game-desc {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Word Game */
+        .word-display {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 1.8rem 0;
+            flex-wrap: wrap;
+        }
+
+        .letter-box {
+            width: 48px;
+            height: 62px;
+            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: rgba(108, 92, 231, 0.12);
+            color: var(--text-main);
+        }
+
+        .letter-box.revealed {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            animation: pop 0.4s ease;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hint-btn {
+            padding: 10px 24px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-light);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin: 4px;
+        }
+
+        .hint-btn:hover:not(:disabled) {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hint-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .score-display {
+            font-size: 1.4rem;
+            margin: 1rem 0;
+            color: var(--text-soft);
+        }
+
+        /* Memory Game */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 420px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: 3px solid var(--card-border);
+            transition: all 0.4s ease;
+            color: transparent;
+            user-select: none;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .memory-card.flipped,
+        .memory-card.matched {
+            background: var(--card-bg);
+            color: var(--primary-light);
+            transform: rotateY(360deg);
+        }
+
+        .memory-card.matched {
+            background: rgba(0, 184, 148, 0.15);
+            border-color: #00b894;
+            color: #55efc4;
+            animation: matchedPop 0.5s ease;
+        }
+
+        @keyframes matchedPop {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.15);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Snake Game */
+        .snake-grid {
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            background: var(--dark-bg);
+            border: 3px solid var(--card-border);
+            border-radius: 10px;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+        }
+
+        .snake-cell {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+
+        .snake-cell.head {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            box-shadow: 0 0 10px rgba(108, 92, 231, 0.8);
+        }
+
+        .snake-cell.body {
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .snake-cell.food {
+            background: var(--accent-color);
+            box-shadow: 0 0 10px rgba(253, 121, 168, 0.8);
+            animation: pulse 1s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.8);
+            }
+        }
+
+        /* Quiz Game */
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 500px;
+            margin: 1.5rem auto;
+        }
+
+        .quiz-option {
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 2px solid var(--card-border);
+            background: var(--dark-bg);
+            color: var(--text-soft);
+            cursor: pointer;
+            text-align: left;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+            color: var(--text-main);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 184, 148, 0.2);
+            border-color: #00b894;
+            color: #55efc4;
+            animation: pop 0.4s ease;
+        }
+
+        .quiz-option.wrong {
+            background: rgba(253, 121, 168, 0.2);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-8px);
+            }
+            75% {
+                transform: translateX(8px);
+            }
+        }
+
+        .quiz-progress {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .quiz-dot.completed {
+            background: var(--primary-color);
+        }
+
+        .quiz-dot.correct {
+            background: #00b894;
+        }
+
+        .quiz-dot.wrong {
+            background: var(--accent-color);
+        }
+
+        .quiz-dot.current {
+            transform: scale(1.3);
+            background: var(--primary-light);
+        }
+
+        /* Tic Tac Toe */
+        .ttt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 320px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .ttt-cell {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            background: var(--dark-bg);
+            border: 3px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: transparent;
+        }
+
+        .ttt-cell:hover:not(.taken) {
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+        }
+
+        .ttt-cell.taken {
+            cursor: default;
+        }
+
+        .ttt-cell.X {
+            color: var(--primary-light);
+        }
+
+        .ttt-cell.O {
+            color: var(--accent-color);
+        }
+
+        .ttt-cell.win {
+            background: rgba(0, 184, 148, 0.2);
+            border-color: #00b894;
+            animation: pulse 0.8s ease infinite;
+        }
+
+        .btn-game {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            margin: 5px;
+        }
+
+        .btn-game.primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+        }
+
+        .btn-game:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+        }
+
+        .game-message {
+            font-size: 1.3rem;
+            min-height: 35px;
+            color: var(--text-soft);
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            box-shadow: 0 0 15px rgba(108, 92, 231, 0.6);
+            border: 3px solid var(--dark-bg);
+        }
+
+        .timeline-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.2);
+        }
+
+        .timeline-date {
+            color: var(--primary-light);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-card h5 {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .timeline-card p {
+            color: var(--text-muted) !important;
+        }
+
+        /* Contact */
+        .contact-info a {
+            color: var(--text-soft);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-light);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--dark-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-light);
+            font-size: 1.3rem;
+        }
+
+        .contact-item small {
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            padding: 2.5rem 0;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+        }
+
+        footer p {
+            color: var(--text-soft);
+        }
+
+        /* Toast */
+        .toast-notif {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: var(--text-main);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateX(120%);
+            transition: transform 0.4s ease;
+            z-index: 2000;
+        }
+
+        .toast-notif.show {
+            transform: translateX(0);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            border-radius: 10px;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-faint);
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+            color: var(--text-main);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        /* Floating action button / back to top */
+        .back-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1500;
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+        }
+
+        .back-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .letter-box {
+                width: 40px;
+                height: 52px;
+                font-size: 1.5rem;
+            }
+
+            .navbar .d-flex {
+                gap: 0 !important;
+            }
+
+            .nav-link {
+                margin: 0 8px;
+                font-size: 0.85rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .game-tab {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .memory-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+
+            .snake-grid {
+                max-width: 320px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-    <symbol id="check2" viewBox="0 0 16 16">
-      <path
-        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-    </symbol>
-    <symbol id="circle-half" viewBox="0 0 16 16">
-      <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
-    </symbol>
-    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-      <path
-        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
-      <path
-        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
-    </symbol>
-    <symbol id="sun-fill" viewBox="0 0 16 16">
-      <path
-        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
-    </symbol>
-  </svg>
+    <canvas id="confettiCanvas"></canvas>
+    <div class="hero-cursor" id="heroCursor"></div>
+    <div class="toast-notif" id="toast"></div>
+    <button class="back-top" id="backTop" title="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
 
-  <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-      aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-      <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-        <use href="#circle-half"></use>
-      </svg>
-      <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-          aria-pressed="false">
-          <svg class="bi me-2 opacity-50" width="1em" height="1em">
-            <use href="#sun-fill"></use>
-          </svg>
-          Light
-          <svg class="bi ms-auto d-none" width="1em" height="1em">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-          aria-pressed="false">
-          <svg class="bi me-2 opacity-50" width="1em" height="1em">
-            <use href="#moon-stars-fill"></use>
-          </svg>
-          Dark
-          <svg class="bi ms-auto d-none" width="1em" height="1em">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
-          aria-pressed="true">
-          <svg class="bi me-2 opacity-50" width="1em" height="1em">
-            <use href="#circle-half"></use>
-          </svg>
-          Auto
-          <svg class="bi ms-auto d-none" width="1em" height="1em">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-
-  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-    <symbol id="bootstrap" viewBox="0 0 118 94">
-      <title>Bootstrap</title>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z">
-      </path>
-    </symbol>
-    <symbol id="home" viewBox="0 0 16 16">
-      <path
-        d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
-    </symbol>
-    <symbol id="speedometer2" viewBox="0 0 16 16">
-      <path
-        d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
-      <path fill-rule="evenodd"
-        d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
-    </symbol>
-    <symbol id="table" viewBox="0 0 16 16">
-      <path
-        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
-    </symbol>
-    <symbol id="people-circle" viewBox="0 0 16 16">
-      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-      <path fill-rule="evenodd"
-        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-    </symbol>
-    <symbol id="grid" viewBox="0 0 16 16">
-      <path
-        d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
-    </symbol>
-  </svg>
-
-  <main>
-
-
-    <div class="container">
-      <div class="row justify-content-center align-items-center mt-5">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <div class="gambar-wrapper" onclick="toggleMute()">
-            <img src="assets/icon/high-volume.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
-              id="volumeImage">
-          </div>
-          <!-- Background Music -->
-          <audio id="audioPlayer" autoplay loop>
-            <source src="assets/music/bg.wav" type="audio/mp3">
-            Browser Anda tidak mendukung elemen audio.
-          </audio>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-code me-2"></i>Isyaau
+            </a>
+            <div class="d-flex">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">Tentang</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#game" class="nav-link">Games</a>
+                <a href="#experience" class="nav-link">Pengalaman</a>
+                <a href="#contact" class="nav-link">Kontak</a>
+            </div>
         </div>
-        <div class="text-center">
-          <img src="assets/img/title-membaca.png" class="gambar-title" alt="Deskripsi Gambar" width="1000vh">
-          <br>
-          <h2>BERSAMA KAMI</h2>
+    </nav>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particle-bg" id="particleBg"></div>
+        <div class="hero-content">
+            <div class="profile-img-wrapper">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=developer" alt="Profile Photo" class="profile-img">
+            </div>
+            <h1>Isyaau</h1>
+            <p class="tagline">Full Stack Developer</p>
+            <p class="typed-text" id="typedText">|</p>
+            <div class="social-links">
+                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card-login p-4">
-            <h2 class="text-center mb-4">Login</h2>
-            <form id="loginForm">
-              <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-              </div>
-              <div class="mb-3">
-                <label for="school" class="form-label">Sekolah</label>
-                <input type="text" class="form-control" id="school" name="school" required>
-              </div>
-              <button type="submit" class="btn btn-primary w-100">Login</button>
-            </form>
-            <p id="error-message" class="text-danger mt-2 d-none">Mohon masukkan nama dan sekolah!</p>
-          </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
         </div>
-      </div>
-    </div>
-    <div class="container">
+    </section>
 
-    </div>
-  </main>
-  <script src="assets/login.js"></script>
-  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Tentang Saya</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="about-card shiny-card reveal reveal-delay-1">
+                        <p class="lead">
+                            Saya adalah seorang developer yang bersemangat dalam menciptakan solusi digital yang inovatif.
+                            Dengan pengalaman di bidang web development dan design, saya selalu berusaha memberikan
+                            yang terbaik dalam setiap proyek yang saya kerjakan.
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-user me-2"></i>Nama</span>
+                                    <span class="info-value">Isyaau</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-birthday-cake me-2"></i>Usia</span>
+                                    <span class="info-value">20 Tahun</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-location-dot me-2"></i>Lokasi</span>
+                                    <span class="info-value">Indonesia</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-briefcase me-2"></i>Status</span>
+                                    <span class="info-value">Freelance</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-graduation-cap me-2"></i>Pendidikan</span>
+                                    <span class="info-value">Teknik Informatika</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label"><i class="fas fa-heart me-2"></i>Hobi</span>
+                                    <span class="info-value">Coding, Gaming</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Skills & Expertise</h2>
+            <p class="section-sub reveal reveal-delay-1">Kemampuan teknis yang saya kuasai</p>
+            <div class="row g-4">
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-1">
+                    <div class="skill-card shiny-card">
+                        <i class="fab fa-html5 skill-icon"></i>
+                        <h5>HTML5</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="90"></div></div>
+                        <small>90% - Mahir</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-2">
+                    <div class="skill-card shiny-card">
+                        <i class="fab fa-css3-alt skill-icon"></i>
+                        <h5>CSS3</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="85"></div></div>
+                        <small>85% - Mahir</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-3">
+                    <div class="skill-card shiny-card">
+                        <i class="fab fa-js skill-icon"></i>
+                        <h5>JavaScript</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="80"></div></div>
+                        <small>80% - Mahir</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-1">
+                    <div class="skill-card shiny-card">
+                        <i class="fab fa-react skill-icon"></i>
+                        <h5>React</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="75"></div></div>
+                        <small>75% - Menengah</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-2">
+                    <div class="skill-card shiny-card">
+                        <i class="fab fa-node-js skill-icon"></i>
+                        <h5>Node.js</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="70"></div></div>
+                        <small>70% - Menengah</small>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 reveal reveal-delay-3">
+                    <div class="skill-card shiny-card">
+                        <i class="fab fa-python skill-icon"></i>
+                        <h5>Python</h5>
+                        <div class="progress-track"><div class="progress-fill" data-width="65"></div></div>
+                        <small>65% - Menengah</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="game" class="section">
+        <div class="container">
+            <h2 class="section-title reveal"><i class="fas fa-gamepad me-2" style="color: var(--primary-light);"></i>Games Interaktif</h2>
+            <p class="section-sub reveal reveal-delay-1">Mainkan game seru dan uji kemampuanmu!</p>
+
+            <div class="game-hub reveal reveal-delay-2">
+                <div class="game-tab active" onclick="switchGame(0)"><i class="fas fa-brain"></i> Word Challenge</div>
+                <div class="game-tab" onclick="switchGame(1)"><i class="fas fa-puzzle-piece"></i> Memory</div>
+                <div class="game-tab" onclick="switchGame(2)"><i class="fas fa-gamepad"></i> Snake</div>
+                <div class="game-tab" onclick="switchGame(3)"><i class="fas fa-question"></i> Quiz</div>
+                <div class="game-tab" onclick="switchGame(4)"><i class="fas fa-hashtag"></i> Tic Tac Toe</div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+
+                    <!-- GAME 1: Word Challenge -->
+                    <div class="game-container game-panel active" id="panel-0">
+                        <h3 class="game-title"><i class="fas fa-brain me-2"></i>Word Challenge</h3>
+                        <p class="game-desc">Tebak kata berdasarkan petunjuk yang diberikan!</p>
+                        <div class="score-display">
+                            <span class="me-4">Score: <span style="color:#fdcb6e; font-weight:bold;" id="score">0</span></span>
+                            <span>Level: <span style="color:var(--accent-color); font-weight:bold;" id="level">1</span></span>
+                        </div>
+                        <div class="word-display" id="wordDisplay"></div>
+                        <p style="margin:1.2rem 0; font-size:1.1rem; color:var(--text-soft);">
+                            <i class="fas fa-lightbulb me-2" style="color:#fdcb6e;"></i><span id="currentHint"></span>
+                        </p>
+                        <div class="hint-buttons">
+                            <button class="hint-btn" onclick="getHint()" id="hintBtn"><i class="fas fa-lightbulb"></i> Petunjuk Huruf</button>
+                            <button class="hint-btn" onclick="skipWord()"><i class="fas fa-forward"></i> Skip</button>
+                        </div>
+                        <div class="mt-2 d-flex justify-content-center flex-wrap gap-2">
+                            <input type="text" id="guessInput" class="form-control d-inline-block p-2" style="max-width:300px;" placeholder="Masukkan jawaban...">
+                            <button class="btn btn-primary px-4" onclick="checkAnswer()"><i class="fas fa-check"></i> Cek</button>
+                        </div>
+                        <div id="message" class="mt-3 game-message"></div>
+                    </div>
+
+                    <!-- GAME 2: Memory -->
+                    <div class="game-container game-panel" id="panel-1">
+                        <h3 class="game-title"><i class="fas fa-eye me-2"></i>Memory Match</h3>
+                        <p class="game-desc">Cocokkan pasangan kartu yang sama!</p>
+                        <div class="score-display" id="memStats">Moves: <span style="color:#fdcb6e;font-weight:bold;" id="memMoves">0</span> | Pairs: <span style="color:#00b894;font-weight:bold;" id="memPairs">0/8</span></div>
+                        <div class="memory-grid" id="memoryGrid"></div>
+                        <button class="btn-game primary" onclick="initMemory()"><i class="fas fa-redo"></i> Mulai Ulang</button>
+                    </div>
+
+                    <!-- GAME 3: Snake -->
+                    <div class="game-container game-panel" id="panel-2">
+                        <h3 class="game-title"><i class="fas fa-gamepad me-2"></i>Snake Game</h3>
+                        <p class="game-desc">Gunakan tombol panah (← ↑ → ↓) untuk memainkan!</p>
+                        <div class="score-display">Score: <span style="color:#00b894;font-weight:bold;" id="snakeScore">0</span> | Best: <span style="color:#fdcb6e;font-weight:bold;" id="snakeBest">0</span></div>
+                        <div class="snake-grid" id="snakeGrid"></div>
+                        <button class="btn-game primary" onclick="startSnake()"><i class="fas fa-play"></i> Mulai</button>
+                        <div id="snakeMsg" class="game-message"></div>
+                    </div>
+
+                    <!-- GAME 4: Quiz -->
+                    <div class="game-container game-panel" id="panel-3">
+                        <h3 class="game-title"><i class="fas fa-question-circle me-2"></i>Tech Quiz</h3>
+                        <p class="game-desc">Jawab pertanyaan seputar teknologi!</p>
+                        <div class="score-display">Score: <span style="color:#fdcb6e;font-weight:bold;" id="quizScore">0</span></div>
+                        <div class="quiz-progress" id="quizProgress"></div>
+                        <div id="quizArea">
+                            <h5 style="color:var(--text-main); margin-bottom:1rem;" id="quizQuestion"></h5>
+                            <div class="quiz-options" id="quizOptions"></div>
+                        </div>
+                        <button class="btn-game primary" onclick="initQuiz()"><i class="fas fa-redo"></i> Mulai Ulang</button>
+                        <div id="quizResult" class="game-message mt-3"></div>
+                    </div>
+
+                    <!-- GAME 5: Tic Tac Toe -->
+                    <div class="game-container game-panel" id="panel-4">
+                        <h3 class="game-title"><i class="fas fa-hashtag me-2"></i>Tic Tac Toe</h3>
+                        <p class="game-desc">Kamu adalah X, komputer adalah O. Giliranmu duluan!</p>
+                        <div class="score-display"><span id="tttStatus" style="color:var(--text-soft);font-weight:bold;">Giliranmu (X)</span></div>
+                        <div class="ttt-grid" id="tttGrid"></div>
+                        <button class="btn-game primary" onclick="initTtt()"><i class="fas fa-redo"></i> Mulai Ulang</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Pengalaman Kerja</h2>
+            <div class="timeline reveal reveal-delay-1">
+                <div class="timeline-item">
+                    <div class="timeline-card shiny-card">
+                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2024 - Sekarang</div>
+                        <h5>Full Stack Developer</h5>
+                        <p>PT. Teknologi Maju</p>
+                        <p>Mengembangkan aplikasi web menggunakan React dan Node.js, memimpin tim development kecil, dan mengoptimalkan performa aplikasi.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-card shiny-card">
+                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2023 - 2024</div>
+                        <h5>Frontend Developer</h5>
+                        <p>PT. Digital Kreatif</p>
+                        <p>Membangun UI/UX untuk berbagai proyek client dengan fokus pada responsivitas dan pengalaman pengguna.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-card shiny-card">
+                        <div class="timeline-date"><i class="fas fa-calendar me-2"></i>2022 - 2023</div>
+                        <h5>Web Developer Intern</h5>
+                        <p>Startup XYZ</p>
+                        <p>Magang intensif dalam pengembangan web, belajar praktik terbaik dan bekerja dalam tim agile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Hubungi Saya</h2>
+            <p class="section-sub reveal reveal-delay-1">Terbuka untuk kolaborasi dan peluang kerja</p>
+            <div class="row justify-content-center reveal reveal-delay-2">
+                <div class="col-md-10 col-lg-8">
+                    <div class="row g-4">
+                        <div class="col-md-5">
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                                    <div>
+                                        <small>Telepon</small><br>
+                                        <a href="tel:+620000000000">+62 800-0000-0000</a>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                                    <div>
+                                        <small>Email</small><br>
+                                        <a href="mailto:isyaau@email.com">isyaau@email.com</a>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+                                    <div>
+                                        <small>Lokasi</small><br>
+                                        <span style="color:var(--text-soft);">Indonesia</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="about-card">
+                                <form id="contactForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <input type="text" class="form-control" placeholder="Nama" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <input type="email" class="form-control" placeholder="Email" required>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control mb-3" placeholder="Subjek" required>
+                                    <textarea class="form-control mb-3" rows="4" placeholder="Pesan Anda..." required></textarea>
+                                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-paper-plane me-2"></i>Kirim Pesan</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="mb-3">&copy; 2026 Isyaau. Made with <i class="fas fa-heart" style="color:var(--accent-color);"></i> dan Bootstrap.</p>
+            <div class="social-links justify-content-center" style="display:flex;">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ================== SUPER GAME LOGIC ==================
+
+        // ===== GAME SWITCHING =====
+        function switchGame(index) {
+            document.querySelectorAll('.game-tab').forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+            document.querySelectorAll('.game-panel').forEach((panel, i) => {
+                panel.classList.toggle('active', i === index);
+            });
+        }
+
+        // ================== GAME 1: WORD CHALLENGE ==================
+        const words = [
+            { word: "DEVELOPER", hint: "Seseorang yang membuat program/aplikasi" },
+            { word: "JAVASCRIPT", hint: "Bahasa pemrograman utama untuk web" },
+            { word: "CREATIVITY", hint: "Kemampuan untuk menciptakan sesuatu" },
+            { word: "PORTFOLIO", hint: "Kumpulan karya terbaik seseorang" },
+            { word: "INNOVATION", hint: "Pembaruan atau penemuan baru" },
+            { word: "ALGORITHM", hint: "Langkah-langkah penyelesaian masalah" },
+            { word: "DATABASE", hint: "Tempat penyimpanan data terstruktur" },
+            { word: "FRONTEND", hint: "Bagian website yang dilihat user" },
+            { word: "BACKEND", hint: "Bagian server yang mengelola data" },
+            { word: "TECHNOLOGY", hint: "Ilmu yang diterapkan untuk membuat alat" },
+            { word: "DESIGNER", hint: "Seseorang yang merancang tampilan" },
+            { word: "PROGRAMMER", hint: "Profesi yang menulis kode program" }
+        ];
+
+        let currentWordIndex = 0, score = 0, level = 1, hintsUsed = 0, revealedLetters = [];
+
+        function initGame() {
+            currentWordIndex = Math.floor(Math.random() * words.length);
+            renderWord();
+            updateHint();
+        }
+
+        function renderWord() {
+            const word = words[currentWordIndex].word;
+            const display = document.getElementById('wordDisplay');
+            display.innerHTML = '';
+            for (let i = 0; i < word.length; i++) {
+                const box = document.createElement('div');
+                box.className = 'letter-box';
+                box.id = `letter-${i}`;
+                if (revealedLetters.includes(i)) {
+                    box.textContent = word[i];
+                    box.classList.add('revealed');
+                }
+                display.appendChild(box);
+            }
+        }
+
+        function updateHint() {
+            document.getElementById('currentHint').textContent = words[currentWordIndex].hint;
+        }
+
+        function getHint() {
+            const word = words[currentWordIndex].word;
+            const unrevealedLetters = [];
+            for (let i = 0; i < word.length; i++) {
+                if (!revealedLetters.includes(i)) unrevealedLetters.push(i);
+            }
+            if (unrevealedLetters.length > 0) {
+                const r = unrevealedLetters[Math.floor(Math.random() * unrevealedLetters.length)];
+                revealedLetters.push(r);
+                hintsUsed++;
+                document.getElementById(`letter-${r}`).textContent = word[r];
+                document.getElementById(`letter-${r}`).classList.add('revealed');
+                score = Math.max(0, score - 5);
+                document.getElementById('score').textContent = score;
+                if (hintsUsed >= 3) document.getElementById('hintBtn').disabled = true;
+            }
+        }
+
+        function skipWord() {
+            currentWordIndex = (currentWordIndex + 1) % words.length;
+            revealedLetters = [];
+            hintsUsed = 0;
+            document.getElementById('hintBtn').disabled = false;
+            document.getElementById('message').innerHTML = '';
+            document.getElementById('guessInput').value = '';
+            renderWord();
+            updateHint();
+        }
+
+        function checkAnswer() {
+            const input = document.getElementById('guessInput').value.toUpperCase().trim();
+            const word = words[currentWordIndex].word;
+            const message = document.getElementById('message');
+            if (!input) {
+                message.innerHTML = '<span style="color:#fdcb6e;">Masukkan jawaban terlebih dahulu!</span>';
+                return;
+            }
+            if (input === word) {
+                let earned = 10 - (hintsUsed * 5);
+                if (earned < 5) earned = 5;
+                score += earned;
+                level++;
+                message.innerHTML = `<span style="color:#55efc4;"><i class="fas fa-trophy me-2"></i>Benar! +${earned} poin</span>`;
+                launchConfetti();
+                showToast(`Jawaban benar! +${earned} poin!`);
+                setTimeout(() => {
+                    currentWordIndex = (currentWordIndex + 1) % words.length;
+                    revealedLetters = [];
+                    hintsUsed = 0;
+                    document.getElementById('hintBtn').disabled = false;
+                    document.getElementById('score').textContent = score;
+                    document.getElementById('level').textContent = level;
+                    document.getElementById('guessInput').value = '';
+                    message.innerHTML = '';
+                    renderWord();
+                    updateHint();
+                }, 2000);
+            } else {
+                message.innerHTML = '<span style="color:var(--accent-color);"><i class="fas fa-times me-2"></i>Jawaban salah, coba lagi!</span>';
+                score = Math.max(0, score - 2);
+                document.getElementById('score').textContent = score;
+            }
+        }
+
+        document.getElementById('guessInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkAnswer();
+        });
+
+        // ================== GAME 2: MEMORY MATCH ==================
+        const memoryEmojis = ['🚀', '💻', '🎮', '🎨', '⚡', '🌟', '🔥', '📱'];
+        let memoryCards = [], memFirst = null, memSecond = null, memLock = false, memMoves = 0, memPairs = 0;
+
+        function initMemory() {
+            memCards = [...memoryEmojis, ...memoryEmojis].sort(() => Math.random() - 0.5);
+            memFirst = null; memSecond = null; memLock = false; memMoves = 0; memPairs = 0;
+            document.getElementById('memMoves').textContent = 0;
+            document.getElementById('memPairs').textContent = '0/8';
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = '';
+            memCards.forEach((emoji, i) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.index = i;
+                card.dataset.emoji = emoji;
+                card.addEventListener('click', () => flipCard(card));
+                grid.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (memLock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            card.classList.add('flipped');
+            card.textContent = card.dataset.emoji;
+            if (!memFirst) {
+                memFirst = card;
+            } else {
+                memSecond = card;
+                memMoves++;
+                document.getElementById('memMoves').textContent = memMoves;
+                memLock = true;
+                setTimeout(checkMatch, 700);
+            }
+        }
+
+        function checkMatch() {
+            if (memFirst.dataset.emoji === memSecond.dataset.emoji) {
+                memFirst.classList.add('matched');
+                memSecond.classList.add('matched');
+                memPairs++;
+                document.getElementById('memPairs').textContent = `${memPairs}/8`;
+                launchConfetti();
+                if (memPairs === 8) {
+                    showToast(`Selamat! Kamu menang dalam ${memMoves} langkah!`);
+                }
+            } else {
+                memFirst.classList.remove('flipped');
+                memSecond.classList.remove('flipped');
+                memFirst.textContent = '';
+                memSecond.textContent = '';
+            }
+            memFirst = null; memSecond = null; memLock = false;
+        }
+
+        // ================== GAME 3: SNAKE ==================
+        const snakeGrid = document.getElementById('snakeGrid');
+        const snakeSize = 20;
+        let snake, snakeDir, snakeFood, snakeRunning = false, snakeInterval, snakeScoreVal = 0, snakeBestVal = 0;
+
+        function initSnakeGrid() {
+            snakeGrid.innerHTML = '';
+            for (let i = 0; i < snakeSize * snakeSize; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'snake-cell';
+                cell.id = `snake-cell-${i}`;
+                snakeGrid.appendChild(cell);
+            }
+        }
+
+        function startSnake() {
+            if (snakeRunning) return;
+            snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+            snakeDir = { x: 1, y: 0 };
+            snakeScoreVal = 0;
+            document.getElementById('snakeScore').textContent = 0;
+            document.getElementById('snakeMsg').textContent = '';
+            placeFood();
+            renderSnake();
+            snakeRunning = true;
+            snakeInterval = setInterval(snakeStep, 150);
+            showToast('Snake dimulai! Gunakan panah untuk bergerak');
+        }
+
+        function placeFood() {
+            let valid = false;
+            while (!valid) {
+                const fx = Math.floor(Math.random() * snakeSize);
+                const fy = Math.floor(Math.random() * snakeSize);
+                valid = !snake.some(s => s.x === fx && s.y === fy);
+                if (valid) snakeFood = { x: fx, y: fy };
+            }
+        }
+
+        function renderSnake() {
+            for (let i = 0; i < snakeSize * snakeSize; i++) {
+                const cell = document.getElementById(`snake-cell-${i}`);
+                cell.className = 'snake-cell';
+            }
+            snake.forEach((seg, i) => {
+                const idx = seg.y * snakeSize + seg.x;
+                const cell = document.getElementById(`snake-cell-${idx}`);
+                cell.className = i === 0 ? 'snake-cell head' : 'snake-cell body';
+            });
+            if (snakeFood) {
+                const idx = snakeFood.y * snakeSize + snakeFood.x;
+                document.getElementById(`snake-cell-${idx}`).className = 'snake-cell food';
+            }
+        }
+
+        function snakeStep() {
+            const head = { x: snake[0].x + snakeDir.x, y: snake[0].y + snakeDir.y };
+            if (head.x < 0 || head.x >= snakeSize || head.y < 0 || head.y >= snakeSize ||
+                snake.some(s => s.x === head.x && s.y === head.y)) {
+                clearInterval(snakeInterval);
+                snakeRunning = false;
+                if (snakeScoreVal > snakeBestVal) {
+                    snakeBestVal = snakeScoreVal;
+                    document.getElementById('snakeBest').textContent = snakeBestVal;
+                }
+                document.getElementById('snakeMsg').innerHTML = '<span style="color:var(--accent-color);">Game Over! Skor akhir: ' + snakeScoreVal + '</span>';
+                return;
+            }
+            snake.unshift(head);
+            if (head.x === snakeFood.x && head.y === snakeFood.y) {
+                snakeScoreVal += 10;
+                document.getElementById('snakeScore').textContent = snakeScoreVal;
+                placeFood();
+            } else {
+                snake.pop();
+            }
+            renderSnake();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (!snakeRunning) return;
+            const keyMap = {
+                ArrowUp: { x: 0, y: -1 },
+                ArrowDown: { x: 0, y: 1 },
+                ArrowLeft: { x: -1, y: 0 },
+                ArrowRight: { x: 1, y: 0 }
+            };
+            if (keyMap[e.key]) {
+                e.preventDefault();
+                const dir = keyMap[e.key];
+                if (dir.x !== -snakeDir.x || dir.y !== -snakeDir.y) {
+                    snakeDir = dir;
+                }
+            }
+        });
+
+        // ================== GAME 4: QUIZ ==================
+        const quizQuestions = [
+            { q: "Apa kepanjangan dari HTML?", options: ["HyperText Markup Language", "High Tech Modern Language", "Hyperlink Text Mode Language", "Home Tool Markup Language"], answer: 0 },
+            { q: "Bahasa pemrograman apa yang paling umum digunakan untuk pengembangan web frontend?", options: ["Python", "JavaScript", "Java", "C++"], answer: 1 },
+            { q: "Apa itu CSS?", options: ["Computer Style System", "Cascading Style Sheets", "Creative Style Software", "Coded Style Syntax"], answer: 1 },
+            { q: "Library JavaScript mana yang paling populer untuk membangun UI?", options: ["React", "Angular", "Vue", "Svelte"], answer: 0 },
+            { q: "Apa fungsi utama dari database?", options: ["Menyimpan data", "Menampilkan web", "Membuat desain", "Mengirim email"], answer: 0 },
+            { q: "Apa itu API?", options: ["Application Programming Interface", "Automated Process Integration", "Advanced Program Index", "Application Protocol Internet"], answer: 0 },
+            { q: "Apa kegunaan Git?", options: ["Membuat game", "Mengontrol versi kode", "Mendesain UI", "Mengelola server"], answer: 1 },
+            { q: "Bahasa apa yang sering digunakan untuk membuat AI/ML?", options: ["Java", "C#", "Python", "PHP"], answer: 2 },
+            { q: "Apa itu 'responsive design'?", options: ["Desain yang bisa berubah warna", "Desain yang menyesuaikan dengan layar", "Desain dengan banyak animasi", "Desain yang cepat dimuat"], answer: 1 },
+            { q: "Apa fungsi dari framework Bootstrap?", options: ["Membuat database", "Mempermudah styling dan layout", "Menjalankan server", "Mengkompilasi kode"], answer: 1 }
+        ];
+
+        let quizIndex = 0, quizScore = 0, quizAnswered = [];
+
+        function initQuiz() {
+            quizIndex = 0;
+            quizScore = 0;
+            quizAnswered = [];
+            document.getElementById('quizScore').textContent = '0';
+            document.getElementById('quizResult').innerHTML = '';
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const q = quizQuestions[quizIndex];
+            document.getElementById('quizQuestion').textContent = q.q;
+            const options = document.getElementById('quizOptions');
+            options.innerHTML = '';
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('div');
+                btn.className = 'quiz-option';
+                btn.textContent = `${String.fromCharCode(65 + i)}. ${opt}`;
+                btn.addEventListener('click', () => answerQuiz(i, btn));
+                options.appendChild(btn);
+            });
+            // progress
+            const progress = document.getElementById('quizProgress');
+            progress.innerHTML = '';
+            quizQuestions.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'quiz-dot' + (i === quizIndex ? ' current' : '') + (quizAnswered[i] === true ? ' correct' : '') + (quizAnswered[i] === false ? ' wrong' : '');
+                progress.appendChild(dot);
+            });
+        }
+
+        function answerQuiz(choice, btn) {
+            const q = quizQuestions[quizIndex];
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(o => o.style.pointerEvents = 'none');
+            if (choice === q.answer) {
+                btn.classList.add('correct');
+                quizScore += 10;
+                document.getElementById('quizScore').textContent = quizScore;
+                quizAnswered[quizIndex] = true;
+                launchConfetti();
+                showToast('Jawaban benar! +10 poin');
+            } else {
+                btn.classList.add('wrong');
+                options[q.answer].classList.add('correct');
+                quizAnswered[quizIndex] = false;
+                showToast('Jawaban salah!');
+            }
+            setTimeout(() => {
+                quizIndex++;
+                if (quizIndex < quizQuestions.length) {
+                    renderQuiz();
+                } else {
+                    document.getElementById('quizArea').innerHTML = `<h5 style="color:var(--primary-light);">Kuis Selesai!</h5>`;
+                    const pct = Math.round((quizAnswered.filter(a => a).length / quizQuestions.length) * 100);
+                    document.getElementById('quizResult').innerHTML = `<span style="color:#55efc4;">Skor akhir: ${quizScore} (Akurasi ${pct}%)</span>`;
+                    if (pct >= 70) launchConfetti();
+                }
+            }, 1200);
+        }
+
+        // ================== GAME 5: TIC TAC TOE ==================
+        let tttBoard = [], tttTurn = 'X', tttGameOver = false;
+
+        function initTtt() {
+            tttBoard = Array(9).fill(null);
+            tttTurn = 'X';
+            tttGameOver = false;
+            document.getElementById('tttStatus').textContent = 'Giliranmu (X)';
+            const grid = document.getElementById('tttGrid');
+            grid.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'ttt-cell';
+                cell.dataset.index = i;
+                cell.addEventListener('click', () => tttClick(i, cell));
+                grid.appendChild(cell);
+            }
+        }
+
+        function tttClick(i, cell) {
+            if (tttGameOver || tttBoard[i] || tttTurn !== 'X') return;
+            tttBoard[i] = 'X';
+            cell.textContent = 'X';
+            cell.classList.add('taken', 'X');
+            if (checkTttWin(tttBoard, 'X')) {
+                tttGameOver = true;
+                highlightTttWin();
+                document.getElementById('tttStatus').innerHTML = '<span style="color:#55efc4;">Kamu Menang! 🎉</span>';
+                launchConfetti();
+                showToast('Selamat, kamu menang!');
+                return;
+            }
+            if (tttBoard.every(c => c)) {
+                tttGameOver = true;
+                document.getElementById('tttStatus').textContent = 'Seri!';
+                return;
+            }
+            tttTurn = 'O';
+            document.getElementById('tttStatus').textContent = 'Komputer berpikir...';
+            setTimeout(computerMove, 500);
+        }
+
+        function computerMove() {
+            if (tttGameOver) return;
+            let best = null;
+            // Simple AI: try to win, block, then random
+            for (const marker of ['O', 'X']) {
+                for (let i = 0; i < 9; i++) {
+                    if (!tttBoard[i]) {
+                        tttBoard[i] = marker;
+                        if (checkTttWin(tttBoard, marker)) {
+                            best = i;
+                        }
+                        tttBoard[i] = null;
+                        if (best !== null) break;
+                    }
+                }
+                if (best !== null) break;
+            }
+            if (best === null) {
+                const empty = tttBoard.map((v, i) => v ? null : i).filter(v => v !== null);
+                best = empty[Math.floor(Math.random() * empty.length)];
+            }
+            tttBoard[best] = 'O';
+            const cell = document.querySelector(`.ttt-cell[data-index="${best}"]`);
+            cell.textContent = 'O';
+            cell.classList.add('taken', 'O');
+            if (checkTttWin(tttBoard, 'O')) {
+                tttGameOver = true;
+                highlightTttWin();
+                document.getElementById('tttStatus').innerHTML = '<span style="color:var(--accent-color);">Komputer Menang!</span>';
+                return;
+            }
+            if (tttBoard.every(c => c)) {
+                tttGameOver = true;
+                document.getElementById('tttStatus').textContent = 'Seri!';
+                return;
+            }
+            tttTurn = 'X';
+            document.getElementById('tttStatus').textContent = 'Giliranmu (X)';
+        }
+
+        function checkTttWin(board, marker) {
+            const wins = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            return wins.some(w => w.every(i => board[i] === marker));
+        }
+
+        function highlightTttWin() {
+            const wins = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            for (const w of wins) {
+                if (tttBoard[w[0]] && tttBoard[w[0]] === tttBoard[w[1]] && tttBoard[w[1]] === tttBoard[w[2]]) {
+                    w.forEach(i => {
+                        document.querySelector(`.ttt-cell[data-index="${i}"]`).classList.add('win');
+                    });
+                    break;
+                }
+            }
+        }
+
+        // ================== SHARED FEATURES ==================
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function launchConfetti() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+            const colors = ['#6c5ce7', '#fd79a8', '#00b894', '#fdcb6e', '#a29bfe', '#55efc4', '#74b9ff'];
+            const particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: -20 - Math.random() * canvas.height * 0.3,
+                    size: Math.random() * 8 + 4,
+                    speedY: Math.random() * 3 + 2,
+                    speedX: (Math.random() - 0.5) * 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 12
+                });
+            }
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let active = false;
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX + Math.sin(p.y * 0.02) * 0.8;
+                    p.rotation += p.rotationSpeed;
+                    if (p.y < canvas.height + 20) {
+                        active = true;
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rotation * Math.PI / 180);
+                        ctx.fillStyle = p.color;
+                        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                        ctx.restore();
+                    }
+                });
+                if (active) requestAnimationFrame(animate);
+                else ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+            }
+            resize();
+            animate();
+        }
+
+        // ===== Particle Background =====
+        function createParticles() {
+            const container = document.getElementById('particleBg');
+            for (let i = 0; i < 25; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 6 + 2;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.background = `rgba(${Math.random() > 0.5 ? '108, 92, 231' : '253, 121, 168'}, ${Math.random() * 0.5 + 0.3})`;
+                p.style.animationDuration = Math.random() * 10 + 10 + 's';
+                p.style.animationDelay = '-' + Math.random() * 20 + 's';
+                container.appendChild(p);
+            }
+        }
+        createParticles();
+
+        // ===== Hero Cursor Glow =====
+        const heroCursor = document.getElementById('heroCursor');
+        window.addEventListener('mousemove', function(e) {
+            if (e.clientY < window.innerHeight * 0.8) {
+                heroCursor.style.left = e.clientX + 'px';
+                heroCursor.style.top = e.clientY + 'px';
+                heroCursor.classList.add('active');
+            } else {
+                heroCursor.classList.remove('active');
+            }
+        });
+
+        // ===== Typing Effect =====
+        const phrases = [
+            'Website Developer',
+            'UI/UX Enthusiast',
+            'Creative Problem Solver',
+            'Tech Explorer'
+        ];
+        let phraseIndex = 0, charIndex = 0, deleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            const typedText = document.getElementById('typedText');
+            if (!deleting && charIndex <= currentPhrase.length) {
+                typedText.textContent = currentPhrase.substring(0, charIndex) + '|';
+                charIndex++;
+            } else if (deleting && charIndex > 0) {
+                typedText.textContent = currentPhrase.substring(0, charIndex - 1) + '|';
+                charIndex--;
+            }
+            let delay = deleting ? 50 : 100;
+            if (charIndex === currentPhrase.length) {
+                typedText.textContent = currentPhrase + '|';
+                delay = 2000;
+                deleting = true;
+            } else if (charIndex === 0 && deleting) {
+                deleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                delay = 500;
+            }
+            setTimeout(typeEffect, delay);
+        }
+        typeEffect();
+
+        // ===== Skill Bars =====
+        function animateSkillBars() {
+            document.querySelectorAll('.progress-fill').forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+        }
+
+        // ===== Scroll Reveal & Nav =====
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Back to top button
+        const backTop = document.getElementById('backTop');
+        backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        window.addEventListener('scroll', function() {
+            updateActiveNav();
+            if (window.scrollY > 300) backTop.classList.add('show');
+            else backTop.classList.remove('show');
+            const skillsSection = document.getElementById('skills');
+            if (window.scrollY > skillsSection.offsetTop - 300) animateSkillBars();
+        });
+
+        // ===== Contact Form =====
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Pesan berhasil dikirim! Terima kasih');
+            this.reset();
+        });
+
+        // ===== Initialize Canvas & Games =====
+        function resizeCanvas() {
+            const canvas = document.getElementById('confettiCanvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        initGame();
+        initMemory();
+        initSnakeGrid();
+        initQuiz();
+        initTtt();
+
+        window.addEventListener('load', function() {
+            setTimeout(() => animateSkillBars(), 600);
+        });
+    </script>
 </body>
 
 </html>
