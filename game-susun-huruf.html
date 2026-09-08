@@ -15,31 +15,39 @@
     <style>
         .letter-box {
             display: inline-block;
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             margin: 10px;
-            background-color: #f0f0f0;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
             text-align: center;
             font-size: 24px;
-            line-height: 50px;
-            border: 1px solid #ccc;
+            line-height: 56px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
             cursor: pointer;
             user-select: none;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .letter-box.used {
-            background-color: #6c757d;
-            color: white;
-            opacity: 0.6;
+            background: rgba(107, 114, 128, 0.35);
+            color: rgba(255, 255, 255, 0.5);
+            opacity: 0.55;
             cursor: not-allowed;
             transform: scale(0.9);
+            border-color: transparent;
         }
 
         .letter-box:hover:not(.used) {
-            background-color: #007bff;
-            color: white;
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #6366f1, #22d3ee);
+            color: #fff;
+            transform: scale(1.12) rotate(-2deg);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.4);
+            border-color: transparent;
         }
 
         .word-box {
@@ -47,27 +55,32 @@
         }
 
         .letter-drop-box {
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             margin: 10px;
-            border: 2px dashed #aaa;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
             display: inline-block;
             vertical-align: top;
             text-align: center;
             font-size: 24px;
-            line-height: 50px;
-            background-color: #f8f9fa;
-            transition: all 0.3s ease;
+            line-height: 56px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            transition: all 0.25s ease;
             cursor: pointer;
+            box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.25);
         }
 
         .letter-drop-box:empty {
-            background-color: #e9ecef;
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .letter-drop-box:not(:empty) {
             border-style: solid;
-            border-color: #28a745;
+            border-color: #22d3ee;
+            background: rgba(34, 211, 238, 0.2);
+            box-shadow: 0 0 22px rgba(34, 211, 238, 0.3);
         }
 
         #game-stats {
@@ -75,23 +88,30 @@
             justify-content: space-between;
             margin-bottom: 20px;
             font-size: 18px;
+            font-weight: 700;
+            color: #fff;
         }
 
         #timer {
-            color: #dc3545;
+            color: #fbbf24;
             font-weight: bold;
         }
 
         #score {
-            color: #28a745;
+            color: #22d3ee;
             font-weight: bold;
         }
 
         .game-over {
             text-align: center;
-            padding: 20px;
-            background-color: #f8d7da;
-            border-radius: 10px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            color: #fff;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
         }
 
         #notification {

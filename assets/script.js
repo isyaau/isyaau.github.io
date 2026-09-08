@@ -2,19 +2,19 @@
 const userName = localStorage.getItem('name');
 const userSchool = localStorage.getItem('school');
 
-if (userName && userSchool) {
+if (userName && userSchool && document.getElementById('userName')) {
     document.getElementById('userName').textContent = userName;
     document.getElementById('userSchool').textContent = userSchool;
-} else {
+} else if (!userName || !userSchool) {
     // Jika data tidak ditemukan, arahkan kembali ke halaman login
-    window.location.href = 'index.html';
+    window.location.href = 'index-belajar.html';
 }
 
 // Fungsi untuk logout dan menghapus data dari localStorage
 function logout() {
     localStorage.removeItem('name');
     localStorage.removeItem('school');
-    window.location.href = 'index.html';
+    window.location.href = 'index-belajar.html';
 }
 
 function toggleMute() {

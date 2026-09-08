@@ -25,7 +25,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         window.location.href = 'dashboard.html';
     } else {
         // Tampilkan pesan error jika ada input yang kosong
-        document.getElementById('error-message').classList.remove('hidden');
+        document.getElementById('error-message').classList.remove('d-none');
     }
 });
 

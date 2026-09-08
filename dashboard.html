@@ -1,97 +1,137 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="id">
 
 <head>
-    <script src="../assets/js/color-modes.js"></script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.122.0">
-    <title>BELAJAR MEMBACA</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+    <title>BELAJAR MEMBACA - Menu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/style.css" rel="stylesheet">
 
     <style>
+        .menu-card {
+            position: relative;
+            border-radius: 26px;
+            overflow: hidden;
+            padding: 0;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
 
+        .menu-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+
+        .menu-card .menu-label {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 2.6rem 0.9rem 0.9rem;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 0.04em;
+            color: #fff;
+            background: linear-gradient(180deg, transparent, rgba(6, 10, 30, 0.85) 55%);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 24px 55px rgba(0, 0, 0, 0.5), 0 0 40px rgba(34, 211, 238, 0.25);
+        }
+
+        .menu-card:hover img {
+            transform: scale(1.07);
+        }
+
+        .welcome-chip {
+            display: inline-block;
+            padding: 0.65rem 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 40px;
+            color: var(--c-soft);
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .welcome-chip strong {
+            color: #fff;
+        }
     </style>
-
 </head>
 
 <body>
     <main>
         <div class="container">
             <div class="row justify-content-center align-items-center mt-5">
-                <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                    <div class="gambar-wrapper" onclick="toggleMute()">
-                        <img src="assets/icon/high-volume.png" alt="Deskripsi Gambar" class="gambar-shadow"
-                            id="volumeImage">
+                <div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-4">
+                    <div class="gambar-wrapper" onclick="toggleMute()" title="Suara">
+                        <img src="assets/icon/high-volume.png" alt="Volume" class="gambar-shadow" id="volumeImage">
                     </div>
-                    <!-- Background Music -->
-                    <audio id="audioPlayerbg" autoplay loop>
-                        <source src="assets/music/bg.wav" type="audio/mp3">
-                        Browser Anda tidak mendukung elemen audio.
-                    </audio>
-                    <h1 class="mx-auto">Materi</h1>
-                    <div class="gambar-wrapper" onclick="logout()">
-                        <img src="assets/icon/logout.png" alt="Deskripsi Gambar" class="gambar-shadow" id="logoutImage">
+                    <h1 class="mx-auto my-2 my-md-0">Menu Belajar</h1>
+                    <div class="gambar-wrapper" onclick="logout()" title="Keluar">
+                        <img src="assets/icon/logout.png" alt="Logout" class="gambar-shadow" id="logoutImage">
                     </div>
                 </div>
+
                 <div class="text-center mb-5">
-                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Deskripsi Gambar">
-                    <br>
-                    <h2>Selamat datang <span id="userName"></span> dari sekolah <span id="userSchool"></span>!</h2>
+                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Belajar Membaca">
+                    <div class="welcome-chip mt-3">
+                        <i class="bi bi-hand-index-thumb me-2"></i>Selamat datang
+                        <strong id="userName"></strong> dari sekolah
+                        <strong id="userSchool"></strong>!
+                    </div>
                 </div>
             </div>
+
             <div class="row justify-content-center">
                 <div class="col-6 col-md-3 mb-4">
-                    <a href="/mengenal-huruf.html">
-
-                        <img src="assets/menu/mengenal-huruf.png" class="card-img-top" alt="...">
-
-
+                    <a href="/mengenal-huruf.html" class="menu-card">
+                        <img src="assets/menu/mengenal-huruf.png" alt="Mengenal Huruf">
+                        <div class="menu-label">MENGENAL HURUF</div>
                     </a>
                 </div>
                 <div class="col-6 col-md-3 mb-4">
-                    <a href="/materi.html">
-
-                        <img src="assets/menu/mengenal-kata.png" class="card-img-top" alt="...">
-
-
-                    </a>
-                </div>
-
-                <div class="col-6 col-md-3 mb-4">
-                    <a href="/mengenal-objek.html">
-
-                        <img src="assets/menu/mengenal-objek.png" class="card-img-top" alt="...">
-
+                    <a href="/materi.html" class="menu-card">
+                        <img src="assets/menu/mengenal-kata.png" alt="Mengenal Kata">
+                        <div class="menu-label">MENGENAL KATA</div>
                     </a>
                 </div>
                 <div class="col-6 col-md-3 mb-4">
-                    <a href="/game-susun-huruf.html">
-
-                        <img src="assets/menu/bermain.png" class="card-img-top" alt="...">
-
-
+                    <a href="/mengenal-objek.html" class="menu-card">
+                        <img src="assets/menu/mengenal-objek.png" alt="Mengenal Objek">
+                        <div class="menu-label">MENGENAL OBJEK</div>
                     </a>
                 </div>
                 <div class="col-6 col-md-3 mb-4">
-                    <a href="/game-susun-huruf.html">
-
-                        <img src="assets/menu/latihan.png" class="card-img-top" alt="...">
-
-
+                    <a href="/game-susun-huruf.html" class="menu-card">
+                        <img src="assets/menu/bermain.png" alt="Bermain">
+                        <div class="menu-label">BERMAIN</div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3 mb-4">
+                    <a href="/game-susun-huruf.html" class="menu-card">
+                        <img src="assets/menu/latihan.png" alt="Latihan">
+                        <div class="menu-label">LATIHAN</div>
                     </a>
                 </div>
             </div>
         </div>
     </main>
+
+    <audio id="audioPlayerbg" autoplay loop>
+        <source src="assets/music/bg.wav" type="audio/mp3">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
     <script src="assets/script.js"></script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>

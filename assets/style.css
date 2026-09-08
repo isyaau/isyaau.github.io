@@ -1,76 +1,296 @@
-/* Responsif untuk gambar */
-.gambar-wrapper img {
-    max-width: 100%;
-    height: auto;
+/* =========================================================
+   BELAJAR MEMBACA - Tema Modern (21st.dev inspired)
+   Dibangun ulang dengan tetap memakai nama kelas lama agar
+   kompatibel dengan semua halaman.
+   ========================================================= */
+
+:root {
+    --c-primary: #6366f1;
+    --c-secondary: #a855f7;
+    --c-accent: #22d3ee;
+    --c-gold: #fbbf24;
+    --c-inner: #111827;
+    --c-soft: #e5e7eb;
+    --c-mist: #9ca3af;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.18);
 }
 
-/* Menyesuaikan ukuran gambar title */
+/* ---------- Body: aurora gradient + floating orbs ---------- */
+body {
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(99, 102, 241, 0.55), transparent 60%),
+        radial-gradient(1000px 500px at 110% 20%, rgba(168, 85, 247, 0.45), transparent 55%),
+        radial-gradient(900px 600px at 50% 120%, rgba(34, 211, 238, 0.4), transparent 60%),
+        linear-gradient(135deg, #0b1026 0%, #111a3a 45%, #1a1450 100%);
+    background-attachment: fixed;
+    background-size: cover, cover, cover, cover;
+    background-position: center;
+    color: #fff;
+    font-family: 'Segoe UI', 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Tiga orb melayang halus (aurora) */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(70px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+body::before {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    left: -120px;
+    background: rgba(99, 102, 241, 0.35);
+    animation: drift 18s ease-in-out infinite;
+}
+
+body::after {
+    width: 380px;
+    height: 380px;
+    bottom: -130px;
+    right: -130px;
+    background: rgba(34, 211, 238, 0.3);
+    animation: drift 22s ease-in-out infinite reverse;
+}
+
+@keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 40px) scale(1.15); }
+}
+
+/* Semua konten utama di atas orb */
+.container,
+main > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ---------- Header bar ---------- */
+h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    background: linear-gradient(120deg, #c7d2fe, #fae8ff, #a5f3fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+h2 {
+    font-weight: 700;
+    color: var(--c-soft);
+}
+
+/* ---------- Tombol ikon (volume, logout, back, home) ---------- */
+.gambar-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+}
+
+.gambar-wrapper:hover {
+    transform: translateY(-4px) scale(1.05);
+    border-color: var(--c-accent);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45), 0 0 30px rgba(34, 211, 238, 0.25);
+}
+
+.gambar-wrapper:active {
+    transform: scale(0.95);
+}
+
+.gambar-wrapper img {
+    width: 5vh;
+    max-width: 44px;
+    height: auto;
+    display: block;
+}
+
+.gambar-shadow {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* ---------- Gambar judul ---------- */
 .gambar-title {
     width: 100%;
-    max-width: 1000px; /* Maksimal lebar gambar title */
+    max-width: 620px;
     height: auto;
+    filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.45));
+    animation: heroFloat 4.5s ease-in-out infinite;
 }
 
-/* Responsif untuk card */
+@keyframes heroFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ---------- Card umum ---------- */
 .card {
     width: 100%;
-    max-width: 18rem; /* Ukuran maksimum card */
+    max-width: 18rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px !important;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-/* Gambar card harus responsif */
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--c-accent);
+    box-shadow: 0 26px 55px rgba(0, 0, 0, 0.5), 0 0 35px rgba(34, 211, 238, 0.2);
+}
+
 .card-img-top {
     width: 100%;
     height: auto;
+    transition: transform 0.45s ease;
 }
 
-/* Responsif untuk tombol (volume dan logout) */
-.gambar-wrapper img {
-    width: 5vh; /* Lebar gambar pada perangkat kecil */
-    height: auto;
+.card:hover .card-img-top {
+    transform: scale(1.06);
 }
 
-/* Media query untuk perangkat kecil */
+.card-text {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+/* ---------- Login card ---------- */
+.card-login {
+    padding: 34px 28px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), inset 0 0 30px rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.card-login h2 {
+    font-weight: 800;
+    background: linear-gradient(120deg, #c7d2fe, #fae8ff, #a5f3fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card-login .form-label {
+    color: var(--c-soft);
+    font-weight: 600;
+}
+
+/* ---------- Form controls ---------- */
+.form-control {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--card-border);
+    color: #fff;
+    border-radius: 14px;
+    padding: 0.7rem 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.form-control::placeholder {
+    color: var(--c-mist);
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 0.25rem rgba(34, 211, 238, 0.2);
+}
+
+/* ---------- Tombol ---------- */
+.btn-primary {
+    background: linear-gradient(135deg, var(--c-primary), var(--c-secondary), var(--c-accent));
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.75rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 45px rgba(99, 102, 241, 0.55);
+    color: #fff;
+}
+
+.btn-primary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+@keyframes shimmer {
+    0% { left: -150%; }
+    60%, 100% { left: 150%; }
+}
+
+/* ---------- Awan/panel teks ---------- */
+.text-center {
+    color: var(--c-soft);
+}
+
+/* ---------- Media queries kecil ---------- */
 @media (max-width: 768px) {
     .row .col-6 {
-        flex: 0 0 50%; /* Membuat kolom card menjadi dua kolom dalam satu baris pada perangkat kecil */
+        flex: 0 0 50%;
         max-width: 50%;
     }
 
     .gambar-wrapper img {
-        width: 4vh; /* Mengecilkan ukuran tombol pada perangkat kecil */
+        width: 4vh;
+        max-width: 36px;
     }
 }
 
-/* Media query untuk perangkat sangat kecil */
 @media (max-width: 576px) {
     .gambar-wrapper img {
-        width: 3vh; /* Mengecilkan lebih jauh pada perangkat lebih kecil */
+        width: 3vh;
+        max-width: 28px;
     }
-}
-
-body {
-    background-image: url('../assets/img/bg-login.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
-    height: 100vh;
-}
-
-/* Gambar wrapper dengan border dan bayangan */
-.gambar-wrapper {
-    display: inline-block; /* Agar box hanya sebesar gambar */
-    padding: 10px; /* Memberikan jarak antara gambar dan border */
-    background-color: rgb(102, 0, 0); /* Memberikan warna latar belakang pada box */
-    border: 5px solid rgba(255, 255, 255, 0.9); /* Border putih mengelilingi gambar */
-    border-radius: 50px; /* Sudut melengkung pada box */
-    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.8); /* Bayangan putih di sekitar box */
-}
-
-/* Card login styling */
-.card-login {
-    padding: 20px; /* Memberikan jarak antara gambar dan border */
-    background-color: rgba(0, 0, 0, 0.24); /* Memberikan warna latar belakang pada box */
-    border: 5px solid rgba(255, 255, 255, 0.9); /* Border putih mengelilingi gambar */
-    border-radius: 50px; /* Sudut melengkung pada box */
-    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.8); /* Bayangan putih di sekitar box */
 }

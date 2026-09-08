@@ -1,99 +1,70 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="id">
 
 <head>
-    <script src="../assets/js/color-modes.js"></script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.122.0">
-    <title>BELAJAR MEMBACA</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+    <title>BELAJAR MEMBACA - Materi</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/style.css" rel="stylesheet">
-
 </head>
 
 <body>
     <main>
         <div class="container">
             <div class="row justify-content-center align-items-center mt-5">
-                <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                    <div class="gambar-wrapper" onclick="toggleMute()">
-                        <img src="assets/icon/high-volume.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
-                            id="volumeImage">
+                <div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-4">
+                    <div class="gambar-wrapper" onclick="toggleMute()" title="Suara">
+                        <img src="assets/icon/high-volume.png" alt="Volume" class="gambar-shadow" id="volumeImage">
                     </div>
-                    <!-- Background Music -->
-                    <audio id="audioPlayerbg" autoplay loop>
-                        <source src="assets/music/bg.wav" type="audio/mp3">
-                        Browser Anda tidak mendukung elemen audio.
-                    </audio>
-                    <h1 class="mx-auto">Materi</h1>
-                    <a href="/dashboard.html">
-                        <div class="gambar-wrapper">
-                            <img src="assets/icon/home.png" alt="Deskripsi Gambar" width="50vh" class="gambar-shadow"
-                                id="volumeImage">
+                    <h1 class="mx-auto my-2 my-md-0">Materi</h1>
+                    <a href="/dashboard.html" class="text-decoration-none">
+                        <div class="gambar-wrapper" title="Beranda">
+                            <img src="assets/icon/home.png" alt="Beranda" class="gambar-shadow">
                         </div>
                     </a>
                 </div>
 
                 <div class="text-center mb-5">
-                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Deskripsi Gambar" width="1000vh">
-                    <br>
-                    <h2>Selamat datang <span id="userName"></span> dari sekolah <span id="userSchool"></span>!</h2>
+                    <img src="assets/img/title-membaca.png" class="gambar-title" alt="Belajar Membaca">
                 </div>
             </div>
 
             <!-- Cards Section -->
-            <div class="row">
-                <!-- Card 1 -->
-                <div class="col-6 col-md-3 col-lg-3 my-3">
-                    <a href="/materi-1.html">
-                        <div class="card" style="width: 100%; height: 100%;">
-                            <img src="assets/img/img-materi.jpg" class="card-img-top" alt="..."
-                                style="object-fit: cover; height: 150px; width: 100%;">
+            <div class="row justify-content-center">
+                <div class="col-6 col-md-4 col-lg-3 my-3 d-flex justify-content-center">
+                    <a href="/materi-1.html" class="text-decoration-none d-block">
+                        <div class="card h-100">
+                            <img src="assets/img/img-materi.jpg" class="card-img-top" alt="Materi 1" style="object-fit: cover; height: 160px; width: 100%;">
                             <div class="card-body">
                                 <p class="card-text">MATERI 1</p>
                             </div>
                         </div>
                     </a>
                 </div>
-                <!-- Card 2 -->
-                <div class="col-6 col-md-3 col-lg-3 my-3">
-                    <a href="">
-                        <div class="card" style="width: 100%; height: 100%;">
-                            <img src="assets/img/img-quiz.jpg" class="card-img-top" alt="..."
-                                style="object-fit: cover; height: 150px; width: 100%;">
-                            <div class="card-body">
-                                <p class="card-text">MATERI 2</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Card 3 -->
-                <div class="col-6 col-md-3 col-lg-3 my-3">
-                    <a href="">
-                        <div class="card" style="width: 100%; height: 100%;">
-                            <img src="assets/img/img-about.jpg" class="card-img-top" alt="..."
-                                style="object-fit: cover; height: 150px; width: 100%;">
-                            <div class="card-body">
-                                <p class="card-text">MATERI 3</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Card 4 -->
-                <div class="col-6 col-md-3 col-lg-3 my-3">
-                    <div class="card" style="width: 100%; height: 100%;" onclick="logout()">
-                        <img src="assets/img/img-logout.jpg" class="card-img-top" alt="..."
-                            style="object-fit: cover; height: 150px; width: 100%;">
+                <div class="col-6 col-md-4 col-lg-3 my-3 d-flex justify-content-center">
+                    <div class="card h-100 text-center" style="opacity:1;">
+                        <img src="assets/img/img-quiz.jpg" class="card-img-top" alt="Materi 2" style="object-fit: cover; height: 160px; width: 100%;">
                         <div class="card-body">
-                            <p class="card-text">MATERI 4</p>
+                            <p class="card-text">MATERI 2 <span class="badge text-bg-warning ms-1" style="font-size:.65rem;">Segera</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3 my-3 d-flex justify-content-center">
+                    <div class="card h-100 text-center" style="opacity:1;">
+                        <img src="assets/img/img-about.jpg" class="card-img-top" alt="Materi 3" style="object-fit: cover; height: 160px; width: 100%;">
+                        <div class="card-body">
+                            <p class="card-text">MATERI 3 <span class="badge text-bg-warning ms-1" style="font-size:.65rem;">Segera</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3 my-3 d-flex justify-content-center">
+                    <div class="card h-100 text-center" style="opacity:1;" onclick="logout()" role="button">
+                        <img src="assets/img/img-logout.jpg" class="card-img-top" alt="Materi 4" style="object-fit: cover; height: 160px; width: 100%;">
+                        <div class="card-body">
+                            <p class="card-text">MATERI 4 <span class="badge text-bg-warning ms-1" style="font-size:.65rem;">Segera</span></p>
                         </div>
                     </div>
                 </div>
@@ -101,9 +72,14 @@
 
         </div>
     </main>
+
+    <audio id="audioPlayerbg" autoplay loop>
+        <source src="assets/music/bg.wav" type="audio/mp3">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
     <script src="assets/script.js"></script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>
