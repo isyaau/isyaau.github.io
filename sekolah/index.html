@@ -1,0 +1,1360 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SDN 2 Mangkutoyo Ngawi - Sekolah Dasar Negeri | PPDB &amp; Profil</title>
+    <meta name="description" content="Profil resmi SDN 2 Mangkutoyo Ngawi: visi misi, program ekstrakurikuler, galeri kegiatan, dan info pendaftaran peserta didik baru (PPDB). Daftar mudah via WhatsApp.">
+    <meta property="og:title" content="SDN 2 Mangkutoyo Ngawi">
+    <meta property="og:description" content="Profil sekolah, ekstrakurikuler, galeri, dan info PPDB. Daftar mudah via WhatsApp.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg0: #05130f;
+            --bg1: #0a1f18;
+            --bg2: #0d2a20;
+            --green: #22c55e;
+            --green-hi: #4ade80;
+            --teal: #2dd4bf;
+            --emerald: #10b981;
+            --amber: #fbbf24;
+            --text: #ecfdf5;
+            --muted: #a7c4b8;
+            --radius: 22px;
+            --shadow: 0 18px 50px rgba(2, 10, 8, 0.55);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(1200px 600px at 15% -10%, rgba(16, 185, 129, 0.3), transparent 60%),
+                radial-gradient(900px 500px at 110% 12%, rgba(45, 212, 191, 0.2), transparent 55%),
+                radial-gradient(1000px 700px at 50% 120%, rgba(34, 197, 94, 0.22), transparent 60%),
+                linear-gradient(160deg, var(--bg1), var(--bg0) 45%, var(--bg2));
+            background-attachment: fixed;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .blobs {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.45;
+        }
+
+        .blob.b1 { width: 460px; height: 460px; top: -160px; left: -140px; background: rgba(16, 185, 129, 0.5); animation: float1 20s ease-in-out infinite; }
+        .blob.b2 { width: 400px; height: 400px; top: 30%; right: -180px; background: rgba(45, 212, 191, 0.4); animation: float2 24s ease-in-out infinite; }
+        .blob.b3 { width: 380px; height: 380px; bottom: -160px; left: 20%; background: rgba(34, 197, 94, 0.5); animation: float1 28s ease-in-out infinite reverse; }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 50px) scale(1.12); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-70px, 40px) scale(1.1); }
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        nav {
+            position: sticky;
+            top: 14px;
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+            padding: 13px 20px;
+            border-radius: 20px;
+            background: rgba(10, 31, 24, 0.72);
+            border: 1px solid rgba(129, 220, 168, 0.14);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 800;
+            font-size: 1.02rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--green), var(--teal));
+            box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4);
+        }
+
+        .brand-logo img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-hi);
+        }
+
+        .nav-cta {
+            padding: 10px 18px;
+            border-radius: 13px;
+            color: #04140a !important;
+            background: linear-gradient(135deg, var(--green), var(--teal));
+            font-weight: 800;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 0;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 860px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 66px;
+                right: 0;
+                left: 0;
+                flex-direction: column;
+                gap: 6px;
+                padding: 14px;
+                border-radius: 16px;
+                background: rgba(10, 31, 24, 0.97);
+                border: 1px solid rgba(129, 220, 168, 0.14);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            align-items: center;
+            padding: 70px 0 60px;
+        }
+
+        .hero .badge-line {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--amber);
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4.8vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.14;
+            margin-bottom: 8px;
+        }
+
+        .hero h1 small {
+            display: block;
+            font-size: 0.4em;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: var(--green-hi);
+            margin-bottom: 8px;
+        }
+
+        .grad {
+            background: linear-gradient(120deg, #86efac, #2dd4bf, #fbbf24);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.lead {
+            color: var(--muted);
+            font-size: 1.08rem;
+            max-width: 540px;
+            margin-bottom: 28px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            padding: 15px 26px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 0.98rem;
+            text-decoration: none;
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-wa {
+            color: #04150b;
+            background: linear-gradient(135deg, #25d366, #2ee88c);
+            box-shadow: 0 14px 34px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-wa:hover {
+            box-shadow: 0 20px 46px rgba(37, 211, 102, 0.55);
+        }
+
+        .btn-ghost {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(129, 220, 168, 0.25);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--green);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.25);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--green-hi);
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            border-radius: 28px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(129, 220, 168, 0.16);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: var(--shadow);
+            animation: heroFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+
+        .hero-card-head {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 14px;
+        }
+
+        .hero-card-head img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .hero-card-head strong {
+            font-size: 1rem;
+        }
+
+        .hero-card-head span {
+            color: var(--muted);
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .hero-check {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 8px 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .hero-check img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .mini-chip {
+            position: absolute;
+            top: -18px;
+            right: -12px;
+            padding: 9px 15px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: #3a2200;
+            background: linear-gradient(135deg, var(--amber), #fde68a);
+            box-shadow: 0 10px 24px rgba(251, 191, 36, 0.45);
+            animation: ping 2.2s ease-in-out infinite;
+        }
+
+        @keyframes ping {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        .marquee {
+            overflow: hidden;
+            border-top: 1px solid rgba(129, 220, 168, 0.1);
+            border-bottom: 1px solid rgba(129, 220, 168, 0.1);
+            padding: 16px 0;
+            margin-bottom: 90px;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 48px;
+            width: max-content;
+            animation: scrollX 22s linear infinite;
+        }
+
+        .marquee-track span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--green-hi);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        .marquee-track span::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 12px var(--green);
+        }
+
+        @keyframes scrollX {
+            to { transform: translateX(-50%); }
+        }
+
+        .section {
+            padding: 20px 0 96px;
+        }
+
+        .sec-head {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 46px;
+        }
+
+        .sec-head .eyebrow {
+            display: inline-block;
+            padding: 7px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--green-hi);
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            margin-bottom: 16px;
+        }
+
+        .sec-head h2 {
+            font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .sec-head p {
+            color: var(--muted);
+        }
+
+        /* Profil */
+        .profil-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 44px;
+            align-items: center;
+        }
+
+        .profil-media {
+            border-radius: 28px;
+            aspect-ratio: 4 / 3.4;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(140deg, rgba(16, 185, 129, 0.25), rgba(45, 212, 191, 0.15));
+            border: 1px solid rgba(129, 220, 168, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profil-media img {
+            width: 160px;
+            height: 160px;
+            filter: drop-shadow(0 16px 34px rgba(34, 197, 94, 0.4));
+        }
+
+        .profil-media .badge-ph {
+            position: absolute;
+            bottom: 18px;
+            right: 18px;
+            left: 18px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            background: rgba(5, 19, 15, 0.75);
+            border: 1px solid rgba(129, 220, 168, 0.2);
+            font-size: 0.82rem;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .profil-info h3 {
+            font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .profil-info p {
+            color: var(--muted);
+            font-size: 0.96rem;
+            margin-bottom: 14px;
+        }
+
+        .identitas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .ident {
+            border-radius: 16px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(129, 220, 168, 0.14);
+        }
+
+        .ident small {
+            display: block;
+            color: var(--muted);
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 3px;
+        }
+
+        .ident strong {
+            font-size: 0.95rem;
+        }
+
+        /* Visi Misi */
+        .vm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 26px;
+        }
+
+        .vm {
+            border-radius: 26px;
+            padding: 32px;
+            border: 1px solid rgba(129, 220, 168, 0.16);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vm h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.15rem;
+            margin-bottom: 16px;
+        }
+
+        .vm h3 img {
+            width: 46px;
+            height: 46px;
+        }
+
+        .vm p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .vm ul {
+            margin: 12px 0 0 20px;
+            color: var(--muted);
+            font-size: 0.93rem;
+        }
+
+        .vm ul li {
+            margin-bottom: 8px;
+        }
+
+        .vm.visi {
+            background: linear-gradient(150deg, rgba(16, 185, 129, 0.18), rgba(45, 212, 191, 0.08));
+        }
+
+        .vm.misi {
+            background: linear-gradient(150deg, rgba(45, 212, 191, 0.14), rgba(16, 185, 129, 0.1));
+        }
+
+        /* Ekstrakurikuler */
+        .ekskul-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .eks {
+            border-radius: var(--radius);
+            padding: 26px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(129, 220, 168, 0.13);
+            transition: transform 0.28s ease, border-color 0.28s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eks::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green), var(--teal), transparent);
+        }
+
+        .eks:hover {
+            transform: translateY(-6px);
+            border-color: rgba(45, 212, 191, 0.45);
+        }
+
+        .eks .icon-tile {
+            width: 58px;
+            height: 58px;
+            border-radius: 17px;
+            background: linear-gradient(160deg, rgba(16, 185, 129, 0.3), rgba(45, 212, 191, 0.16));
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+        }
+
+        .eks .icon-tile img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .eks h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .eks p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Galeri */
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .galeri-item {
+            position: relative;
+            height: 320px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .galeri-item:hover {
+            transform: translateY(-6px);
+        }
+
+        .galeri-item .ph {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            transition: transform 0.4s ease;
+        }
+
+        .galeri-item:hover .ph {
+            transform: scale(1.08);
+        }
+
+        .galeri-item .ph img {
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
+        }
+
+        .galeri-item .cap {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 34px 20px 18px;
+            background: linear-gradient(transparent, rgba(4, 12, 9, 0.92));
+            font-weight: 700;
+            font-size: 0.98rem;
+        }
+
+        .galeri-item .cap small {
+            display: block;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-top: 3px;
+        }
+
+        .ph-c1 { background: linear-gradient(135deg, #065c33, #10b981, #2dd4bf); }
+        .ph-c2 { background: linear-gradient(135deg, #06323f, #0e7490, #2dd4bf); }
+        .ph-c3 { background: linear-gradient(135deg, #143a1e, #16a34a, #86efac); }
+        .ph-c4 { background: linear-gradient(135deg, #274b0c, #65a30d, #facc15); }
+        .ph-c5 { background: linear-gradient(135deg, #0d3b2e, #0f766e, #5eead4); }
+        .ph-c6 { background: linear-gradient(135deg, #1e3a0a, #15803d, #4ade80); }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            display: none;
+            place-items: center;
+            background: rgba(3, 10, 7, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .lightbox.open { display: grid; }
+
+        .lightbox .box {
+            text-align: center;
+            padding: 40px;
+            max-width: 90vw;
+        }
+
+        .lightbox .box img {
+            width: 180px; height: 180px;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 14px 30px rgba(45, 212, 191, 0.4));
+        }
+
+        .lightbox .box h3 { font-size: 1.2rem; margin-bottom: 6px; }
+        .lightbox .box p { color: var(--muted); margin-bottom: 20px; }
+
+        .lightbox .close {
+            position: absolute;
+            top: 22px; right: 26px;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        /* PPDB */
+        .ppdb-hero {
+            border-radius: 28px;
+            padding: 48px;
+            background: linear-gradient(150deg, rgba(16, 185, 129, 0.22), rgba(45, 212, 191, 0.12));
+            border: 1px solid rgba(129, 220, 168, 0.25);
+            margin-bottom: 40px;
+        }
+
+        .ppdb-hero h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            margin-bottom: 10px;
+        }
+
+        .ppdb-hero p {
+            color: var(--muted);
+            max-width: 640px;
+            margin-bottom: 24px;
+        }
+
+        .ppdb-intro {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .ppdb-intro img {
+            width: 150px;
+            height: 150px;
+            justify-self: center;
+            filter: drop-shadow(0 14px 30px rgba(34, 197, 94, 0.4));
+        }
+
+        .ppdb-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .ppdb-info p {
+            color: var(--muted);
+            font-size: 0.94rem;
+            margin-bottom: 12px;
+        }
+
+        .ppdb-syarat {
+            margin: 10px 0 0 20px;
+            color: var(--muted);
+            font-size: 0.93rem;
+        }
+
+        .ppdb-syarat li {
+            margin-bottom: 6px;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+            counter-reset: step;
+        }
+
+        .ppdb-step {
+            position: relative;
+            border-radius: var(--radius);
+            padding: 26px 22px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(129, 220, 168, 0.13);
+        }
+
+        .ppdb-step::after {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: rgba(45, 212, 191, 0.2);
+        }
+
+        .ppdb-step img {
+            width: 44px; height: 44px;
+            margin-bottom: 14px;
+        }
+
+        .ppdb-step h3 {
+            font-size: 1.02rem;
+            margin-bottom: 6px;
+        }
+
+        .ppdb-step p {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .ppdb-cta {
+            text-align: center;
+            margin-top: 38px;
+        }
+
+        .ppdb-cta .btn {
+            font-size: 1.05rem;
+            padding: 17px 34px;
+        }
+
+        /* Kontak */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            border-radius: 28px;
+            padding: 46px;
+            background: linear-gradient(150deg, rgba(16, 185, 129, 0.2), rgba(45, 212, 191, 0.12));
+            border: 1px solid rgba(129, 220, 168, 0.22);
+        }
+
+        .contact h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 12px;
+        }
+
+        .contact p {
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 9px 0;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.98rem;
+        }
+
+        .contact-row img {
+            width: 30px; height: 30px;
+        }
+
+        .contact-row span {
+            color: var(--muted);
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-actions .btn {
+            justify-content: center;
+        }
+
+        footer {
+            border-top: 1px solid rgba(129, 220, 168, 0.1);
+            padding: 34px 0 80px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        footer a {
+            color: var(--green-hi);
+            text-decoration: none;
+        }
+
+        footer .brand-line {
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .wa-fab {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 100;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #25d366;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+            transition: transform 0.22s ease;
+        }
+
+        .wa-fab:hover {
+            transform: scale(1.1) rotate(6deg);
+        }
+
+        .wa-fab::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid #25d366;
+            animation: ring 2s ease-out infinite;
+        }
+
+        @keyframes ring {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.7); opacity: 0; }
+        }
+
+        .wa-fab svg {
+            width: 34px; height: 34px;
+            fill: #fff;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 860px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 44px 0;
+            }
+
+            .profil-grid,
+            .contact {
+                grid-template-columns: 1fr;
+            }
+
+            .ppdb-intro {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .ppdb-syarat {
+                text-align: left;
+            }
+
+            .identitas {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding-bottom: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blobs">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+    </div>
+
+    <div class="wrap">
+        <nav id="navbar">
+            <a href="#" class="brand">
+                <span class="brand-logo"><img src="img/sekolah.png" alt=""></span>
+                SDN 2 Mangkutoyo
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#visimisi">Visi &amp; Misi</a></li>
+                <li><a href="#ekskul">Ekstrakurikuler</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#ppdb" class="nav-cta">Daftar PPDB</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+        </nav>
+
+        <header class="hero">
+            <div>
+                <span class="badge-line">&#128331; PPDB Tahun Ajaran Baru Telah Dibuka</span>
+                <h1 class="reveal">
+                    <small>SDN 2 MANGKUTOYO NGAWI</small>
+                    Tumbuh <span class="grad">Cerdas, Berakhlak,</span> dan Berprestasi
+                </h1>
+                <p class="lead reveal">
+                    Sekolah dasar negeri yang nyaman dan menyenangkan untuk belajar. Didukung tenaga pendidik berdedikasi, ekstrakurikuler beragam, dan lingkungan yang aman.
+                </p>
+                <div class="hero-actions reveal">
+                    <a class="btn btn-wa" href="https://wa.me/6285748637242?text=Halo%20Panitia%20PPDB%20SDN%202%20Mangkutoyo%20Ngawi%2C%20saya%20ingin%20mendaftarkan%20anak%2C%20mohon%20informasinya." target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.02h-.01a8.98 8.98 0 0 1-4.58-1.25l-.33-.2-3.4.89.9-3.31-.21-.34a9 9 0 1 1 7.63 4.21zm8.38-17.4A9.96 9.96 0 0 0 2.1 18.05L0 24l6.05-1.58a9.96 9.96 0 1 0 14.37-17.8z"/></svg>
+                        Daftar via WhatsApp
+                    </a>
+                    <a class="btn btn-ghost" href="#profil">Lihat Profil Sekolah</a>
+                </div>
+                <div class="hero-stats reveal">
+                    <div class="stat"><h3><span class="count" data-target="120">0</span>+</h3><span>Siswa Aktif</span></div>
+                    <div class="stat"><h3><span class="count" data-target="12">0</span></h3><span>Tenaga Pengajar</span></div>
+                    <div class="stat"><h3><span class="count" data-target="8">0</span></h3><span>Ekstrakurikuler</span></div>
+                    <div class="stat"><h3><span class="count" data-target="25">0</span>+</h3><span>Tahun Mengabdi</span></div>
+                </div>
+            </div>
+            <div class="hero-visual reveal">
+                <div class="hero-card">
+                    <div class="hero-card-head">
+                        <img src="img/sekolah.png" alt="SDN 2 Mangkutoyo">
+                        <div>
+                            <strong>SDN 2 Mangkutoyo Ngawi</strong>
+                            <span>Sekolah Dasar Negeri "Ayo Belajar, Ayo Berprestasi"</span>
+                        </div>
+                    </div>
+                    <div class="hero-check"><img src="img/ceklis.png" alt=""><span>Kurikulum merdeka &amp; pembelajaran menyenangkan</span></div>
+                    <div class="hero-check"><img src="img/ceklis.png" alt=""><span>Guru berdedikasi &amp; ramah anak</span></div>
+                    <div class="hero-check"><img src="img/ceklis.png" alt=""><span>Ekstrakurikuler Pramuka, Tahfidz, olahraga &amp; seni</span></div>
+                    <div class="hero-check"><img src="img/ceklis.png" alt=""><span>Lingkungan aman, asri, dan nyaman</span></div>
+                    <div class="mini-chip">PPDB Sedang Dibuka</div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="marquee">
+        <div class="marquee-track">
+            <span>PEDULI DAN SALING MENGHARGAI</span><span>SEMANGAT BELAJAR</span><span>BERPRESTASI</span><span>BERAKHLAK MULIA</span><span>KREATIF DAN MANDIRI</span><span>LINGKUNGAN ASRI</span><span>GURU BERDEDIKASI</span>
+            <span>PEDULI DAN SALING MENGHARGAI</span><span>SEMANGAT BELAJAR</span><span>BERPRESTASI</span><span>BERAKHLAK MULIA</span><span>KREATIF DAN MANDIRI</span><span>LINGKUNGAN ASRI</span><span>GURU BERDEDIKASI</span>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <section class="section" id="profil">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Profil Sekolah</span>
+                <h2>Mengenal SDN 2 Mangkutoyo Ngawi</h2>
+                <p>Sekolah yang ramah untuk anak, dengan pembelajaran aktif dan karakter yang kuat.</p>
+            </div>
+            <div class="profil-grid">
+                <div class="profil-media reveal">
+                    <img src="img/sekolah.png" alt="Ilustrasi Sekolah">
+                    <div class="badge-ph">[ Foto Gedung Sekolah dapat diletakkan di sini menggantikan ilustrasi ]</div>
+                </div>
+                <div class="profil-info reveal">
+                    <h3>Tentang Sekolah Kami</h3>
+                    <p>
+                        SDN 2 Mangkutoyo Ngawi merupakan sekolah dasar negeri yang berkomitmen menumbuhkan generasi cerdas, terampil, dan berakhlak mulia. Pembelajaran dirancang menyenangkan dan sesuai dengan tumbuh kembang anak, didukung tenaga pendidik yang berpengalaman serta lingkungan belajar yang aman dan asri.
+                    </p>
+                    <p>
+                        Sekolah juga aktif mengembangkan karakter melalui pembiasaan ibadah, kedisiplinan, gotong royong, serta berbagai kegiatan ekstrakurikuler. Kami percaya setiap anak memiliki potensi, dan tugas sekolah adalah membantu mereka menemukan serta mengembangkannya.
+                    </p>
+                    <div class="identitas">
+                        <div class="ident"><small>NPSN</small><strong>2033####</strong></div>
+                        <div class="ident"><small>Jenjang</small><strong>Sekolah Dasar (SD)</strong></div>
+                        <div class="ident"><small>Status</small><strong>Negeri</strong></div>
+                        <div class="ident"><small>Kecamatan</small><strong>Mangkutoyo, Ngawi</strong></div>
+                        <div class="ident"><small>Waktu</small><strong>Pagi (Reguler)</strong></div>
+                        <div class="ident"><small>Akreditasi</small><strong>A / B</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="visimisi">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Visi &amp; Misi</span>
+                <h2>Landasan Arah Sekolah Kami</h2>
+                <p>Visi, misi, dan nilai yang kami tanamkan pada setiap peserta didik.</p>
+            </div>
+            <div class="vm-grid">
+                <div class="vm visi reveal">
+                    <h3><img src="img/target.png" alt="Visi">Visi</h3>
+                    <p>
+                        "Terwujudnya peserta didik yang cerdas, terampil, berakhlak mulia, berbudaya lingkungan, dan berkarakter Pancasila."
+                    </p>
+                </div>
+                <div class="vm misi reveal">
+                    <h3><img src="img/rocket.png" alt="Misi">Misi</h3>
+                    <ul>
+                        <li>Menyelenggarakan pembelajaran aktif, kreatif, dan menyenangkan.</li>
+                        <li>Menanamkan nilai keimanan, ketakwaan, dan akhlak mulia.</li>
+                        <li>Mengembangkan bakat dan minat siswa melalui ekstrakurikuler.</li>
+                        <li>Membangun budaya literasi, numerasi, dan peduli lingkungan.</li>
+                        <li>Meningkatkan peran serta orang tua dan masyarakat.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="ekskul">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Ekstrakurikuler</span>
+                <h2>Wadah Mengembangkan Bakat &amp; Minat</h2>
+                <p>Beragam kegiatan ekstrakurikuler untuk membentuk karakter, kesehatan, dan kreativitas siswa.</p>
+            </div>
+            <div class="ekskul-grid" id="ekskulGrid">
+            </div>
+        </section>
+
+        <section class="section" id="galeri">
+            <div class="sec-head reveal">
+                <span class="eyebrow">Galeri Kegiatan</span>
+                <h2>Momen Belajar &amp; Beraktivitas</h2>
+                <p>Sebagian dokumentasi kegiatan belajar, ekstrakurikuler, dan perayaan di sekolah kami.</p>
+            </div>
+            <div class="galeri-grid" id="galeriGrid">
+            </div>
+        </section>
+
+        <section class="section" id="ppdb">
+            <div class="sec-head reveal">
+                <span class="eyebrow">PPDB</span>
+                <h2>Penerimaan Peserta Didik Baru</h2>
+                <p>Daftarkan ananda sekarang — kuota terbatas setiap tahun ajaran.</p>
+            </div>
+
+            <div class="ppdb-hero reveal">
+                <div class="ppdb-intro">
+                    <img src="img/memo.png" alt="Pendaftaran">
+                    <div class="ppdb-info">
+                        <h4>Pendaftaran Mudah &amp; Sederhana</h4>
+                        <p>
+                            Cukup siapkan berkas dan kirim pesan via WhatsApp. Panitia PPDB akan memandu proses pendaftaran dari awal hingga dinyatakan diterima.
+                        </p>
+                        <ul class="ppdb-syarat">
+                            <li>Fotokopi akta kelahiran calon peserta didik</li>
+                            <li>Kartu Keluarga (KK)</li>
+                            <li>Fotokopi KTP orang tua/wali</li>
+                            <li>Pas foto calon peserta didik 3x4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="ppdb-step reveal">
+                    <img src="img/telepon.png" alt="Konsultasi">
+                    <h3>Hubungi Panitia</h3>
+                    <p>Kirim pesan via WhatsApp untuk konsultasi dan pengecekan kuota.</p>
+                </div>
+                <div class="ppdb-step reveal">
+                    <img src="img/memo.png" alt="Kirim Data">
+                    <h3>Kirim Berkas &amp; Data</h3>
+                    <p>Panitia memberi daftar berkas; Anda melengkapi sesuai ketentuan.</p>
+                </div>
+                <div class="ppdb-step reveal">
+                    <img src="img/pensil.png" alt="Verifikasi">
+                    <h3>Verifikasi &amp; Konfirmasi</h3>
+                    <p>Verifikasi berkas oleh panitia, lalu konfirmasi tanda diterima.</p>
+                </div>
+                <div class="ppdb-step reveal">
+                    <img src="img/lulus.png" alt="Daftar Ulang">
+                    <h3>Cara PPDB Selesai</h3>
+                    <p>Lakukan daftar ulang sesuai jadwal dan kenalkan ananda pada lingkungan sekolah.</p>
+                </div>
+            </div>
+
+            <div class="ppdb-cta reveal">
+                <a class="btn btn-wa" href="https://wa.me/6285748637242?text=Halo%20Panitia%20PPDB%20SDN%202%20Mangkutoyo%20Ngawi%2C%20saya%20ingin%20mendaftarkan%20anak%2C%20mohon%20dibantu%20proses%20pendaftarannya." target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.02h-.01a8.98 8.98 0 0 1-4.58-1.25l-.33-.2-3.4.89.9-3.31-.21-.34a9 9 0 1 1 7.63 4.21zm8.38-17.4A9.96 9.96 0 0 0 2.1 18.05L0 24l6.05-1.58a9.96 9.96 0 1 0 14.37-17.8z"/></svg>
+                    Daftar Sekarang via WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <section class="section" id="kontak">
+            <div class="contact reveal">
+                <div>
+                    <h2>Butuh Informasi Lebih Lanjut?</h2>
+                    <p>Tim kami siap membantu pertanyaan seputar sekolah dan pendaftaran PPDB.</p>
+                    <a class="contact-row" href="https://wa.me/6285748637242" target="_blank" rel="noopener">
+                        <img src="img/telepon.png" alt="WhatsApp">
+                        <div>0857-4863-7242<span>Panitia PPDB / Informasi</span></div>
+                    </a>
+                    <a class="contact-row" href="https://maps.google.com/?q=SDN+Mangkutoyo+Ngawi" target="_blank" rel="noopener">
+                        <img src="img/lokasi.png" alt="Lokasi">
+                        <div>Mangkutoyo, Kab. Ngawi, Jawa Timur<span>Lihat di Peta</span></div>
+                    </a>
+                    <div class="hours" style="margin-top:14px;border-radius:16px;padding:18px;background:rgba(3,12,9,0.35);border:1px solid rgba(129,220,168,0.16);color:var(--muted);font-size:0.9rem;">
+                        Jam kerja: Senin – Jumat, 07.00 – 14.00 WIB. Di luar jam kerja, silakan tinggalkan pesan WhatsApp.
+                    </div>
+                </div>
+                <div class="contact-actions">
+                    <a class="btn btn-wa" href="https://wa.me/6285748637242?text=Halo%20SDN%202%20Mangkutoyo%20Ngawi%2C%20saya%20ingin%20bertanya%20seputar%20sekolah%20dan%20PPDB." target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.02h-.01a8.98 8.98 0 0 1-4.58-1.25l-.33-.2-3.4.89.9-3.31-.21-.34a9 9 0 1 1 7.63 4.21zm8.38-17.4A9.96 9.96 0 0 0 2.1 18.05L0 24l6.05-1.58a9.96 9.96 0 1 0 14.37-17.8z"/></svg>
+                        Chat WhatsApp
+                    </a>
+                    <a class="btn btn-ghost" href="https://isyaau.github.io/landing/" target="_blank" rel="noopener">Web Layanan Isyaau Teknologi</a>
+                    <a class="btn btn-ghost" href="https://isyaau.github.io" target="_blank" rel="noopener">Portofolio Pengembang</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="brand-line">SDN 2 Mangkutoyo Ngawi</div>
+            Mangkutoyo, Kab. Ngawi, Jawa Timur — SD Negeri dengan semangat berprestasi &amp; berakhlak mulia.<br>
+            &copy; 2026 SDN 2 Mangkutoyo Ngawi. Web profile dikembangkan bersama <a href="https://isyaau.github.io">Isyaau Teknologi</a>. Ikon oleh <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0).
+        </footer>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="close" id="lbClose">&times;</button>
+        <div class="box">
+            <img id="lbImg" src="" alt="Preview galeri">
+            <h3 id="lbTitle"></h3>
+            <p id="lbDesc"></p>
+            <a class="btn btn-wa" id="lbWa" href="#" target="_blank" rel="noopener">Tanya tentang kegiatan ini</a>
+        </div>
+    </div>
+
+    <a class="wa-fab" href="https://wa.me/6285748637242?text=Halo%20SDN%202%20Mangkutoyo%20Ngawi%2C%20saya%20mau%20bertanya" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.02h-.01a8.98 8.98 0 0 1-4.58-1.25l-.33-.2-3.4.89.9-3.31-.21-.34a9 9 0 1 1 7.63 4.21zm8.38-17.4A9.96 9.96 0 0 0 2.1 18.05L0 24l6.05-1.58a9.96 9.96 0 1 0 14.37-17.8z"/></svg>
+    </a>
+
+    <script>
+        (function () {
+            var WA = 'https://wa.me/6285748637242?text=';
+
+            var ekskuls = [
+                { icon: 'img/bendera.png', name: 'Pramuka', desc: 'Latihan jiwa kepemimpinan, mandiri, dan cinta alam melalui gerakan pramuka.' },
+                { icon: 'img/bola.png', name: 'Sepak Bola / Futsal', desc: 'Melatih kerjasama tim, ketangkasan, dan sportivitas lewat olahraga bola.' },
+                { icon: 'img/buku.png', name: 'Tahfidz & Keagamaan', desc: 'Pembiasaan hafalan doa, surat pendek, dan pembinaan akhlak Islami.' },
+                { icon: 'img/seni.png', name: 'Seni & Melukis', desc: 'Mengasah kreativitas dan kepekaan estetika melalui karya seni.' },
+                { icon: 'img/bendera.png', name: 'Paskibra', desc: 'Latihan baris-berbaris, kedisiplinan, dan pengibaran bendera upacara.' },
+                { icon: 'img/silat.png', name: 'Pencak Silat', desc: 'Melestarikan budaya serta membangun percaya diri dan ketahanan fisik.' },
+                { icon: 'img/musik.png', name: 'Seni Musik & Drumband', desc: 'Berkreasi lewat musik, ritme, dan penampilan di momen sekolah.' },
+                { icon: 'img/badminton.png', name: 'Bulutangkis', desc: 'Olahraga yang melatih kelincahan, fokus, dan semangat juara.' }
+            ];
+
+            var galeri = [
+                { icon: 'img/kelas.png', title: 'Kegiatan Belajar di Kelas', sub: 'Pembelajaran aktif & menyenangkan', c: 'ph-c1' },
+                { icon: 'img/bendera.png', title: 'Upacara Bendera', sub: 'Menumbuhkan jiwa nasionalisme', c: 'ph-c2' },
+                { icon: 'img/seni.png', title: 'Karya Seni Siswa', sub: 'Pameran kreativitas siswa', c: 'ph-c3' },
+                { icon: 'img/bola.png', title: 'Olahraga Bersama', sub: 'Sehat, ceria, berkarakter', c: 'ph-c4' },
+                { icon: 'img/lulus.png', title: 'Perayaan Kelulusan', sub: 'Momen bahagia siswa angkatan', c: 'ph-c5' },
+                { icon: 'img/ceklis.png', title: 'Moment Kebersamaan', sub: 'Kegiatan gotong royong & outing', c: 'ph-c6' }
+            ];
+
+            var waText = function (msg) {
+                return WA + encodeURIComponent(msg);
+            };
+
+            var eGrid = document.getElementById('ekskulGrid');
+            ekskuls.forEach(function (e) {
+                var card = document.createElement('div');
+                card.className = 'eks reveal';
+                card.innerHTML =
+                    '<div class="icon-tile"><img src="' + e.icon + '" alt="' + e.name + '"></div>' +
+                    '<h3>' + e.name + '</h3>' +
+                    '<p>' + e.desc + '</p>';
+                eGrid.appendChild(card);
+            });
+
+            var gGrid = document.getElementById('galeriGrid');
+            galeri.forEach(function (g) {
+                var item = document.createElement('div');
+                item.className = 'galeri-item reveal';
+                item.dataset.raw = JSON.stringify(g);
+                item.innerHTML =
+                    '<div class="ph ' + g.c + '"><img src="' + g.icon + '" alt=""></div>' +
+                    '<div class="cap">' + g.title + '<small>' + g.sub + '</small></div>';
+                gGrid.appendChild(item);
+            });
+
+            var lb = document.getElementById('lightbox');
+            var gItems = document.querySelectorAll('.galeri-item');
+            gItems.forEach(function (it) {
+                it.addEventListener('click', function () {
+                    var g = JSON.parse(it.dataset.raw);
+                    document.getElementById('lbImg').src = g.icon;
+                    document.getElementById('lbTitle').textContent = g.title;
+                    document.getElementById('lbDesc').textContent = g.sub + ' — hubungi kami untuk informasi kegiatan sekolah.';
+                    document.getElementById('lbWa').href = waText('Halo SDN 2 Mangkutoyo Ngawi, saya ingin bertanya tentang kegiatan "' + g.title + '".');
+                    lb.classList.add('open');
+                });
+            });
+            document.getElementById('lbClose').addEventListener('click', function () { lb.classList.remove('open'); });
+            lb.addEventListener('click', function (e) { if (e.target === lb) lb.classList.remove('open'); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+            var navT = document.getElementById('navToggle');
+            var navL = document.getElementById('navLinks');
+            navT.addEventListener('click', function () { navL.classList.toggle('open'); });
+            navL.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () { navL.classList.remove('open'); });
+            });
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (en.isIntersecting) {
+                        en.target.classList.add('show');
+                        io.unobserve(en.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+            var statIo = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (en.isIntersecting) {
+                        var el = en.target;
+                        var target = +el.dataset.target;
+                        var start = performance.now();
+                        function step(now) {
+                            var p = Math.min((now - start) / 1400, 1);
+                            el.textContent = Math.floor(p * target);
+                            if (p < 1) requestAnimationFrame(step);
+                        }
+                        requestAnimationFrame(step);
+                        statIo.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            document.querySelectorAll('.count').forEach(function (el) { statIo.observe(el); });
+        })();
+    </script>
+</body>
+
+</html>
