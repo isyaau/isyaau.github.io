@@ -104,6 +104,88 @@
             background: linear-gradient(90deg, transparent, rgba(10, 20, 40, 0.06), transparent);
         }
 
+        /* Bank account cards */
+        .bank-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .bank-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.2);
+        }
+
+        .bank-card .bank-name {
+            font-weight: 700;
+            color: var(--primary-light);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bank-card .bank-number {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 1px;
+            word-break: break-all;
+            margin: 6px 0 2px;
+        }
+
+        .bank-card .bank-holder {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(30, 144, 255, 0.4);
+        }
+
+        .copy-btn.copied {
+            background: #00b894;
+            border-color: #00b894;
+            color: white;
+        }
+
+        .bank-section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-soft);
+            margin: 20px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        body.light-mode .bank-card .bank-number {
+            color: var(--text-main);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -1606,6 +1688,25 @@
                                         <a href="https://www.instagram.com/isyaau23" target="_blank">@isyaau23</a>
                                     </div>
                                 </div>
+                                <div class="bank-section-title">
+                                    <i class="fas fa-building-columns" style="color:var(--gold-color);"></i> Rekening Bank
+                                </div>
+                                <div class="bank-card">
+                                    <div class="bank-name"><i class="fas fa-building-columns"></i> BANK MANDIRI</div>
+                                    <div class="bank-number">1710018408040</div>
+                                    <div class="bank-holder">a.n. Isyaau Akhsanil Khakim</div>
+                                    <button class="copy-btn" onclick="copyBank('Bank Mandiri', '1710018408040', 'Isyaau Akhsanil Khakim', this)">
+                                        <i class="fas fa-copy"></i> Salin Rekening
+                                    </button>
+                                </div>
+                                <div class="bank-card">
+                                    <div class="bank-name"><i class="fas fa-building-columns"></i> BANK BRI</div>
+                                    <div class="bank-number">643101028758533</div>
+                                    <div class="bank-holder">a.n. Isyaau Akhsanil Khakim</div>
+                                    <button class="copy-btn" onclick="copyBank('Bank BRI', '643101028758533', 'Isyaau Akhsanil Khakim', this)">
+                                        <i class="fas fa-copy"></i> Salin Rekening
+                                    </button>
+                                </div>
                                 <a href="https://wa.me/6285748637242" target="_blank" class="btn btn-primary w-100 mt-3">
                                     <i class="fab fa-whatsapp me-2"></i>Chat WhatsApp
                                 </a>
@@ -2443,6 +2544,40 @@
                 document.body.classList.remove('light-mode');
                 icon.className = 'fas fa-moon';
             }
+        }
+
+        // ===== Copy Bank Account =====
+        function copyBank(bankName, number, holder, btn) {
+            const text = `Bank ${bankName}\nNomor Rekening: ${number}\na.n. ${holder}`;
+            const done = function() {
+                showToast(`Rekening ${bankName} disalin!`);
+                const original = btn.innerHTML;
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = original;
+                }, 2000);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+            } else {
+                fallbackCopy(text, done);
+            }
+        }
+
+        function fallbackCopy(text, done) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+            } catch (e) {}
+            document.body.removeChild(textarea);
+            done();
         }
     </script>
 </body>
